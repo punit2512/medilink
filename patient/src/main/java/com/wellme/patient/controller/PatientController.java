@@ -1,6 +1,8 @@
 package com.wellme.patient.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +25,14 @@ public class PatientController {
 		Patient patient = new Patient();
 		patient.setFirstName("Patient");
 		patient.setLastName("PatientLastName");
+		List<Phone> phones = new ArrayList<>();
 		Phone phone = new Phone();
 		phone.setAreaCode("0124");
 		phone.setCountryCode("+91");
-		phone.setPhoneNumber(4382604);
+		phone.setPhoneNumber("4382604");
 		phone.setPhoneType("Home");
-		patient.setPhones(Collections.singletonList(phone));
+		phones.add(phone);
+		patient.setPhones(phones);
 		Address address = new Address();
 		address.setAddressLine1("D-5/3 Second Floor");
 		address.setAddressLine2("Ardee City");

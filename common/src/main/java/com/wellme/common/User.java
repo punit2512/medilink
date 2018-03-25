@@ -22,6 +22,7 @@ public class User {
 	
 	/** The middle name. */
 	private String middleName;
+
 	
 	/** The profile pic url. */
 	private String profilePicUrl;
@@ -40,6 +41,9 @@ public class User {
 	
 	/** The social profiles. */
 	private List<SocialProfile> socialProfiles;
+	
+	/** User's full name */
+	private String userFullName;
 	
 	/**
 	 * Gets the user id.
@@ -238,4 +242,19 @@ public class User {
 	public void setEmails(List<String> emails) {
 		this.emails = emails;
 	}
+
+	/**
+	 * @return the userFullName
+	 */
+	public String getUserFullName() {
+		return userFullName;
+	}
+
+	/**
+	 * @param userFullName the userFullName to set
+	 */
+	public void setUserFullName(String userFullName) {
+		this.userFullName = userFullName;
+	}
+
 }
