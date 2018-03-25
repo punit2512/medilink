@@ -2,6 +2,7 @@ package com.wellme.practice.model;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +17,7 @@ import com.wellme.common.Phone;
 public class InsuranceProvider {
 	
 	/** The insurance provider id. */
+	@Id
 	private int insuranceProviderId;
 	
 	/** The insurance provider name. */

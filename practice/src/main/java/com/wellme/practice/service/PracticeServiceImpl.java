@@ -66,17 +66,18 @@ public class PracticeServiceImpl implements PracticeService{
 	 * @see com.wellme.practice.service.PracticeService#savePractice(com.wellme.practice.model.Practice)
 	 */
 	public void savePractice(Practice practice){
-		practiceRepo.save(practice);
-		consultantRepo.save(practice.getConsultants());
+		
+
 		List<Speciality> specialities = new ArrayList<>();
 		specialities.addAll(practice.getSpecialitiesSupported());
 		practice.getConsultants().stream().map(c -> specialities.addAll(c.getSpecialities())).count();
 		specialityRepo.save(specialities);
-		
 		insuranceProviderRepo.save(practice.getInsuranceProviders());
 		List<InsuranceType> insuranceTypes = new ArrayList<>();
 		practice.getInsuranceProviders().stream().map(ip -> insuranceTypes.addAll(ip.getInsuranceTypes())).count();
 		insuranceTypeRepo.save(insuranceTypes);
+		consultantRepo.save(practice.getConsultants());
+		practiceRepo.save(practice);
 		
 	}
 	
