@@ -3,13 +3,18 @@
  */
 package com.wellme.practice.model;
 
+import java.math.BigInteger;
 import java.util.List;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.wellme.common.Address;
+import com.wellme.common.BaseVO;
 import com.wellme.common.Phone;
 import com.wellme.common.SocialProfile;
 
@@ -17,11 +22,11 @@ import com.wellme.common.SocialProfile;
  * The Class Practice.
  */
 @Document(collection="practice")
-public class Practice {
+public class Practice  extends BaseVO{
 	
 	/** The practice id. */
 	@Id
-	private int practiceId;
+	private String practiceId;
 	
 	/** The practive name. */
 	private String practiceName;
@@ -55,7 +60,7 @@ public class Practice {
 	 *
 	 * @return the practice id
 	 */
-	public int getPracticeId() {
+	public String getPracticeId() {
 		return practiceId;
 	}
 	
@@ -64,7 +69,7 @@ public class Practice {
 	 *
 	 * @param practiceId the new practice id
 	 */
-	public void setPracticeId(int practiceId) {
+	public void setPracticeId(String practiceId) {
 		this.practiceId = practiceId;
 	}
 	

@@ -1,6 +1,6 @@
 package com.wellme.common;
 
-public class Qualification {
+public class Qualification extends BaseVO{
 	private String qualification;
 	private String institute;
 	private int year;

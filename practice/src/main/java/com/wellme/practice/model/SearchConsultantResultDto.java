@@ -6,13 +6,14 @@ package com.wellme.practice.model;
 import java.util.List;
 
 import com.wellme.common.Address;
+import com.wellme.common.BaseVO;
 import com.wellme.common.Phone;
 import com.wellme.common.SocialProfile;
 
 /**
  * The Class SearchConsultantResultDto.
  */
-public class SearchConsultantResultDto {
+public class SearchConsultantResultDto  extends BaseVO{
 	
 	/** The consultant name. */
 	private String consultantName;

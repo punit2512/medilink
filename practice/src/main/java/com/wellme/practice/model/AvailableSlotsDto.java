@@ -7,10 +7,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import com.wellme.common.BaseVO;
+
 /**
  * The Class AvailableSlotsDto.
  */
-public class AvailableSlotsDto {
+public class AvailableSlotsDto extends BaseVO{
 	
 	/** The appointment date. */
 	private LocalDate appointmentDate;

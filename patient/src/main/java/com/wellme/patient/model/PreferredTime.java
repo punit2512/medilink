@@ -1,10 +1,12 @@
 package com.wellme.patient.model;
 
+import com.wellme.common.BaseVO;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class PreferredTime.
  */
-public class PreferredTime {
+public class PreferredTime extends BaseVO{
 	
 	/** The hour. */
 	private String hour;

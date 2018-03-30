@@ -6,6 +6,7 @@ package com.wellme.practice.repo;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -22,7 +23,7 @@ public class PracticeDao {
 	
 	/** The mongo template. */
 	@Autowired
-	private MongoTemplate mongoTemplate;
+	private MongoOperations mongoOperations;
 	
 	/**
 	 * Search practices.
@@ -33,7 +34,7 @@ public class PracticeDao {
 	public List<Practice> searchPractices(SearchPracticesRequest request){
 		Query query = new Query();
 		if(request.getPracticeName() != null){
-			Criteria practiceNameCriteria = Criteria.where("practiveName").regex(request.getPracticeName());
+			Criteria practiceNameCriteria = Criteria.where("practiceName").regex(request.getPracticeName());
 			query.addCriteria(practiceNameCriteria);
 			
 		}
@@ -65,7 +66,7 @@ public class PracticeDao {
 		if(request.getWithinMiles() != null){
 			
 		}
-		List<Practice> practices = mongoTemplate.find(query,Practice.class);
+		List<Practice> practices = mongoOperations.find(query,Practice.class);
 		return practices;
 	}
 }

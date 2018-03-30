@@ -6,7 +6,7 @@ package com.wellme.common;
 /**
  * The Class SocialProfile.
  */
-public class SocialProfile {
+public class SocialProfile extends BaseVO{
 	
 	/** The social type. */
 	private String socialType;

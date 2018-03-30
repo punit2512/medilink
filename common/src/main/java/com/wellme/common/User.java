@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The Class User.
  */
-public class User {
+public class User extends BaseVO{
 	
 	/** The user id. */
 	private Integer userId;

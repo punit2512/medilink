@@ -6,11 +6,13 @@ package com.wellme.appointment.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.wellme.common.BaseVO;
+
 
 /**
  * The Class Appointment.
  */
-public class Appointment {
+public class Appointment extends BaseVO {
 	
 	/** The consultant id. */
 	private String consultantId;
