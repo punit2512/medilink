@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+ <link rel="stylesheet" href="css/themeping.css" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+  <script type="text/javascript">  jQuery(document).ready(function($) {
+
+        $('#myCarousel').carousel({
+                interval: 5000
+        });
+
+        $('#carousel-text').html($('#slide-content-0').html());
+
+        //Handles the carousel thumbnails
+       $('[id^=carousel-selector-]').click( function(){
+            var id = this.id.substr(this.id.lastIndexOf("-") + 1);
+            var id = parseInt(id);
+            $('#myCarousel').carousel(id);
+        });
+
+
+        // When the carousel slides, auto update the text
+        $('#myCarousel').on('slid.bs.carousel', function (e) {
+                 var id = $('.item.active').data('slide-number');
+                $('#carousel-text').html($('#slide-content-'+id).html());
+        });
+});</script>
+<style type="text/css">
+img {
+  max-width: 100%; }
+
+.preview {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  @media screen and (max-width: 996px) {
+    .preview {
+      margin-bottom: 20px; } }
+
+.preview-pic {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+
+.preview-thumbnail.nav-tabs {
+  border: none;
+  margin-top: 15px; }
+  .preview-thumbnail.nav-tabs li {
+    width: 18%;
+    margin-right: 2.5%; }
+    .preview-thumbnail.nav-tabs li img {
+      max-width: 100%;
+      display: block; }
+    .preview-thumbnail.nav-tabs li a {
+      padding: 0;
+      margin: 0; }
+    .preview-thumbnail.nav-tabs li:last-of-type {
+      margin-right: 0; }
+
+.tab-content {
+  overflow: hidden; }
+  .tab-content img {
+    width: 100%;
+    -webkit-animation-name: opacity;
+            animation-name: opacity;
+    -webkit-animation-duration: .3s;
+            animation-duration: .3s; }
+
+.card {
+  margin-top: 50px;
+  background: #eee;
+  padding: 3em;
+  line-height: 1.5em; }
+
+@media screen and (min-width: 997px) {
+  .wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; } }
+
+.details {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.colors {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+
+.product-title, .price, .sizes, .colors {
+  text-transform: UPPERCASE;
+  font-weight: bold; }
+
+.checked, .price span {
+  color: #ff9f1a; }
+
+.product-title, .rating, .product-description, .price, .vote, .sizes {
+  margin-bottom: 15px; }
+
+.product-title {
+  margin-top: 0; }
+
+.size {
+  margin-right: 10px; }
+  .size:first-of-type {
+    margin-left: 40px; }
+
+.color {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 2em;
+  width: 2em;
+  border-radius: 2px; }
+  .color:first-of-type {
+    margin-left: 20px; }
+
+.add-to-cart, .like {
+  background: #ff9f1a;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+  -webkit-transition: background .3s ease;
+          transition: background .3s ease; }
+  .add-to-cart:hover, .like:hover {
+    background: #b36800;
+    color: #fff; }
+
+.not-available {
+  text-align: center;
+  line-height: 2em; }
+  .not-available:before {
+    font-family: fontawesome;
+    content: "\f00d";
+    color: #fff; }
+
+.orange {
+  background: #ff9f1a; }
+
+.green {
+  background: #85ad00; }
+
+.blue {
+  background: #0076ad; }
+
+.tooltip-inner {
+  padding: 1.3em; }
+
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+/*# sourceMappingURL=style.css.map */
+</style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="fa d-inline fa-lg fa-cloud"></i><b>  Brand</b></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-bookmark-o"></i> Notifications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-envelope-o"></i> Welcome User</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+
+
+  <div class="container">
+    <div class="card">
+      <div class="container-fliud">
+        <div class="wrapper row">
+          <div class="preview col-md-4">
+
+            <div class="preview-pic tab-content">
+              <div class="tab-pane active" id="pic-1"><img src="img/profile.jpg" /></div>
+              <div class="tab-pane" id="pic-2"><img src="img/profile.jpg" /></div>
+              <div class="tab-pane" id="pic-3"><img src="img/profile.jpg" /></div>
+              <div class="tab-pane" id="pic-4"><img src="img/profile.jpg"/></div>
+              <div class="tab-pane" id="pic-5"><img src="img/profile.jpg" /></div>
+            </div>
+            <ul class="preview-thumbnail nav nav-tabs">
+              <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="img/profile.jpg" /></a></li>
+              <li><a data-target="#pic-2" data-toggle="tab"><img src="img/profile.jpg"/></a></li>
+              <li><a data-target="#pic-3" data-toggle="tab"><img src="img/profile.jpg" /></a></li>
+              <li><a data-target="#pic-4" data-toggle="tab"><img src="img/profile.jpg" /></a></li>
+              <li><a data-target="#pic-5" data-toggle="tab"><img src="img/profile.jpg" /></a></li>
+            </ul>
+
+            <ul>
+
+            <div class="form-group"> <label for="exampleFormControlInput1" style="font-weight:bold;">Education</label>
+              <p class="pi-draggable" draggable="true"> </p>
+              <ul>
+                <li>Medical School - University of Connecticut, Doctor of Medicine</li>
+                <li>Harvard University (Bachelor’s) Boston University</li>
+                <li>Boston City Hospital, Internship in Medicine Boston University</li>
+                <li>Boston City Hospital, Residency in Internal Medicine Boston University</li>
+                <li>Boston City Hospital, Residency in Pediatrics</li>
+              </ul> <label for="exampleFormControlInput1" style="font-weight:bold;">Hospital Affiliation</label> </div>
+            <p> Mount Sinai Beth Israel - Petrie Division </p>
+            <div class="form-group"> <label for="exampleFormControlInput1" style="font-weight:bold;">Languages Spoken</label>
+              <ul>
+                <li>English</li>
+                <li>Spanish</li>
+              </ul>
+            </div>
+            <div class="form-group"> <label for="exampleFormControlSelect2" style="font-weight:bold;">Professional Statement</label>
+              <p>Dr. Berestrand Williams is a skilled and experienced internist and pediatrician serving the community of New York, NY. Dr. Williams attended the University of Connecticut, where he received his medical degree, and completed his residency
+                in internal medicine and an additional residency in pediatrics from Boston University, Boston City Hospital. </p>
+              <p> Dr. Williams is a part of Mount Sinai Beth Israel Medical Group. He is board certified by the American Board of Internal Medicine and the American Board of Pediatrics. Dr. Williams is a member of the American Academy of Pediatrics and the
+                American College of Physicians. He is affiliated with Mount Sinai Beth Israel Hospital, NY.</p>
+            </div>
+
+            </ul>
+
+          </div>
+          <div class="details col-md-4">
+            <h3 class="product-title">John Doe , M.D.</h3>
+            <div class="rating">
+              <div class="stars">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              </div>
+              <span class="review-no">534 reviews</span>
+            </div>
+            <p class="product-description">NPI Number: 1234567890
+</p>
+ <p class="product-description">Gender: Male
+</p>
+
+<p class="product-description">Languages: English, Hindi
+</p>
+
+            <h6 >
+              <a data-target="#pic-2" data-toggle="tab"><img src="img/map.png"/></a>
+              <p class="product-description"  style="bold">50 Wall St,</p>
+<p class="product-description"  style="bold">New York, NY 01150</p>
+
+            </h6>
+
+          </div>
+          <div class="details col-md-4">
+            <h6 class="product-title">Earliest Availability</h6>
+
+            <p class="product-description">Tuesday, Dec 19, at 10:30 am</p>
+            <div class="action">
+              <button class="btn btn-primary" type="button">Reserve</button>
+                        </div>
+                        <hr/>
+                         <h6 class="product-title">Next Availability</h6>
+
+            <div class="radio">
+  <label><input type="radio" name="optradio">Tue, Dec 19 at 11:30 am</label>
+</div>
+<div class="radio">
+  <label><input type="radio" name="optradio">Wed, Dec 20 at 8:00 am</label>
+</div>
+<div class="radio disabled">
+  <label><input type="radio" name="optradio" disabled>Wed, Dec 20 at 3:30 pm</label>
+</div>
+<div class="radio disabled">
+  <label><input type="radio" name="optradio" disabled>Thu, Dec 21 at 8:00 am</label>
+</div>
+<div class="radio disabled">
+  <label><input type="radio" name="optradio" disabled>Fri, Dec 22 at 2:00 pm</label>
+</div>
+
+            <div class="action">
+              <button class="btn btn-primary" type="button">Reserve Selected Time</button>
+                        </div>
+            <hr/>
+
+            <h6 class="product-title">Reviews</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
