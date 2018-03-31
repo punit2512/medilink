@@ -1,6 +1,6 @@
 package com.wellme.common;
 
-public class Role {
+public class Role extends BaseVO{
 	private int roleId;
 	private String roleName;
 	private String roleDescription;

@@ -1,9 +1,11 @@
 package com.wellme.appointment.model;
 
+import com.wellme.common.BaseVO;
+
 /**
  * The Class AppointmentStatus.
  */
-public class AppointmentStatus {
+public class AppointmentStatus extends BaseVO{
 	
 	/** The status. */
 	private AppointmentStatusEnum status;

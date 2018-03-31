@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.wellme.common.Address;
+import com.wellme.common.BaseVO;
 import com.wellme.common.Phone;
 
 // TODO: Auto-generated Javadoc
@@ -14,11 +15,11 @@ import com.wellme.common.Phone;
  * The Class InsuranceProvider.
  */
 @Document(collection="insuranceProviders")
-public class InsuranceProvider {
+public class InsuranceProvider  extends BaseVO{
 	
 	/** The insurance provider id. */
 	@Id
-	private int insuranceProviderId;
+	private String insuranceProviderId;
 	
 	/** The insurance provider name. */
 	private String insuranceProviderName;
@@ -38,7 +39,7 @@ public class InsuranceProvider {
 	 *
 	 * @return the insurance provider id
 	 */
-	public int getInsuranceProviderId() {
+	public String getInsuranceProviderId() {
 		return insuranceProviderId;
 	}
 	
@@ -47,7 +48,7 @@ public class InsuranceProvider {
 	 *
 	 * @param insuranceProviderId the new insurance provider id
 	 */
-	public void setInsuranceProviderId(int insuranceProviderId) {
+	public void setInsuranceProviderId(String insuranceProviderId) {
 		this.insuranceProviderId = insuranceProviderId;
 	}
 	

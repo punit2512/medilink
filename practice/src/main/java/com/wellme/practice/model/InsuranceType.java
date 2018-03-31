@@ -6,15 +6,17 @@ package com.wellme.practice.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.wellme.common.BaseVO;
+
 /**
  * The Class InsuranceType.
  */
 @Document(collection="insuranceTypes")
-public class InsuranceType {
+public class InsuranceType  extends BaseVO{
 	
 	/** The insurance type id. */
-	@Id
-	private int insuranceTypeId;
+	@Id 
+	private String insuranceTypeId;
 	
 	/** The insurance type. */
 	private String insuranceType;
@@ -27,7 +29,7 @@ public class InsuranceType {
 	 *
 	 * @return the insurance type id
 	 */
-	public int getInsuranceTypeId() {
+	public String getInsuranceTypeId() {
 		return insuranceTypeId;
 	}
 	
@@ -36,7 +38,7 @@ public class InsuranceType {
 	 *
 	 * @param insuranceTypeId the new insurance type id
 	 */
-	public void setInsuranceTypeId(int insuranceTypeId) {
+	public void setInsuranceTypeId(String insuranceTypeId) {
 		this.insuranceTypeId = insuranceTypeId;
 	}
 	

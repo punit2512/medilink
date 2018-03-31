@@ -5,8 +5,10 @@ package com.wellme.practice.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -68,15 +70,18 @@ public class PracticeServiceImpl implements PracticeService{
 	public void savePractice(Practice practice){
 		
 
-		List<Speciality> specialities = new ArrayList<>();
+		Set<Speciality> specialities = new HashSet<>();
 		specialities.addAll(practice.getSpecialitiesSupported());
 		practice.getConsultants().stream().map(c -> specialities.addAll(c.getSpecialities())).count();
 		specialityRepo.save(specialities);
-		insuranceProviderRepo.save(practice.getInsuranceProviders());
-		List<InsuranceType> insuranceTypes = new ArrayList<>();
+		
+		Set<InsuranceType> insuranceTypes = new HashSet<>();
 		practice.getInsuranceProviders().stream().map(ip -> insuranceTypes.addAll(ip.getInsuranceTypes())).count();
 		insuranceTypeRepo.save(insuranceTypes);
-		consultantRepo.save(practice.getConsultants());
+		
+		insuranceProviderRepo.save(new HashSet<>(practice.getInsuranceProviders()));
+		
+		consultantRepo.save(new HashSet<>(practice.getConsultants()));
 		practiceRepo.save(practice);
 		
 	}
@@ -135,6 +140,7 @@ public class PracticeServiceImpl implements PracticeService{
 				consultantResult.setPhones(consultant.getPhones());
 				consultantResult.setSocialProfiles(consultant.getSocialProfiles());
 				consultantResult.setAvailableSlots(availableSlotsMap.get(consultant.getUserId()));
+				consultantResults.add(consultantResult);
 			}
 			
 			SearchPracticeResultDto practiceDto = new SearchPracticeResultDto();
@@ -142,6 +148,7 @@ public class PracticeServiceImpl implements PracticeService{
 			practiceDto.setConsultants(consultantResults);
 			practiceDto.setPhones(practice.getPhones());
 			practiceDto.setPracticeName(practice.getPracticeName());
+			practiceDto.setPracticeSocialProfiles(practice.getSocialProfiles());
 			results.add(practiceDto);
 		}
 		return results;

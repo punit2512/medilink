@@ -1,7 +1,11 @@
+/*
+ * Copyright. Do not copy any portion of this file.
+ */
 package com.wellme.practice.model;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,6 +19,10 @@ import com.wellme.common.User;
 @Document(collection="consultants")
 public class Consultant extends User{
 	
+	/** The consultant id. */
+	@Id
+	private String consultantId;
+	
 	/** The specialities. */
 	@DBRef(db="specialities")
 	private List<Speciality> specialities;
@@ -22,6 +30,24 @@ public class Consultant extends User{
 	/** The qualifications. */
 	private List<Qualification> qualifications;
 	
+	/**
+	 * Gets the consultant id.
+	 *
+	 * @return the consultant id
+	 */
+	public String getConsultantId() {
+		return consultantId;
+	}
+
+	/**
+	 * Sets the consultant id.
+	 *
+	 * @param consultantId the new consultant id
+	 */
+	public void setConsultantId(String consultantId) {
+		this.consultantId = consultantId;
+	}
+
 	/**
 	 * Gets the specialities.
 	 *

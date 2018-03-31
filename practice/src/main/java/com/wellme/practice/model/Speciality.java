@@ -3,15 +3,18 @@ package com.wellme.practice.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.wellme.common.BaseVO;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Speciality.
  */
 @Document(collection="speciality")
-public class Speciality {
+public class Speciality  extends BaseVO{
 	
 	/** The speciality id. */
 	@Id
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String specialityId;
 	
 	/** The speciality name. */

@@ -1,6 +1,6 @@
 package com.wellme.common;
 
-public class Coordinates {
+public class Coordinates extends BaseVO{
 
 	private double lattitude;
 	private double longitude;

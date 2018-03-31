@@ -1,6 +1,6 @@
 package com.wellme.common;
 
-public class Address {
+public class Address extends BaseVO{
 	private String addressLine1;
 	private String addressLine2;
 	private String area;

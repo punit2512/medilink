@@ -6,7 +6,7 @@ package com.wellme.common;
 /**
  * The Class Phone.
  */
-public class Phone {
+public class Phone extends BaseVO{
 	
 	/** The phone type. */
 	private String phoneType;
