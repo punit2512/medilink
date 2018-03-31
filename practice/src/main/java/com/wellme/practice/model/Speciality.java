@@ -1,8 +1,5 @@
 package com.wellme.practice.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
