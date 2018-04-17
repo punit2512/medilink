@@ -6,10 +6,7 @@ package com.wellme.practice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.wellme.practice.PracticeTestDataUtils;
 import com.wellme.practice.SearchPracticesRequest;
@@ -35,6 +32,7 @@ public class PracticeController {
 	 * @return the list
 	 */
 	@RequestMapping(value = "/searchPractices", method = RequestMethod.POST)
+    @CrossOrigin
 	public List<SearchPracticeResultDto> searchPractices(@RequestBody SearchPracticesRequest request) {
 		return practiceService.findPractices(request);
 	}
