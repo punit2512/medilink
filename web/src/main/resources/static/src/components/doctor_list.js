@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchPractices} from "../actions";
 import GoogleMap from "./google_map";
-
+import _ from 'lodash';
+import MapForAddress from "./mapforaddress";
 
 class DoctorList extends Component {
 
@@ -16,6 +17,7 @@ class DoctorList extends Component {
     renderPractice(practice) {
         var lon = 12.35;
         var lat = 78.25;
+        var address = practice.addresses[0].addressLine1 + " " + practice.addresses[0].addressLine2 + " " + practice.addresses[0].city + " " + practice.addresses[0].zip;
         console.log('practice is:', practice);
         return (
             <tr key={practice.practiceName}>
@@ -30,7 +32,8 @@ class DoctorList extends Component {
                             className="fa fa-star"></span> <span
                             className="fa fa-star"></span>
                 </td>
-                <td><GoogleMap lon={lon} lat={lat}/></td>
+                {/*<td><GoogleMap lon={lon} lat={lat} width="100px" height="100px"/></td>*/}
+                <td><MapForAddress address={address} width="100px" height="100px"/></td>
                 <td><p><img src="img/Email.png"/></p><p><img src="img/message.jpg"/></p></td>
                 <td>
                     <div>
