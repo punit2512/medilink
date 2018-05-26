@@ -5,6 +5,7 @@ package com.wellme.practice.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.wellme.common.model.Address;
 import com.wellme.common.model.BaseVO;
 import com.wellme.common.model.Phone;
@@ -13,6 +14,7 @@ import com.wellme.common.model.SocialProfile;
 /**
  * The Class SearchPracticeResultDto.
  */
+@JsonIgnoreProperties(value = { "insTs", "insLogin", "updTs", "updLogin", "versionId", "previosVersionId" })
 public class SearchPracticeResultDto  extends BaseVO{
 
 

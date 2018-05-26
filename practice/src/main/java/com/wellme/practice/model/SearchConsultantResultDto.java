@@ -3,6 +3,7 @@
  */
 package com.wellme.practice.model;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +16,11 @@ import com.wellme.common.model.SocialProfile;
 /**
  * The Class SearchConsultantResultDto.
  */
-@JsonIgnoreProperties(value = { "insTs", "insLogin", "updTs", "updLogin", "rowVersionId" })
+@JsonIgnoreProperties(value = { "insTs", "insLogin", "updTs", "updLogin", "versionId", "previosVersionId" })
 public class SearchConsultantResultDto  extends BaseVO{
 	
 	/** The consultant id. */
-	private Long consultantId;
+	private BigInteger consultantId;
 	
 	/** The consultant name. */
 	private String consultantName;
@@ -51,7 +52,7 @@ public class SearchConsultantResultDto  extends BaseVO{
 	 *
 	 * @return the consultant id
 	 */
-	public Long getConsultantId() {
+	public BigInteger getConsultantId() {
 		return consultantId;
 	}
 
@@ -60,7 +61,7 @@ public class SearchConsultantResultDto  extends BaseVO{
 	 *
 	 * @param consultantId the new consultant id
 	 */
-	public void setConsultantId(Long consultantId) {
+	public void setConsultantId(BigInteger consultantId) {
 		this.consultantId = consultantId;
 	}
 

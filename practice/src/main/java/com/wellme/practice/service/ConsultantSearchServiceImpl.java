@@ -229,7 +229,8 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 	 *            the context
 	 * @return the list
 	 */
-	private List<SearchConsultantResultDto> convertResultData(SearchConsultantsRequest request, SearchConsultantDataContext context) {
+	private List<SearchConsultantResultDto> convertResultData(SearchConsultantsRequest request,
+			SearchConsultantDataContext context) {
 
 		Map<BigInteger, List<AvailableSlotsDto>> availableSlotsMap = MapUtils.isNotEmpty(context.getConsultants())
 				? getAvailableSlots(context.getConsultants().keySet()) : null;
@@ -242,7 +243,7 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 				Consultant consultant = consultantEntry.getValue();
 				SearchConsultantResultDto consultantResult = new SearchConsultantResultDto();
 				for (BigInteger practiceId : consultant.getPracticeIds()) {
-					
+
 					Practice practice = practices.get(practiceId);
 					if (practice != null) {
 						SearchPracticeResultDto practiceDto = new SearchPracticeResultDto();
@@ -260,38 +261,38 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 						consultantResult.getPractices().add(practiceDto);
 					}
 				}
-					List<String> specialities = new ArrayList<String>();
-					for (BigInteger specialityId : consultant.getSpecialityIds()) {
-						Speciality speciality = context.getSpecialities().get(specialityId);
-						if (speciality != null) {
-							specialities.add(speciality.getSpecialityName());
+				List<String> specialities = new ArrayList<String>();
+				for (BigInteger specialityId : consultant.getSpecialityIds()) {
+					Speciality speciality = context.getSpecialities().get(specialityId);
+					if (speciality != null) {
+						specialities.add(speciality.getSpecialityName());
+					}
+				}
+				consultantResult.setConsultantId(consultant.getConsultantId());
+				consultantResult.setConsultantName(consultant.getUserFullName());
+				consultantResult.setPhones(consultant.getPhones());
+				consultantResult.setSocialProfiles(consultant.getSocialProfiles());
+
+				consultantResult.setAvailableSlots(availableSlotsMap.get(consultant.getUserId()));
+				if (CollectionUtils.isNotEmpty(specialities)) {
+					consultantResult.setSpecialities(specialities);
+				}
+
+				for (Map.Entry<BigInteger, InsuranceProvider> insuranceProviderEntry : insuranceProviders.entrySet()) {
+					InsuranceProvider insuranceProvider = insuranceProviderEntry.getValue();
+
+					for (BigInteger insurancePlanId : consultant.getInsurancePlanIds()) {
+						if (insuranceProvider.getInsuranceTypeIds().contains(insurancePlanId)) {
+							InsuranceProviderDto insuranceProviderDto = new InsuranceProviderDto();
+							insuranceProviderDto.setInsuranceProviderId(insuranceProvider.getInsuranceProviderId());
+							insuranceProviderDto.setInsuranceProviderName(insuranceProvider.getInsuranceProviderName());
+							consultantResult.getInsuranceProviderDto().add(insuranceProviderDto);
+							break;
 						}
 					}
-					if (CollectionUtils.isNotEmpty(specialities)) {
-						consultantResult.setConsultantName(consultant.getUserFullName());
-						consultantResult.setPhones(consultant.getPhones());
-						consultantResult.setSocialProfiles(consultant.getSocialProfiles());
-						consultantResult.setAvailableSlots(availableSlotsMap.get(consultant.getUserId()));
-						consultantResult.setSpecialities(specialities);
-					}
 
-					for (Map.Entry<BigInteger, InsuranceProvider> insuranceProviderEntry : insuranceProviders
-							.entrySet()) {
-						InsuranceProvider insuranceProvider = insuranceProviderEntry.getValue();
-
-						for (BigInteger insurancePlanId : consultant.getInsurancePlanIds()) {
-							if (insuranceProvider.getInsuranceTypeIds().contains(insurancePlanId)) {
-								InsuranceProviderDto insuranceProviderDto = new InsuranceProviderDto();
-								insuranceProviderDto.setInsuranceProviderId(insuranceProvider.getInsuranceProviderId());
-								insuranceProviderDto
-										.setInsuranceProviderName(insuranceProvider.getInsuranceProviderName());
-								consultantResult.getInsuranceProviderDto().add(insuranceProviderDto);
-								break;
-							}
-						}
-
-					}
-					consultantResults.add(consultantResult);
+				}
+				consultantResults.add(consultantResult);
 
 			}
 		}
