@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.wellme.common.User;
+import com.wellme.common.model.User;
 
 // TODO: Auto-generated Javadoc
 /**

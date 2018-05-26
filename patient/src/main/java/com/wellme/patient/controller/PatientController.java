@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wellme.common.Address;
-import com.wellme.common.Phone;
+import com.wellme.common.model.Address;
+import com.wellme.common.model.Phone;
 import com.wellme.patient.model.Patient;
 import com.wellme.patient.model.PreferredTime;
 import com.wellme.patient.repo.PatientRepository;

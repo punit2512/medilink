@@ -3,17 +3,23 @@
  */
 package com.wellme.practice.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.wellme.common.Address;
-import com.wellme.common.BaseVO;
-import com.wellme.common.Phone;
-import com.wellme.common.SocialProfile;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.wellme.common.model.Address;
+import com.wellme.common.model.BaseVO;
+import com.wellme.common.model.Phone;
+import com.wellme.common.model.SocialProfile;
 
 /**
  * The Class SearchConsultantResultDto.
  */
+@JsonIgnoreProperties(value = { "insTs", "insLogin", "updTs", "updLogin", "rowVersionId" })
 public class SearchConsultantResultDto  extends BaseVO{
+	
+	/** The consultant id. */
+	private Long consultantId;
 	
 	/** The consultant name. */
 	private String consultantName;
@@ -30,6 +36,34 @@ public class SearchConsultantResultDto  extends BaseVO{
 	/** The available slots. */
 	private List<AvailableSlotsDto> availableSlots;
 	
+	
+	/** The specialities. */
+	private List<String> specialities;
+	
+	/** The insurance provider dto. */
+	private List<InsuranceProviderDto> insuranceProviderDto = new ArrayList<>();
+	
+	/** The practice. */
+	private List<SearchPracticeResultDto> practices = new ArrayList<>();
+	
+	/**
+	 * Gets the consultant id.
+	 *
+	 * @return the consultant id
+	 */
+	public Long getConsultantId() {
+		return consultantId;
+	}
+
+	/**
+	 * Sets the consultant id.
+	 *
+	 * @param consultantId the new consultant id
+	 */
+	public void setConsultantId(Long consultantId) {
+		this.consultantId = consultantId;
+	}
+
 	/**
 	 * Gets the addresses.
 	 *
@@ -145,5 +179,59 @@ public class SearchConsultantResultDto  extends BaseVO{
 	 */
 	public void setAvailableSlots(List<AvailableSlotsDto> availableSlots) {
 		this.availableSlots = availableSlots;
+	}
+
+	/**
+	 * Gets the specialities.
+	 *
+	 * @return the specialities
+	 */
+	public List<String> getSpecialities() {
+		return specialities;
+	}
+
+	/**
+	 * Sets the specialities.
+	 *
+	 * @param specialities the new specialities
+	 */
+	public void setSpecialities(List<String> specialities) {
+		this.specialities = specialities;
+	}
+
+	/**
+	 * Gets the insurance provider dto.
+	 *
+	 * @return the insurance provider dto
+	 */
+	public List<InsuranceProviderDto> getInsuranceProviderDto() {
+		return insuranceProviderDto;
+	}
+
+	/**
+	 * Sets the insurance provider dto.
+	 *
+	 * @param insuranceProviderDto the new insurance provider dto
+	 */
+	public void setInsuranceProviderDto(List<InsuranceProviderDto> insuranceProviderDto) {
+		this.insuranceProviderDto = insuranceProviderDto;
+	}
+
+	/**
+	 * Gets the practice.
+	 *
+	 * @return the practice
+	 */
+	public List<SearchPracticeResultDto> getPractices() {
+		return practices;
+	}
+
+	/**
+	 * Sets the practice.
+	 *
+	 * @param practice the new practice
+	 */
+	public void setPractices(List<SearchPracticeResultDto> practices) {
+		this.practices = practices;
 	}
 }

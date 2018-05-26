@@ -5,24 +5,23 @@ package com.wellme.practice.model;
 
 import java.util.List;
 
-import com.wellme.common.Address;
-import com.wellme.common.BaseVO;
-import com.wellme.common.Phone;
-import com.wellme.common.SocialProfile;
+import com.wellme.common.model.Address;
+import com.wellme.common.model.BaseVO;
+import com.wellme.common.model.Phone;
+import com.wellme.common.model.SocialProfile;
 
 /**
  * The Class SearchPracticeResultDto.
  */
 public class SearchPracticeResultDto  extends BaseVO{
-	
+
+
 	/** The practice name. */
 	private String practiceName;
-	
-	/** The consultants. */
-	private List<SearchConsultantResultDto> consultants;
+
 	
 	/** The address. */
-	private List<Address> addresses;
+	private Address practiceAddress;
 	
 	/** The phone. */
 	private List<Phone> phones;
@@ -30,6 +29,29 @@ public class SearchPracticeResultDto  extends BaseVO{
 	/** The practice social profile. */
 	private List<SocialProfile> practiceSocialProfiles;
 	
+	/** The distance in miles. */
+	private double distanceInMiles;
+	
+	
+	/**
+	 * Instantiates a new search practice result dto.
+	 *
+	 * @param practiceName the practice name
+	 * @param practiceAddress the practice address
+	 * @param phones the phones
+	 * @param practiceSocialProfiles the practice social profiles
+	 * @param distanceInMiles the distance in miles
+	 */
+	public SearchPracticeResultDto(String practiceName, Address practiceAddress, List<Phone> phones,
+			List<SocialProfile> practiceSocialProfiles, double distanceInMiles) {
+		super();
+		this.practiceName = practiceName;
+		this.practiceAddress = practiceAddress;
+		this.phones = phones;
+		this.practiceSocialProfiles = practiceSocialProfiles;
+		this.distanceInMiles = distanceInMiles;
+	}
+
 	/**
 	 * Instantiates a new search practice result dto.
 	 */
@@ -42,17 +64,17 @@ public class SearchPracticeResultDto  extends BaseVO{
 	 *
 	 * @return the addresses
 	 */
-	public List<Address> getAddresses() {
-		return addresses;
+	public Address getPrimaryAddress() {
+		return practiceAddress;
 	}
 
 	/**
 	 * Sets the addresses.
 	 *
-	 * @param addresses the addresses to set
+	 * @param practiceAddress the new primary address
 	 */
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
+	public void setPrimaryAddress(Address practiceAddress) {
+		this.practiceAddress = practiceAddress;
 	}
 
 	/**
@@ -91,24 +113,7 @@ public class SearchPracticeResultDto  extends BaseVO{
 		this.practiceSocialProfiles = practiceSocialProfiles;
 	}
 
-	/**
-	 * Instantiates a new search practice result dto.
-	 *
-	 * @param practiceName the practice name
-	 * @param consultants the consultants
-	 * @param addresses the addresses
-	 * @param phones the phones
-	 * @param practiceSocialProfiles the practice social profiles
-	 */
-	public SearchPracticeResultDto(String practiceName, List<SearchConsultantResultDto> consultants, List<Address> addresses,
-			List<Phone> phones, List<SocialProfile> practiceSocialProfiles) {
-		super();
-		this.practiceName = practiceName;
-		this.consultants = consultants;
-		this.addresses = addresses;
-		this.phones = phones;
-		this.practiceSocialProfiles = practiceSocialProfiles;
-	}
+
 
 	/**
 	 * Gets the practice name.
@@ -129,22 +134,21 @@ public class SearchPracticeResultDto  extends BaseVO{
 	}
 	
 	/**
-	 * Gets the consultants.
+	 * Gets the distance in miles.
 	 *
-	 * @return the consultants
+	 * @return the distance in miles
 	 */
-	public List<SearchConsultantResultDto> getConsultants() {
-		return consultants;
+	public double getDistanceInMiles() {
+		return distanceInMiles;
 	}
-	
+
 	/**
-	 * Sets the consultants.
+	 * Sets the distance in miles.
 	 *
-	 * @param consultants the consultants to set
+	 * @param distanceInMiles the new distance in miles
 	 */
-	public void setConsultants(List<SearchConsultantResultDto> consultants) {
-		this.consultants = consultants;
+	public void setDistanceInMiles(double distanceInMiles) {
+		this.distanceInMiles = distanceInMiles;
 	}
-	
 
 }

@@ -3,29 +3,31 @@
  */
 package com.wellme.practice.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.wellme.common.BaseVO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.wellme.common.model.BaseVO;
 
 /**
  * The Class AvailableSlotsDto.
  */
+@JsonIgnoreProperties(value = { "insTs", "insLogin", "updTs", "updLogin", "versionId", "previosVersionId" })
 public class AvailableSlotsDto extends BaseVO{
 	
 	/** The appointment date. */
-	private LocalDate appointmentDate;
+	private String appointmentDate;
 	
 	/** The available times. */
-	private List<LocalTime> availableTimes;
+	private Map<String, String> availableTimes = new HashMap<>();
 	
+
 	/**
 	 * Gets the appointment date.
 	 *
 	 * @return the appointmentDate
 	 */
-	public LocalDate getAppointmentDate() {
+	public String getAppointmentDate() {
 		return appointmentDate;
 	}
 	
@@ -34,25 +36,26 @@ public class AvailableSlotsDto extends BaseVO{
 	 *
 	 * @param appointmentDate the appointmentDate to set
 	 */
-	public void setAppointmentDate(LocalDate appointmentDate) {
+	public void setAppointmentDate(String appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
 	
 	/**
 	 * Gets the available times.
 	 *
-	 * @return the availableTimes
+	 * @return the available times
 	 */
-	public List<LocalTime> getAvailableTimes() {
+	public Map<String, String> getAvailableTimes() {
 		return availableTimes;
 	}
-	
+
 	/**
 	 * Sets the available times.
 	 *
-	 * @param availableTimes the availableTimes to set
+	 * @param availableTimes the available times
 	 */
-	public void setAvailableTimes(List<LocalTime> availableTimes) {
+	public void setAvailableTimes(Map<String, String> availableTimes) {
 		this.availableTimes = availableTimes;
 	}
+
 }

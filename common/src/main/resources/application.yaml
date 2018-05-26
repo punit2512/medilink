@@ -1,0 +1,8 @@
+google:
+  map:
+    api:
+      url: http://maps.google.com/maps/api/geocode/json?address={address}&sensor=false
+      connectTimeout : 10000
+      readTimeout: 10000
+      key: AIzaSyCdpOnjvhzHDKwPcxDqLbEGEt53Xi24uBY
+      

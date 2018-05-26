@@ -3,26 +3,29 @@
  */
 package com.wellme.practice.model;
 
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.wellme.common.Address;
-import com.wellme.common.BaseVO;
-import com.wellme.common.Phone;
-import com.wellme.common.SocialProfile;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.wellme.common.model.Address;
+import com.wellme.common.model.BaseVO;
+import com.wellme.common.model.Phone;
+import com.wellme.common.model.SocialProfile;
 
 /**
  * The Class Practice.
  */
-@Document(collection="practice")
+@Document(collection="practices")
+@JsonIgnoreProperties(value = { "insTs", "insLogin", "updTs", "updLogin", "versionId", "previosVersionId" })
 public class Practice  extends BaseVO{
 	
 	/** The practice id. */
 	@Id
-	private String practiceId;
+	private BigInteger practiceId;
 	
 	/** The practive name. */
 	private String practiceName;
@@ -31,8 +34,7 @@ public class Practice  extends BaseVO{
 	private String practiceDetails;
 	
 	/** The specialities supported. */
-	@DBRef(db="specialities")
-	private List<Speciality> specialitiesSupported;
+	private List<BigInteger> specialitiesSupported;
 	
 	/** The addresses. */
 	private List<Address> addresses;
@@ -41,22 +43,64 @@ public class Practice  extends BaseVO{
 	private List<Phone> phones;
 	
 	/** The insurance providers. */
-	@DBRef(db="insuranceProviders")
-	private List<InsuranceProvider> insuranceProviders;
+	private List<BigInteger> insuranceProviderIds;
 	
 	/** The consultants. */
-	@DBRef(db="consultants")
-	private List<Consultant> consultants;
+	private List<BigInteger> consultantIds;
 	
 	/** The social profiles. */
 	private List<SocialProfile> socialProfiles;
 	
+	/** The parent practice id. */
+	private BigInteger parentPracticeId;
+	
+	/** The primary address. */
+	private Address primaryAddress;
+
+	/**
+	 * Instantiates a new practice.
+	 *
+	 * @param practiceId the practice id
+	 * @param practiceName the practice name
+	 * @param practiceDetails the practice details
+	 * @param specialitiesSupported the specialities supported
+	 * @param addresses the addresses
+	 * @param phones the phones
+	 * @param insuranceProviderIds the insurance provider ids
+	 * @param consultantIds the consultant ids
+	 * @param socialProfiles the social profiles
+	 * @param parentPracticeId the parent practice id
+	 * @param primaryAddress the primary address
+	 * @param insTs the ins ts
+	 * @param updTs the upd ts
+	 * @param insLogin the ins login
+	 * @param updLogin the upd login
+	 * @param versionId the version id
+	 * @param previosVersionId the previos version id
+	 */
+	public Practice(BigInteger practiceId, String practiceName, String practiceDetails, List<BigInteger> specialitiesSupported,
+			List<Address> addresses, List<Phone> phones, List<BigInteger> insuranceProviderIds, List<BigInteger> consultantIds,
+			List<SocialProfile> socialProfiles, BigInteger parentPracticeId, Address primaryAddress, Date insTs, Date updTs, String insLogin, String updLogin, long versionId, long previosVersionId) {
+		super(insTs, updTs, insLogin, updLogin, versionId, previosVersionId);
+		this.practiceId = practiceId;
+		this.practiceName = practiceName;
+		this.practiceDetails = practiceDetails;
+		this.specialitiesSupported = specialitiesSupported;
+		this.addresses = addresses;
+		this.phones = phones;
+		this.insuranceProviderIds = insuranceProviderIds;
+		this.consultantIds = consultantIds;
+		this.socialProfiles = socialProfiles;
+		this.parentPracticeId = parentPracticeId;
+		this.primaryAddress = primaryAddress;
+	}
+
 	/**
 	 * Gets the practice id.
 	 *
 	 * @return the practice id
 	 */
-	public String getPracticeId() {
+	public BigInteger getPracticeId() {
 		return practiceId;
 	}
 	
@@ -65,7 +109,7 @@ public class Practice  extends BaseVO{
 	 *
 	 * @param practiceId the new practice id
 	 */
-	public void setPracticeId(String practiceId) {
+	public void setPracticeId(BigInteger practiceId) {
 		this.practiceId = practiceId;
 	}
 	
@@ -110,7 +154,7 @@ public class Practice  extends BaseVO{
 	 *
 	 * @return the specialities supported
 	 */
-	public List<Speciality> getSpecialitiesSupported() {
+	public List<BigInteger> getSpecialitiesSupported() {
 		return specialitiesSupported;
 	}
 	
@@ -119,7 +163,7 @@ public class Practice  extends BaseVO{
 	 *
 	 * @param specialitiesSupported the new specialities supported
 	 */
-	public void setSpecialitiesSupported(List<Speciality> specialitiesSupported) {
+	public void setSpecialitiesSupported(List<BigInteger> specialitiesSupported) {
 		this.specialitiesSupported = specialitiesSupported;
 	}
 
@@ -160,39 +204,39 @@ public class Practice  extends BaseVO{
 	}
 
 	/**
-	 * Gets the insurance providers.
+	 * Gets the insurance provider ids.
 	 *
-	 * @return the insuranceProviders
+	 * @return the insurance provider ids
 	 */
-	public List<InsuranceProvider> getInsuranceProviders() {
-		return insuranceProviders;
+	public List<BigInteger> getInsuranceProviderIds() {
+		return insuranceProviderIds;
 	}
 
 	/**
-	 * Sets the insurance providers.
+	 * Sets the insurance provider ids.
 	 *
-	 * @param insuranceProviders the insuranceProviders to set
+	 * @param insuranceProviderIds the new insurance provider ids
 	 */
-	public void setInsuranceProviders(List<InsuranceProvider> insuranceProviders) {
-		this.insuranceProviders = insuranceProviders;
+	public void setInsuranceProviderIds(List<BigInteger> insuranceProviderIds) {
+		this.insuranceProviderIds = insuranceProviderIds;
 	}
 
 	/**
-	 * Gets the consultants.
+	 * Gets the consultant ids.
 	 *
-	 * @return the consultants
+	 * @return the consultant ids
 	 */
-	public List<Consultant> getConsultants() {
-		return consultants;
+	public List<BigInteger> getConsultantIds() {
+		return consultantIds;
 	}
 
 	/**
-	 * Sets the consultants.
+	 * Sets the consultant ids.
 	 *
-	 * @param consultants the consultants to set
+	 * @param consultantIds the new consultant ids
 	 */
-	public void setConsultants(List<Consultant> consultants) {
-		this.consultants = consultants;
+	public void setConsultantIds(List<BigInteger> consultantIds) {
+		this.consultantIds = consultantIds;
 	}
 
 	/**
@@ -212,7 +256,42 @@ public class Practice  extends BaseVO{
 	public void setSocialProfiles(List<SocialProfile> socialProfiles) {
 		this.socialProfiles = socialProfiles;
 	}
-	
+
+	/**
+	 * Gets the parent practice id.
+	 *
+	 * @return the parent practice id
+	 */
+	public BigInteger getParentPracticeId() {
+		return parentPracticeId;
+	}
+
+	/**
+	 * Sets the parent practice id.
+	 *
+	 * @param parentPracticeId the new parent practice id
+	 */
+	public void setParentPracticeId(BigInteger parentPracticeId) {
+		this.parentPracticeId = parentPracticeId;
+	}
+
+	/**
+	 * Gets the primary address.
+	 *
+	 * @return the primary address
+	 */
+	public Address getPrimaryAddress() {
+		return addresses.get(0);
+	}
+
+	/**
+	 * Sets the primary address.
+	 *
+	 * @param primaryAddress the new primary address
+	 */
+	public void setPrimaryAddress(Address primaryAddress) {
+		this.primaryAddress = primaryAddress;
+	}	
 
 	
 }

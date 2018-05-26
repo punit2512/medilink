@@ -1,6 +1,6 @@
 package com.wellme.patient.model;
 
-import com.wellme.common.BaseVO;
+import com.wellme.common.model.BaseVO;
 
 // TODO: Auto-generated Javadoc
 /**

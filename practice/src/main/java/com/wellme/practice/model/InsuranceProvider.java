@@ -1,14 +1,18 @@
+/*
+ * Copyright. Do not copy any portion of this file.
+ */
 package com.wellme.practice.model;
 
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.wellme.common.Address;
-import com.wellme.common.BaseVO;
-import com.wellme.common.Phone;
+import com.wellme.common.model.Address;
+import com.wellme.common.model.BaseVO;
+import com.wellme.common.model.Phone;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -16,10 +20,10 @@ import com.wellme.common.Phone;
  */
 @Document(collection="insuranceProviders")
 public class InsuranceProvider  extends BaseVO{
-	
+
 	/** The insurance provider id. */
 	@Id
-	private String insuranceProviderId;
+	private BigInteger insuranceProviderId;
 	
 	/** The insurance provider name. */
 	private String insuranceProviderName;
@@ -31,15 +35,40 @@ public class InsuranceProvider  extends BaseVO{
 	private Address address;
 	
 	/** The insurance types. */
-	@DBRef(db="insuranceTypes")
-	private List<InsuranceType> insuranceTypes;
+	private List<BigInteger> insuranceTypeIds;
+	
+	/**
+	 * Instantiates a new insurance provider.
+	 *
+	 * @param insTs the ins ts
+	 * @param updTs the upd ts
+	 * @param insLogin the ins login
+	 * @param updLogin the upd login
+	 * @param versionId the version id
+	 * @param previosVersionId the previos version id
+	 * @param insuranceProviderId the insurance provider id
+	 * @param insuranceProviderName the insurance provider name
+	 * @param phone the phone
+	 * @param address the address
+	 * @param insuranceTypeIds the insurance type ids
+	 */
+	public InsuranceProvider(BigInteger insuranceProviderId, String insuranceProviderName, Phone phone,
+			Address address, List<BigInteger> insuranceTypeIds, Date insTs, Date updTs, String insLogin, String updLogin, long versionId,
+			long previosVersionId) {
+		super(insTs, updTs, insLogin, updLogin, versionId, previosVersionId);
+		this.insuranceProviderId = insuranceProviderId;
+		this.insuranceProviderName = insuranceProviderName;
+		this.phone = phone;
+		this.address = address;
+		this.insuranceTypeIds = insuranceTypeIds;
+	}
 	
 	/**
 	 * Gets the insurance provider id.
 	 *
 	 * @return the insurance provider id
 	 */
-	public String getInsuranceProviderId() {
+	public BigInteger getInsuranceProviderId() {
 		return insuranceProviderId;
 	}
 	
@@ -48,7 +77,7 @@ public class InsuranceProvider  extends BaseVO{
 	 *
 	 * @param insuranceProviderId the new insurance provider id
 	 */
-	public void setInsuranceProviderId(String insuranceProviderId) {
+	public void setInsuranceProviderId(BigInteger insuranceProviderId) {
 		this.insuranceProviderId = insuranceProviderId;
 	}
 	
@@ -107,20 +136,21 @@ public class InsuranceProvider  extends BaseVO{
 	}
 	
 	/**
-	 * Gets the insurance types.
+	 * Gets the insurance type ids.
 	 *
-	 * @return the insurance types
+	 * @return the insurance type ids
 	 */
-	public List<InsuranceType> getInsuranceTypes() {
-		return insuranceTypes;
+	public List<BigInteger> getInsuranceTypeIds() {
+		return insuranceTypeIds;
+	}
+
+	/**
+	 * Sets the insurance type ids.
+	 *
+	 * @param insuranceTypeIds the new insurance type ids
+	 */
+	public void setInsuranceTypeIds(List<BigInteger> insuranceTypeIds) {
+		this.insuranceTypeIds = insuranceTypeIds;
 	}
 	
-	/**
-	 * Sets the insurance types.
-	 *
-	 * @param insuranceTypes the new insurance types
-	 */
-	public void setInsuranceTypes(List<InsuranceType> insuranceTypes) {
-		this.insuranceTypes = insuranceTypes;
-	}
 }

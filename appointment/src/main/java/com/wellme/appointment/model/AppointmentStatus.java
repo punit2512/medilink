@@ -1,6 +1,6 @@
 package com.wellme.appointment.model;
 
-import com.wellme.common.BaseVO;
+import com.wellme.common.model.BaseVO;
 
 /**
  * The Class AppointmentStatus.

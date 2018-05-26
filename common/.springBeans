@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.wellme.appointment.CommonApplication</config>
+		<config>java:com.wellme.common.model.CommonApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
