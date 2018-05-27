@@ -4,7 +4,7 @@ import reducer_practice_search from './reducer_practice_search';
 
 const rootReducer = combineReducers({
     form: formReducer,
-    practices: reducer_practice_search
+    consultants: reducer_practice_search
 });
 
 export default rootReducer;
