@@ -1028,13 +1028,13 @@ public class PracticeTestDataUtils {
 		practice2Addresses.add(practice2Address1);
 		practice2Addresses.add(practice2Address2);
 		
-		SocialProfile socialProfile1Practice2 = new SocialProfile("FaceBook", "wonderYears", "");
-		SocialProfile socialProfile2Practice2 = new SocialProfile("google", "wonderYears", "");
-		SocialProfile socialProfile3Practice2 = new SocialProfile("twitter", "wonderYears", "");
+		SocialProfile socialProfile1Practice2 = new SocialProfile("FaceBook", "tuftsMC", "");
+		SocialProfile socialProfile2Practice2 = new SocialProfile("google", "tuftsMC", "");
+		SocialProfile socialProfile3Practice2 = new SocialProfile("twitter", "tuftsMC", "");
 		List<SocialProfile> socialProfilesPractice2 = new ArrayList<>();
-		socialProfilesPractice1.add(socialProfile1Practice2);
-		socialProfilesPractice1.add(socialProfile2Practice2);
-		socialProfilesPractice1.add(socialProfile3Practice2);
+		socialProfilesPractice2.add(socialProfile1Practice2);
+		socialProfilesPractice2.add(socialProfile2Practice2);
+		socialProfilesPractice2.add(socialProfile3Practice2);
 		
 		Phone phone1Practice2 = new Phone("Office", "001", "617", "2893145");
 		Phone phone2Practice2 = new Phone("Office", "001", "617", "2893149");
@@ -1071,16 +1071,16 @@ public class PracticeTestDataUtils {
 		SocialProfile socialProfile2Practice3 = new SocialProfile("Google", "fenwayHealth", "");
 		SocialProfile socialProfile3Practice3 = new SocialProfile("Twitter", "fenwayHealth", "");
 		List<SocialProfile> socialProfilesPractice3 = new ArrayList<>();
-		socialProfilesPractice1.add(socialProfile1Practice3);
-		socialProfilesPractice1.add(socialProfile2Practice3);
-		socialProfilesPractice1.add(socialProfile3Practice3);
+		socialProfilesPractice3.add(socialProfile1Practice3);
+		socialProfilesPractice3.add(socialProfile2Practice3);
+		socialProfilesPractice3.add(socialProfile3Practice3);
 		
 		Phone phone1Practice3 = new Phone("Office", "001", "617", "2893145");
 		Phone phone2Practice3 = new Phone("Office", "001", "617", "2893149");
 		
 		List<Phone> phonesPractice3 = new ArrayList<>();
-		phonesPractice1.add(phone1Practice3);
-		phonesPractice1.add(phone2Practice3);
+		phonesPractice3.add(phone1Practice3);
+		phonesPractice3.add(phone2Practice3);
 		
 		Practice practice3 = practiceFactory.createPractice("Fenway Health",
 				"The mission of Fenway Health is to enhance the wellbeing of the lesbian, gay, bisexual and transgender community and all people in our neighborhoods and beyond through access to the highest quality health care, education, research and advocacy",

@@ -161,31 +161,32 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 			consultants = consultantDao.searchConsultants(request, context);
 		}
 		List<Practice> practices = practiceDao.searchPractices(request, context);
-		if (CollectionUtils.isNotEmpty(practices) && request.getSpeciality() == null) {
-			List<BigInteger> specialityIds = new ArrayList<>();
-			practices.stream().map(pr -> specialityIds.addAll(pr.getSpecialitiesSupported())).count();
-			if (CollectionUtils.isNotEmpty(consultants)) {
-				consultants.stream().map(c -> specialityIds.addAll(c.getSpecialityIds())).count();
-			}
-			Map<BigInteger, Speciality> specialities = specialityDao.getByIds(specialityIds);
-			context.setSpecialities(specialities);
-		}
-
-		if (CollectionUtils.isNotEmpty(consultants) && request.getInsuranceType() == null
-				&& request.getInsuranceProvider() == null) {
-			List<BigInteger> insurancePlanIds = new ArrayList<>();
-			consultants.stream().map(c -> insurancePlanIds.addAll(c.getInsurancePlanIds())).count();
-			Map<BigInteger, InsurancePlan> insurancePlans = insuranceTypeDao.getByIds(insurancePlanIds);
-			context.setInsurancePlans(insurancePlans);
-			insuranceProviderDao.searchInsuranceProviders(request, context);
-		}
-
-		if (StringUtils.isNotBlank(request.getPracticeName()) && CollectionUtils.isNotEmpty(practices)
+		if (CollectionUtils.isNotEmpty(practices)
 				&& CollectionUtils.isEmpty(consultants)) {
 			List<BigInteger> consultantIds = new ArrayList<>();
 			practices.stream().map(pr -> consultantIds.addAll(pr.getConsultantIds())).count();
 			context.setConsultants(consultantDao.getByIds(consultantIds));
 		}
+		if (CollectionUtils.isNotEmpty(practices) && MapUtils.isEmpty(context.getSpecialities())) {
+			List<BigInteger> specialityIds = new ArrayList<>();
+			practices.stream().map(pr -> specialityIds.addAll(pr.getSpecialitiesSupported())).count();
+			if (MapUtils.isNotEmpty(context.getConsultants())) {
+				context.getConsultants().values().stream().map(c -> specialityIds.addAll(c.getSpecialityIds())).count();
+			}
+			Map<BigInteger, Speciality> specialities = specialityDao.getByIds(specialityIds);
+			context.setSpecialities(specialities);
+		}
+
+		if (MapUtils.isNotEmpty(context.getConsultants()) && request.getInsuranceType() == null
+				&& request.getInsuranceProvider() == null) {
+			List<BigInteger> insurancePlanIds = new ArrayList<>();
+			context.getConsultants().values().stream().map(c -> insurancePlanIds.addAll(c.getInsurancePlanIds())).count();
+			Map<BigInteger, InsurancePlan> insurancePlans = insuranceTypeDao.getByIds(insurancePlanIds);
+			context.setInsurancePlans(insurancePlans);
+			insuranceProviderDao.searchInsuranceProviders(request, context);
+		}
+
+		
 
 		return convertResultData(request, context);
 	}
@@ -277,20 +278,25 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 				if (CollectionUtils.isNotEmpty(specialities)) {
 					consultantResult.setSpecialities(specialities);
 				}
+				
+				if (CollectionUtils.isNotEmpty(consultant.getInsurancePlanIds())
+						&& MapUtils.isNotEmpty(insuranceProviders)) {
+					for (Map.Entry<BigInteger, InsuranceProvider> insuranceProviderEntry : insuranceProviders
+							.entrySet()) {
+						InsuranceProvider insuranceProvider = insuranceProviderEntry.getValue();
 
-				for (Map.Entry<BigInteger, InsuranceProvider> insuranceProviderEntry : insuranceProviders.entrySet()) {
-					InsuranceProvider insuranceProvider = insuranceProviderEntry.getValue();
-
-					for (BigInteger insurancePlanId : consultant.getInsurancePlanIds()) {
-						if (insuranceProvider.getInsuranceTypeIds().contains(insurancePlanId)) {
-							InsuranceProviderDto insuranceProviderDto = new InsuranceProviderDto();
-							insuranceProviderDto.setInsuranceProviderId(insuranceProvider.getInsuranceProviderId());
-							insuranceProviderDto.setInsuranceProviderName(insuranceProvider.getInsuranceProviderName());
-							consultantResult.getInsuranceProviderDto().add(insuranceProviderDto);
-							break;
+						for (BigInteger insurancePlanId : consultant.getInsurancePlanIds()) {
+							if (insuranceProvider.getInsuranceTypeIds().contains(insurancePlanId)) {
+								InsuranceProviderDto insuranceProviderDto = new InsuranceProviderDto();
+								insuranceProviderDto.setInsuranceProviderId(insuranceProvider.getInsuranceProviderId());
+								insuranceProviderDto
+										.setInsuranceProviderName(insuranceProvider.getInsuranceProviderName());
+								consultantResult.getInsuranceProviderDto().add(insuranceProviderDto);
+								break;
+							}
 						}
-					}
 
+					}
 				}
 				consultantResults.add(consultantResult);
 

@@ -51,7 +51,7 @@ public class SpecialityDao {
 	public Map<BigInteger, Speciality> getByIds(List<BigInteger> specialityIds){
 		Map<BigInteger, Speciality> specialityMap = new HashMap<>();
 		Query query = new Query();
-		Criteria idsCriteria = Criteria.where("spcialityId").in(specialityIds);
+		Criteria idsCriteria = Criteria.where("specialityId").in(specialityIds);
 		query.addCriteria(idsCriteria);
 		List<Speciality> specialities =  mongoOperations.find(query, Speciality.class);
 		specialities.stream().map(s -> specialityMap.put(s.getSpecialityId(), s)).count();

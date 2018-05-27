@@ -5,11 +5,13 @@ package com.wellme.practice.repo;
 
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -40,7 +42,10 @@ public class ConsultantDao {
 	public List<Consultant> searchConsultants(SearchConsultantsRequest searchRequest,
 			SearchConsultantDataContext context) {
 		Map<BigInteger, Consultant> consultantsMap = new HashMap<>();
-		Set<BigInteger> specialityIds = context.getSpecialities().keySet();
+		Set<BigInteger> specialityIds = new HashSet<>();
+		if(MapUtils.isNotEmpty(context.getSpecialities())){
+			specialityIds = context.getSpecialities().keySet();
+		}
 		Query query = new Query();
 		if (searchRequest.getConsultantName() != null) {
 			Criteria consultantNameCriteria = Criteria.where("userFullName")
@@ -66,7 +71,7 @@ public class ConsultantDao {
 	public Map<BigInteger, Consultant> getByIds(List<BigInteger> consultantIds) {
 		Map<BigInteger, Consultant> consultantsMap = new HashMap<>();
 		Query query = new Query();
-		Criteria consultantNameCriteria = Criteria.where("consultantIds").in(consultantIds);
+		Criteria consultantNameCriteria = Criteria.where("consultantId").in(consultantIds);
 		query.addCriteria(consultantNameCriteria);
 
 		List<Consultant> consultants = mongoOperations.find(query, Consultant.class);
