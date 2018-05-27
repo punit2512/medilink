@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {fetchPractices} from "../actions";
+import {fetchConsultants} from "../actions";
 import {connect} from 'react-redux';
 
 class FindDoctors extends Component {
@@ -36,6 +36,7 @@ class FindDoctors extends Component {
                             <h1 className="display-3 mb-4" style={{color: '#000000'}}>Find a Doctor</h1>
                                 <p className="lead mb-5" style={{color: '#000000'}}>Not Feeling Well?</p>
                             <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="input-group">
+                                <Field name="consultantName" placeholder="Consultant Name" component={this.renderField}/>
                                 <Field name="practiceName" placeholder="Practice/Provider Name" component={this.renderField}/>
                                 <Field name="procedureName" placeholder="Procedure/Condition" component={this.renderField}/>
                                 <Field name="zip" placeholder="Zip Code" component={this.renderField}/>
@@ -54,4 +55,4 @@ class FindDoctors extends Component {
 export default reduxForm({
     form: 'FindDoctorsForm',
     fields: ['practiceName', 'procedureName','zip','insuranceProvider']
-})(connect(null, {fetchPractices})(FindDoctors));
+})(connect(null, {fetchPractices: fetchConsultants})(FindDoctors));
