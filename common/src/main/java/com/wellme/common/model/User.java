@@ -13,9 +13,6 @@ import java.util.List;
  */
 public class User extends BaseVO {
 
-	/** The user id. */
-	private BigInteger userId;
-
 	/** The user name. */
 	private String userName;
 
@@ -75,12 +72,11 @@ public class User extends BaseVO {
 	 * @param versionId            the version id
 	 * @param previosVersionId            the previos version id
 	 */
-	public User(BigInteger userId, String userName, String firstName, String lastName, String middleName,
+	public User(String userName, String firstName, String lastName, String middleName,
 			String profilePicUrl, List<String> emails, List<String> pictureUrls, List<Address> addresses,
 			List<Phone> phones, List<SocialProfile> socialProfiles, String userFullName, String gender, Date insTs,
 			Date updTs, String insLogin, String updLogin, long versionId, long previosVersionId) {
 		super(insTs, updTs, insLogin, updLogin, versionId, previosVersionId);
-		this.userId = userId;
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -95,24 +91,6 @@ public class User extends BaseVO {
 		this.gender = gender;
 	}
 
-	/**
-	 * Gets the user id.
-	 *
-	 * @return the user id
-	 */
-	public BigInteger getUserId() {
-		return userId;
-	}
-
-	/**
-	 * Sets the user id.
-	 *
-	 * @param userId
-	 *            the new user id
-	 */
-	public void setUserId(BigInteger userId) {
-		this.userId = userId;
-	}
 
 	/**
 	 * Gets the user name.

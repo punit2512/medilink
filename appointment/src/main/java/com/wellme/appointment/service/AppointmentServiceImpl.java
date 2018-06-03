@@ -3,14 +3,21 @@
  */
 package com.wellme.appointment.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.wellme.appointment.model.Appointment;
+import com.wellme.appointment.factory.EventFactory;
+import com.wellme.appointment.factory.EventParticipantFactory;
+import com.wellme.appointment.model.AppointmentDto;
+import com.wellme.appointment.model.Event;
+import com.wellme.appointment.model.EventParticipant;
 import com.wellme.appointment.repo.AppointmentDao;
-import com.wellme.common.model.PracticeConsultantKey;
+import com.wellme.appointment.repo.EventRepo;
 
 /**
  * The Class AppointmentServiceImpl.
@@ -21,19 +28,40 @@ public class AppointmentServiceImpl implements AppointmentService{
 	@Autowired
 	AppointmentDao appointmentDao;
 	
+	/** The event repo. */
+	@Autowired
+	EventRepo eventRepo;
+	
+	/** The event factory. */
+	@Autowired
+	EventFactory eventFactory;
+	
+	/** The event participant factory. */
+	@Autowired
+	EventParticipantFactory eventParticipantFactory;
+	
 	/* (non-Javadoc)
 	 * @see com.wellme.appointment.service.AppointmentService#searchByPracticeAndConsultants(java.util.Set)
 	 */
 	@Override
-	public List<Appointment> searchByPracticeAndConsultants(Set<PracticeConsultantKey> keys){
-		return appointmentDao.getAppointmentsByPracticeConsultantKeys(keys);
+	public Collection<AppointmentDto> searchByParticipantIdsAndType(Map<String, String> participantIdTypeMap){
+		return appointmentDao.getAppointmentsByParticipantIdsAndType(participantIdTypeMap);
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.wellme.appointment.service.AppointmentService#createAppointment(com.wellme.appointment.model.Appointment)
 	 */
 	@Override
-	public void createAppointment(Appointment appointment){
-		appointmentDao.createAppointment(appointment);
+	public Long createAppointment(AppointmentDto appointment){
+		Date insTs = new Date();
+		String insLogin = "PUNIT";
+		Event event = eventFactory.createEvent(appointment.getEventName(), appointment.getEventDescription(), appointment.getAppointmentStartDate(), appointment.getAppointmentEndDate(), appointment.isFullDay(), appointment.isRecurring(), appointment.getAppointmentLocation(), insTs, insLogin);
+		List<EventParticipant> participants = new ArrayList<>();
+		appointment.getParticipants().stream().forEach(pa -> {
+			participants.add(eventParticipantFactory.createEventParticipant(event.getEventId(), pa.getParticipantId(), pa.getParticipationStatus(), pa.getParticipationStatusDate(), pa.getParticipationStatusComments(), insTs, insLogin));
+		});
+		event.setEventParticipants(participants);
+		eventRepo.save(event);
+		return event.getEventId();
 	}
 }

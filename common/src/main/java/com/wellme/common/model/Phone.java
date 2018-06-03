@@ -23,6 +23,16 @@ public class Phone extends BaseVO{
 	/** The phone number. */
 	private String phoneNumber;
 	
+	/** The complete phone number. */
+	private String completePhoneNumber;
+	
+	/**
+	 * Instantiates a new phone.
+	 */
+	public Phone() {
+		
+	}
+	
 	/**
 	 * Instantiates a new phone.
 	 *
@@ -109,6 +119,24 @@ public class Phone extends BaseVO{
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	/**
+	 * Gets the complete phone number.
+	 *
+	 * @return the complete phone number
+	 */
+	public String getCompletePhoneNumber() {
+		return completePhoneNumber;
+	}
+
+	/**
+	 * Sets the complete phone number.
+	 *
+	 * @param completePhoneNumber the new complete phone number
+	 */
+	public void setCompletePhoneNumber(String completePhoneNumber) {
+		this.completePhoneNumber = completePhoneNumber;
 	}
 	
 }

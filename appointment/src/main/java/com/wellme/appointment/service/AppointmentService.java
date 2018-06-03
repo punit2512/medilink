@@ -3,29 +3,29 @@
  */
 package com.wellme.appointment.service;
 
-import java.util.List;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Map;
 
-import com.wellme.appointment.model.Appointment;
-import com.wellme.common.model.PracticeConsultantKey;
+import com.wellme.appointment.model.AppointmentDto;
 
 /**
  * The Interface AppointmentService.
  */
 public interface AppointmentService {
-	
+
 	/**
 	 * Search by practice and consultants.
 	 *
-	 * @param keys the keys
+	 * @param participantIdTypeMap
+	 *            the participant id type map
 	 * @return the list
 	 */
-	List<Appointment> searchByPracticeAndConsultants(Set<PracticeConsultantKey> keys);
-	
+	Collection<AppointmentDto> searchByParticipantIdsAndType(Map<String, String> participantIdTypeMap);
+
 	/**
 	 * Creates the appointment.
 	 *
 	 * @param appointment the appointment
 	 */
-	void createAppointment(Appointment appointment);
+	Long createAppointment(AppointmentDto appointment);
 }

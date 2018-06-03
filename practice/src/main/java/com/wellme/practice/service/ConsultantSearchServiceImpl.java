@@ -274,7 +274,7 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 				consultantResult.setPhones(consultant.getPhones());
 				consultantResult.setSocialProfiles(consultant.getSocialProfiles());
 
-				consultantResult.setAvailableSlots(availableSlotsMap.get(consultant.getUserId()));
+				consultantResult.setAvailableSlots(availableSlotsMap.get(consultant.getConsultantId()));
 				if (CollectionUtils.isNotEmpty(specialities)) {
 					consultantResult.setSpecialities(specialities);
 				}

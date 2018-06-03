@@ -44,6 +44,10 @@ public class Address extends BaseVO{
 	/** The is primary. */
 	private boolean isPrimary;
 	
+	public Address() {
+		
+	}
+	
 	public Address(String addressLine1, String addressLine2, String area, String city, String state, String stateCode,
 			String zip, String country, String countryCode, Coordinates coordinates, boolean isPrimary) {
 		super();

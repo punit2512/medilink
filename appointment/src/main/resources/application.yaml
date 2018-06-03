@@ -13,8 +13,8 @@ spring:
     
 appointment: 
   search:
-    ByPracticeAndConsultants: select * from medilink.APPOINTMENT a where (a.practice_id || '-' || a.consultant_id) in (:practiceConsultantIds) 
-  create:
-    sql: insert into medilink.APPOINTMENT (appointment_id, patient_id, practice_id, consultant_id, appointment_date, start_time, end_time, ins_ts, upd_ts, ins_login, upd_login, status, special_instructions)
-          values (:id, :patientId, :practiceId,:docId, :appointmentDate, :startTime, :endTime, :insTs, :updTs, :insLogin, :updLogin, :status, :specialInstructions)   
-    
+    ByParticipants: | 
+    select ev.event_id, ev.event_name, ev.event_description, ev.start_date, ev.end_date, ev.event_location, ev.is_full_day, ev.is_recurring, ev.version_id event_version_id
+    , ep.participant_id, ep.participant_typ, ep.participation_status, ep.participation_status_dt, ep.participation_status_comments, ep.version_id participant_version_id
+    from medilink.event ev, medilink.event_participants ep where ev.event_id = ep.event_id and ep.participation_status != 'DECLINED'  and CONCAT(ep.participant_id, '-', ep.participant_typ) in (:participantIdsAndTypes)
+ 

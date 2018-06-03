@@ -32,7 +32,7 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public Patient findPatient(Patient patient) {
-		return patientRepository.findOne("Me");
+		return null;
 	}
 
 	@Override
