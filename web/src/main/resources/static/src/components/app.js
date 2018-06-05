@@ -3,6 +3,7 @@ import UpperNav from "./uppernav";
 import HomePage from "./home_page";
 import DoctorList from "./doctor_list";
 import {Switch, Route} from 'react-router-dom';
+import AppointmentDetails from "./appointment_details";
 export default class App extends Component {
     render() {
         return (
@@ -10,6 +11,7 @@ export default class App extends Component {
                 <UpperNav/>
                 <Switch>
                     <Route path="/practices" component={DoctorList}/>
+                    <Route path="/appointment_details" component={AppointmentDetails}/>
                     <Route path='/' component={HomePage}/>
                 </Switch>
 

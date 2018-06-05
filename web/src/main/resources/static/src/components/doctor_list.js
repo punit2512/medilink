@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import {fetchConsultants} from "../actions";
-import GoogleMap from "./google_map";
+import {connect} from 'react-redux';
 import _ from 'lodash';
 import MapForAddress from "./mapforaddress";
+import {Link} from 'react-router-dom';
 
 class DoctorList extends Component {
+
+    constructor(props) {
+        super(props);
+        this.renderAvailableTime = this.renderAvailableTime.bind(this);
+    }
 
     getLatLong(zip) {
         var lat = '';
@@ -14,49 +18,68 @@ class DoctorList extends Component {
 
     }
 
-    getFormattedDate(date)
-    {
+    getFormattedDate(date) {
         var week = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
-        var day  = week[date.getDay()];
-        var dd   = date.getDate();
-        var mm   = date.getMonth()+1; //January is 0!
-        if(dd<10)  { dd='0'+dd }
-        if(mm<10)  { mm='0'+mm }
-        return day+', '+mm+'/'+dd;
+        var day = week[date.getDay()];
+        var dd = date.getDate();
+        var mm = date.getMonth() + 1; //January is 0!
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        return day + ', ' + mm + '/' + dd;
     }
 
 
-    renderAvailableTime(availableTime) {
-        console.log('button for avialabletime:', availableTime);
+    renderAvailableTime(availableTime,consultantId) {
+        console.log('button for avialabletime:', availableTime, ' and cid:', consultantId);
         return (
-            <button key={availableTime} className="btn btn-primary disabled">{availableTime}</button>
+            <Link className="btn btn-primary" to="/appointment_details" params={{consultantId}}>
+                {availableTime}
+            </Link>
         );
     }
 
-    renderAvailableTimes(date, availableTimeslots) {
+    onFormSubmit(event) {
+        event.preventDefault();
+    }
+
+    renderAvailableTimes(consultantId, date, availableTimeslots) {
         console.log('date:', date, 'available timeslots:', availableTimeslots);
         const availableTimeslotStartTimes = Object.keys(availableTimeslots);
+        console.log('consultant consultantId:', consultantId);
         console.log('avialableTimeslotStartTimes', availableTimeslotStartTimes);
         var d = new Date(date);
+        var renderAvailableTime = this.renderAvailableTime;
         return (
             <div key={date}>
-                {this.getFormattedDate(d)}
-                {availableTimeslotStartTimes.map(this.renderAvailableTime)}
+                <form onSubmit={this.onFormSubmit} className="input-group">
+                    <span className="input-group-button">
+                        {this.getFormattedDate(d)}
+                        {availableTimeslotStartTimes.map(
+                            function(availableTime) {
+                                return renderAvailableTime(availableTime, consultantId);
+                            })}
+                </span>
+                </form>
             </div>
         );
     }
 
-    renderAppointmentDate(appointment) {
+    renderAppointmentDate(id, appointment) {
         console.log('appointment is:', appointment);
+        console.log('consultantid is:', id);
         var keys = Object.keys(appointment);
         console.log('keys:', keys);
         var appointmentRendered = (
             keys.map((key) => {
-                return this.renderAvailableTimes(key, appointment[key]);
+                    return this.renderAvailableTimes(id, key, appointment[key]);
                 }
             )
         )
-        console.log('appointmentRendered=',appointmentRendered);
+        console.log('appointmentRendered=', appointmentRendered);
         return (
             <div>
                 {appointmentRendered}
@@ -64,11 +87,11 @@ class DoctorList extends Component {
         );
     }
 
-    renderAppointments(appointments) {
+    renderAppointments(id, appointments) {
         console.log('appointments:', appointments);
         // First group the appointments by date
         var appointmentMap = appointments.reduce(
-            (accumulator, target) => ({ ...accumulator, [target.appointmentDate]: target.availableTimes }),
+            (accumulator, target) => ({...accumulator, [target.appointmentDate]: target.availableTimes}),
             {});
 
         console.log('appointment map:', appointmentMap);
@@ -76,7 +99,7 @@ class DoctorList extends Component {
         return (
             <td>
                 <div>
-                    {this.renderAppointmentDate(appointmentMap)}
+                    {this.renderAppointmentDate(id, appointmentMap)}
                 </div>
             </td>
         );
@@ -85,7 +108,7 @@ class DoctorList extends Component {
     renderConsultant(consultant) {
         var lon = 12.35;
         var lat = 78.25;
-        var addressDefined = (consultant.practices.length>0);
+        var addressDefined = (consultant.practices.length > 0);
         if (addressDefined) {
             var address = consultant.practices[0].primaryAddress;
             var fullAddress = address.addressLine1 + " " + address.addressLine2 + " " + address.city + " " + address.zip;
@@ -95,18 +118,18 @@ class DoctorList extends Component {
             <tr key={consultant.consultantName}>
                 <td><img src="img/12243zoom.jpg" className="img-thumbnail" alt="Cinque Terre"/></td>
                 <td><p>{consultant.consultantName}</p>
-                    <p>{fullAddress} {addressDefined &&  <a href="#">Directions</a>}</p>
+                    <p>{fullAddress} {addressDefined && <a href="#">Directions</a>}</p>
 
-                         <span
-                            className="fa fa-star checked"></span> <span
-                            className="fa fa-star checked"></span>
-                        <span className="fa fa-star checked"></span> <span
-                            className="fa fa-star"></span> <span
-                            className="fa fa-star"></span>
+                    <span
+                        className="fa fa-star checked"></span> <span
+                        className="fa fa-star checked"></span>
+                    <span className="fa fa-star checked"></span> <span
+                        className="fa fa-star"></span> <span
+                        className="fa fa-star"></span>
                 </td>
                 <td><MapForAddress address={fullAddress} width="100px" height="100px"/></td>
                 <td><p><img src="img/Email.png"/></p><p><img src="img/message.jpg"/></p></td>
-                {this.renderAppointments(consultant.availableSlots)}
+                {this.renderAppointments(consultant.consultantId,consultant.availableSlots)}
             </tr>
         );
     }
@@ -127,7 +150,7 @@ class DoctorList extends Component {
 
                         <table className="table table-striped">
                             <tbody>
-                                {this.renderConsultants()}
+                            {this.renderConsultants()}
                             </tbody>
                             <thead>
                             <tr>
