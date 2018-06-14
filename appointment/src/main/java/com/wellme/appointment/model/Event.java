@@ -7,19 +7,25 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.springframework.data.annotation.Id;
 
 /**
  * The Class Event.
  */
+@Entity
+@Table(name = "EVENT") 
 public class Event implements Serializable{
 	
 	/** The Constant serialVersionUID. */
@@ -28,7 +34,7 @@ public class Event implements Serializable{
 	/** The event id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_seq_generator")
-	@SequenceGenerator(name="event_seq_generator", sequenceName = "event_seq", allocationSize=50)
+	@SequenceGenerator(name="event_seq_generator", sequenceName = "EVENT_SEQ", allocationSize=50)
 	@Column(name = "EVENT_ID", updatable = false, nullable = false)
 	/** The event id. */
 	private Long eventId;
@@ -51,11 +57,11 @@ public class Event implements Serializable{
 	
 	/** The is full date event. */
 	@Column(name = "IS_FULL_DAY")
-	private boolean isFullDateEvent;
+	private String isFullDateEvent;
 	
 	/** The is recurring event. */
 	@Column(name = "IS_RECURRING")
-	private boolean isRecurringEvent;
+	private String isRecurringEvent;
 	
 	/** The event location. */
 	@Column(name="EVENT_LOCATION")
@@ -82,20 +88,21 @@ public class Event implements Serializable{
 	private long versionId;
 	
 	/** The previos version id. */
+	@Transient
 	private long previousVersionId;
 	
 	/** The event recurrence. */
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="EVENT_ID")
 	private EventRecurrence eventRecurrence;
 	
 	/** The event instance exceptions. */
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name="EVENT_ID")
 	private List<EventInstanceException> eventInstanceExceptions;
 	
 	/** The event participants. */
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name="EVENT_ID")
 	private List<EventParticipant> eventParticipants;
 	
@@ -118,7 +125,7 @@ public class Event implements Serializable{
 	 * @param previousVersionId the previous version id
 	 */
 	public Event(String eventName, String eventDescription, Date startDateTime, Date endDateTime,
-			boolean isFullDateEvent, boolean isRecurringEvent, String eventLocation, Date insTs, Date updTs, String insLogin, String updLogin,
+			String isFullDateEvent, String isRecurringEvent, String eventLocation, Date insTs, Date updTs, String insLogin, String updLogin,
 			long versionId, long previousVersionId) {
 		super();
 		this.eventName = eventName;
@@ -231,7 +238,7 @@ public class Event implements Serializable{
 	 *
 	 * @return true, if is full date event
 	 */
-	public boolean isFullDateEvent() {
+	public String isFullDateEvent() {
 		return isFullDateEvent;
 	}
 	
@@ -240,7 +247,7 @@ public class Event implements Serializable{
 	 *
 	 * @param isFullDateEvent the new full date event
 	 */
-	public void setFullDateEvent(boolean isFullDateEvent) {
+	public void setFullDateEvent(String isFullDateEvent) {
 		this.isFullDateEvent = isFullDateEvent;
 	}
 	
@@ -249,7 +256,7 @@ public class Event implements Serializable{
 	 *
 	 * @return true, if is recurring event
 	 */
-	public boolean isRecurringEvent() {
+	public String isRecurringEvent() {
 		return isRecurringEvent;
 	}
 	
@@ -258,7 +265,7 @@ public class Event implements Serializable{
 	 *
 	 * @param isRecurringEvent the new recurring event
 	 */
-	public void setRecurringEvent(boolean isRecurringEvent) {
+	public void setRecurringEvent(String isRecurringEvent) {
 		this.isRecurringEvent = isRecurringEvent;
 	}
 

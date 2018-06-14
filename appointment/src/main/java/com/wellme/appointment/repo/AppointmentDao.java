@@ -31,11 +31,11 @@ public class AppointmentDao {
 	NamedParameterJdbcTemplate jdbcTemplate;
 	
 	/** The appointment search SQL. */
-	@Value("${appointment.search.ByPracticeAndConsultants}")
+	@Value("${appointment.search.ByParticipants}")
 	private String appointmentSearchByParticipantsIdAndTypeSQL;
 	
-	@Value("${appointment.create.sql}")
-	private String appointmentCreateSQL;
+//	@Value("${appointment.create.sql}")
+//	private String appointmentCreateSQL;
 
 
 	/**

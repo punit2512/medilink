@@ -9,7 +9,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.wellme.appointment.factory.EventFactory;
 import com.wellme.appointment.factory.EventParticipantFactory;
@@ -22,6 +25,7 @@ import com.wellme.appointment.repo.EventRepo;
 /**
  * The Class AppointmentServiceImpl.
  */
+@Component
 public class AppointmentServiceImpl implements AppointmentService{
 
 	/** The appointment dao. */
@@ -52,16 +56,18 @@ public class AppointmentServiceImpl implements AppointmentService{
 	 * @see com.wellme.appointment.service.AppointmentService#createAppointment(com.wellme.appointment.model.Appointment)
 	 */
 	@Override
+	@Transactional
 	public Long createAppointment(AppointmentDto appointment){
 		Date insTs = new Date();
 		String insLogin = "PUNIT";
 		Event event = eventFactory.createEvent(appointment.getEventName(), appointment.getEventDescription(), appointment.getAppointmentStartDate(), appointment.getAppointmentEndDate(), appointment.isFullDay(), appointment.isRecurring(), appointment.getAppointmentLocation(), insTs, insLogin);
 		List<EventParticipant> participants = new ArrayList<>();
 		appointment.getParticipants().stream().forEach(pa -> {
-			participants.add(eventParticipantFactory.createEventParticipant(event.getEventId(), pa.getParticipantId(), pa.getParticipationStatus(), pa.getParticipationStatusDate(), pa.getParticipationStatusComments(), insTs, insLogin));
+			participants.add(eventParticipantFactory.createEventParticipant(event.getEventId(), pa.getParticipantId(), pa.getParticipantType(), pa.getParticipationStatus(), pa.getParticipationStatusDate(), pa.getParticipationStatusComments(), insTs, insLogin));
 		});
 		event.setEventParticipants(participants);
 		eventRepo.save(event);
 		return event.getEventId();
+		//return null;
 	}
 }

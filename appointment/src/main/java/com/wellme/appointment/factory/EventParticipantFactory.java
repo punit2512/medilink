@@ -5,11 +5,14 @@ package com.wellme.appointment.factory;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 import com.wellme.appointment.model.EventParticipant;
 
 /**
  * A factory for creating EventParticipant objects.
  */
+@Component
 public class EventParticipantFactory {
 	
 	/**
@@ -24,9 +27,9 @@ public class EventParticipantFactory {
 	 * @param insLogin the ins login
 	 * @return the event participant
 	 */
-	public EventParticipant createEventParticipant(Long eventId, String participantId, String participationStatus,
+	public EventParticipant createEventParticipant(Long eventId, String participantId, String participantType, String participationStatus,
 			Date participationStatusDate, String participationStatusComments, Date insTs, String insLogin) {
-		return new EventParticipant(eventId, participantId, participationStatus, participationStatusDate, participationStatusComments, insTs, insTs, insLogin, insLogin, 0L, Long.MIN_VALUE);
+		return new EventParticipant(eventId, participantId, participantType, participationStatus, participationStatusDate, participationStatusComments, insTs, insTs, insLogin, insLogin, 0L, Long.MIN_VALUE);
 	}
 	
 	/**
@@ -41,6 +44,6 @@ public class EventParticipantFactory {
 	 * @return the event participant
 	 */
 	public EventParticipant updateEventParticipant(EventParticipant eventParticipant, String participationStatus, Date participationStatusDate, String participationStatusComments, Date updTs, String updLogin) {
-		return new EventParticipant(eventParticipant.getEventId(), eventParticipant.getParticipantId(), participationStatus, participationStatusDate, participationStatusComments, eventParticipant.getInsTs(), updTs, eventParticipant.getInsLogin(), updLogin, eventParticipant.getVersionId(), eventParticipant.getVersionId());
+		return new EventParticipant(eventParticipant.getEventId(), eventParticipant.getParticipantId(), eventParticipant.getParticipantType(), participationStatus, participationStatusDate, participationStatusComments, eventParticipant.getInsTs(), updTs, eventParticipant.getInsLogin(), updLogin, eventParticipant.getVersionId(), eventParticipant.getVersionId());
 	}
 }

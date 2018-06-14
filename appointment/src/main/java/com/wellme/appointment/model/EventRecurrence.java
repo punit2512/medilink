@@ -7,15 +7,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.springframework.data.annotation.Id;
+
 
 /**
  * The Class EventRecurrence.
  */
+@Entity
+@Table(name = "EVENT_RECURRENCE") 
 public class EventRecurrence implements Serializable{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -23,7 +29,7 @@ public class EventRecurrence implements Serializable{
 	/** The event id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_recurrence_seq_generator")
-	@SequenceGenerator(name="event_recurrence_seq_generator", sequenceName = "event_recurrence_seq", allocationSize=50)
+	@SequenceGenerator(name="event_recurrence_seq_generator", sequenceName = "EVENT_RECURRENCE_SEQ", allocationSize=50)
 	@Column(name = "EVENT_RECURRENCE_ID", updatable = false, nullable = false)
 	/** The event id. */
 	private Long eventRecurrenceId;
@@ -85,6 +91,7 @@ public class EventRecurrence implements Serializable{
 	private long versionId;
 	
 	/** The previos version id. */
+	@Transient
 	private long previousVersionId;
 
 	/**

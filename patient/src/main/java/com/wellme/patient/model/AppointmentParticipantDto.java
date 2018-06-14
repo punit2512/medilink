@@ -6,6 +6,9 @@ package com.wellme.patient.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.wellme.common.util.CustomJsonDateDeserializer;
+
 /**
  * The Class AppointmentParticipantDto.
  */
@@ -24,6 +27,8 @@ public class AppointmentParticipantDto implements Serializable {
 	private String participationStatus;
 
 	/** The participation status date. */
+	/** The appointment start date. */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	private Date participationStatusDate;
 
 	/** The participation status comments. */
@@ -31,6 +36,10 @@ public class AppointmentParticipantDto implements Serializable {
 
 	/** The version id. */
 	private Long versionId;
+	
+	public AppointmentParticipantDto() {
+		
+	}
 
 	/**
 	 * Instantiates a new appointment participant dto.

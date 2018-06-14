@@ -7,15 +7,20 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.springframework.data.annotation.Id;
 
 /**
  * The Class EventInstanceException.
  */
+@Entity
+@Table(name = "EVENT_INSTANCE_EXCEPTION") 
 public class EventInstanceException implements Serializable{
 
 	/** The Constant serialVersionUID. */
@@ -24,7 +29,7 @@ public class EventInstanceException implements Serializable{
 	/** The event instance exception id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_instance_exception_seq_generator")
-	@SequenceGenerator(name="event_instance_exception_seq_generator", sequenceName = "event_instance_exception_seq", allocationSize=50)
+	@SequenceGenerator(name="event_instance_exception_seq_generator", sequenceName = "EVENT_INSTANCE_EXCEPTION_SEQ", allocationSize=50)
 	@Column(name = "EVENT_INSTANCE_EXCEPTION_ID", updatable = false, nullable = false)
 	private Long eventInstanceExceptionId;
 	
@@ -72,6 +77,7 @@ public class EventInstanceException implements Serializable{
 	private long versionId;
 	
 	/** The previos version id. */
+	@Transient
 	private long previousVersionId;
 
 	/**

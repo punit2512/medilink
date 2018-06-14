@@ -3,10 +3,12 @@ package com.wellme.patient.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.wellme.patient.model.Patient;
 import com.wellme.patient.repo.PatientRepository;
 
+@Component
 public class PatientServiceImpl implements PatientService {
 	
 	@Autowired
