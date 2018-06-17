@@ -18,7 +18,7 @@ import com.wellme.practice.model.SearchConsultantResultDto;
 import com.wellme.practice.service.ConsultantSearchService;
 
 /**
- * The Class PracticeController.
+ * The Class roller.
  */
 @RestController
 public class ConsultantController {
@@ -26,7 +26,7 @@ public class ConsultantController {
 	/** The practice service. */
 	@Autowired
 	private ConsultantSearchService consultantSearchService;
-	
+
 	@Autowired
 	private PracticeTestDataUtils testDataUtils;
 
@@ -45,15 +45,12 @@ public class ConsultantController {
 	/**
 	 * Adds the practice.
 	 */
-	@RequestMapping(value = "/addConsultantsData")
+	@RequestMapping(value = "/add")
 	public void addPractice() {
 		SearchConsultantDataContext dataContext = new SearchConsultantDataContext();
 		testDataUtils.createData(dataContext);
 		consultantSearchService.saveConsultantData(dataContext);
 
 	}
-	
-	
-	
-	
+
 }

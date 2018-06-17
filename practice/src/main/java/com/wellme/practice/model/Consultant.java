@@ -55,7 +55,7 @@ public class Consultant extends User{
 	/**
 	 * Instantiates a new consultant.
 	 *
-	 * @param userId the user id
+	 * @param consultantId the consultantId id
 	 * @param userName the user name
 	 * @param firstName the first name
 	 * @param lastName the last name
@@ -83,7 +83,7 @@ public class Consultant extends User{
 	 * @param previosVersionId the previos version id
 	 */
 	public Consultant(
-			BigInteger userId, String userName, String firstName, String lastName, String middleName, String profilePicUrl,
+			BigInteger consultantId, String userName, String firstName, String lastName, String middleName, String profilePicUrl,
 			List<String> emails, List<String> pictureUrls, List<Address> addresses, List<Phone> phones,
 			List<SocialProfile> socialProfiles, String userFullName, String gender, String NPI,
 			List<BigInteger> specialityIds, List<Qualification> qualifications, List<BoardCertificate> boardCertificates, List<BigInteger> practiceIds, String profile,
@@ -91,7 +91,7 @@ public class Consultant extends User{
 		super(userName, firstName, lastName,
 				middleName, profilePicUrl, emails, pictureUrls, addresses, phones, socialProfiles, userFullName,
 				gender, insTs, updTs, insLogin, updLogin, versionId, previosVersionId);
-		this.consultantId = userId;
+		this.consultantId = consultantId;
 		this.NPI = NPI;
 		this.specialityIds = specialityIds;
 		this.boardCertificates = boardCertificates;
