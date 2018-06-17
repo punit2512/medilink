@@ -5,11 +5,15 @@ package com.wellme.appointment.factory;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.springframework.stereotype.Component;
+
 import com.wellme.appointment.model.Event;
 
 /**
  * A factory for creating Event objects.
  */
+@Component
 public class EventFactory {
 
 	/**
@@ -36,8 +40,8 @@ public class EventFactory {
 	 * @return the event
 	 */
 	public Event createEvent(String eventName, String eventDescription, Date startDateTime, Date endDateTime,
-			boolean isFullDateEvent, boolean isRecurringEvent, String eventLocation, Date insTs, String insLogin) {
-		return new Event(eventName, eventDescription, startDateTime, endDateTime, isFullDateEvent, isRecurringEvent,
+			boolean isFullDayEvent, boolean isRecurringEvent, String eventLocation, Date insTs, String insLogin) {
+		return new Event(eventName, eventDescription, startDateTime, endDateTime, BooleanUtils.toString(isFullDayEvent, "Y", "N"), BooleanUtils.toString(isRecurringEvent, "Y", "N"),
 				eventLocation, insTs, insTs, insLogin, insLogin, 0L, Long.MIN_VALUE);
 	}
 
@@ -60,7 +64,7 @@ public class EventFactory {
 	 */
 	public Event updateEvent(Event event, Date startDateTime, Date endDateTime, boolean isFullDayEvent, Date updTs,
 			String updLogin) {
-		return new Event(event.getEventName(), event.getEventDescription(), startDateTime, endDateTime, isFullDayEvent,
+		return new Event(event.getEventName(), event.getEventDescription(), startDateTime, endDateTime, BooleanUtils.toString(isFullDayEvent, "Y", "N"),
 				event.isRecurringEvent(), event.getEventLocation(), event.getInsTs(), updTs, event.getInsLogin(),
 				updLogin, event.getVersionId() + 1, event.getPreviousVersionId());
 	}

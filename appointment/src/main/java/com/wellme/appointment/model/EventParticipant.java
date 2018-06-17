@@ -7,16 +7,31 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * The Class EventParticipant.
  */
+@Entity
+@Table(name = "EVENT_PARTICIPANTS") 
 public class EventParticipant implements Serializable{
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The event id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_participant_seq_generator")
+	@SequenceGenerator(name="event_participant_seq_generator", sequenceName = "EVENT_PARTICIPANT_SEQ", allocationSize=50)
+	@Column(name = "EVENT_PARTICIPANT_ID", updatable = false, nullable = false)
+	/** The event id. */
+	private Long eventParticipantId;
 
 	/** The event id. */
 	@Column(name = "EVENT_ID")
@@ -25,6 +40,10 @@ public class EventParticipant implements Serializable{
 	/** The participant id. */
 	@Column(name = "PARTICIPANT_ID")
 	private String participantId;
+	
+	/** The participant id. */
+	@Column(name = "PARTICIPANT_TYP")
+	private String participantType;
 	
 	/** The participation status. */
 	@Column(name = "PARTICIPATION_STATUS")
@@ -58,6 +77,7 @@ public class EventParticipant implements Serializable{
 	private long versionId;
 	
 	/** The previos version id. */
+	@Transient
 	private long previousVersionId;
 
 	/**
@@ -75,12 +95,13 @@ public class EventParticipant implements Serializable{
 	 * @param versionId the version id
 	 * @param previousVersionId the previous version id
 	 */
-	public EventParticipant(Long eventId, String participantId, String participationStatus,
+	public EventParticipant(Long eventId, String participantId, String participantType, String participationStatus,
 			Date participationStatusDate, String participationStatusComments, Date insTs, Date updTs, String insLogin,
 			String updLogin, long versionId, long previousVersionId) {
 		super();
 		this.eventId = eventId;
 		this.participantId = participantId;
+		this.participantType = participantType;
 		this.participationStatus = participationStatus;
 		this.participationStatusDate = participationStatusDate;
 		this.participationStatusComments = participationStatusComments;
@@ -126,6 +147,24 @@ public class EventParticipant implements Serializable{
 	 */
 	public void setParticipantId(String participantId) {
 		this.participantId = participantId;
+	}
+
+	/**
+	 * Gets the participant type.
+	 *
+	 * @return the participant type
+	 */
+	public String getParticipantType() {
+		return participantType;
+	}
+
+	/**
+	 * Sets the participant type.
+	 *
+	 * @param participantType the new participant type
+	 */
+	public void setParticipantType(String participantType) {
+		this.participantType = participantType;
 	}
 
 	/**

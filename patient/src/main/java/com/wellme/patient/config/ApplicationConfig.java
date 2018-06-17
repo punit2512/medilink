@@ -1,5 +1,7 @@
 package com.wellme.patient.config;
 
+import java.math.BigInteger;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
@@ -11,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;
+import com.wellme.common.dao.sqeuence.SequenceIdSource;
+import com.wellme.common.dao.sqeuence.SequenceIdSourceMongoImpl;
 
 @Configuration
 @EnableMongoRepositories(basePackages="com.wellme.patient.repo" )
@@ -26,6 +30,12 @@ public class ApplicationConfig {
     public MongoTemplate mongoTemplate() throws Exception {
         MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
         return mongoTemplate;
+    }
+    
+    
+    @Bean
+    public SequenceIdSource<BigInteger> sequenceIdSourceMongo(){
+    	return new SequenceIdSourceMongoImpl();
     }
     
     @Bean

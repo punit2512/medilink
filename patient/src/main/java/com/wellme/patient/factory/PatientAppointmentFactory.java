@@ -4,10 +4,12 @@ import java.math.BigInteger;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.wellme.patient.id.provider.PatientAppointmentIdProvider;
 import com.wellme.patient.model.PatientAppointment;
 
+@Component
 public class PatientAppointmentFactory {
 
 	@Autowired

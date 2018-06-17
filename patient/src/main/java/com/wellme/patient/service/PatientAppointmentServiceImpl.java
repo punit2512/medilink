@@ -9,6 +9,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.wellme.patient.factory.PatientAppointmentFactory;
@@ -22,7 +23,8 @@ import com.wellme.patient.repo.PatientAppointmentRepo;
 import com.wellme.patient.repo.PatientDao;
 import com.wellme.patient.repo.PatientRepository;
 
-public class PatientApppointmentServiceImpl implements PatientAppointmentService{
+@Component
+public class PatientAppointmentServiceImpl implements PatientAppointmentService{
 	
 	@Autowired
 	PatientRepository patientRepo;

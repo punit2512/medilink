@@ -6,6 +6,9 @@ package com.wellme.patient.model;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.wellme.common.util.CustomJsonDateDeserializer;
+
 /**
  * The Class AppointmentDto.
  */
@@ -18,9 +21,13 @@ public class AppointmentDto {
 	private String eventDescription;
 	
 	/** The appointment start date. */
+	/** The appointment start date. */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	private Date appointmentStartDate;
 	
 	/** The appointment end date. */
+	/** The appointment start date. */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	private Date appointmentEndDate;
 	
 	/** The appointment location. */
@@ -37,6 +44,10 @@ public class AppointmentDto {
 	
 	/** The participants. */
 	private List<AppointmentParticipantDto> participants;
+	
+	public AppointmentDto() {
+		super();
+	}
 	
 	/**
 	 * Instantiates a new appointment dto.

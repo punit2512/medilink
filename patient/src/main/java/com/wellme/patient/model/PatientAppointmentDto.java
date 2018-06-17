@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.wellme.common.util.CustomJsonDateDeserializer;
+
 /**
  * The Class PatientAppointmentDto.
  */
@@ -46,9 +49,11 @@ public class PatientAppointmentDto implements Serializable{
 	private String appointmentLocation;
 	
 	/** The appointment start date. */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	private Date appointmentStartDate;
 	
 	/** The appointment end date. */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	private Date appointmentEndDate;
 	
 	/** The appointment summary. */
@@ -62,6 +67,10 @@ public class PatientAppointmentDto implements Serializable{
 	
 	/** The insurance plan id. */
 	private BigInteger insurancePlanId;
+	
+	public PatientAppointmentDto() {
+		
+	}
 	
 	/**
 	 * Gets the patient id.
