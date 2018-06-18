@@ -19,6 +19,10 @@ class DoctorList extends Component {
     }
 
     getFormattedDate(date) {
+
+        console.log('printing formatted date for date:', date);
+        console.log('day=', date.getDay());
+        console.log('month=', date.getMonth());
         var week = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
         var day = week[date.getDay()];
         var dd = date.getDate();
@@ -33,10 +37,12 @@ class DoctorList extends Component {
     }
 
 
-    renderAvailableTime(availableTime,consultantId) {
+    renderAvailableTime(date, availableTime,consultantId) {
         console.log('button for avialabletime:', availableTime, ' and cid:', consultantId);
+        const dateHyphenated = date.replace(/\//g, "-");
         return (
-            <Link className="btn btn-primary" to="/appointment_details" params={{consultantId}}>
+
+            <Link className="btn btn-primary" to={`/appointment_details/${consultantId}/${dateHyphenated}/${availableTime}`}>
                 {availableTime}
             </Link>
         );
@@ -46,12 +52,18 @@ class DoctorList extends Component {
         event.preventDefault();
     }
 
+    getDate(date) {
+        var parts =date.split('/');
+        return new Date(parts[2], parts[1], parts[0]);
+    }
+
     renderAvailableTimes(consultantId, date, availableTimeslots) {
         console.log('date:', date, 'available timeslots:', availableTimeslots);
         const availableTimeslotStartTimes = Object.keys(availableTimeslots);
         console.log('consultant consultantId:', consultantId);
         console.log('avialableTimeslotStartTimes', availableTimeslotStartTimes);
-        var d = new Date(date);
+        var d = this.getDate(date);
+        console.log('passing date:', d);
         var renderAvailableTime = this.renderAvailableTime;
         return (
             <div key={date}>
@@ -60,7 +72,7 @@ class DoctorList extends Component {
                         {this.getFormattedDate(d)}
                         {availableTimeslotStartTimes.map(
                             function(availableTime) {
-                                return renderAvailableTime(availableTime, consultantId);
+                                return renderAvailableTime(date, availableTime, consultantId);
                             })}
                 </span>
                 </form>
@@ -106,8 +118,6 @@ class DoctorList extends Component {
     }
 
     renderConsultant(consultant) {
-        var lon = 12.35;
-        var lat = 78.25;
         var addressDefined = (consultant.practices.length > 0);
         if (addressDefined) {
             var address = consultant.practices[0].primaryAddress;

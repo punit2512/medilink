@@ -2,11 +2,17 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {createAppointment} from "../actions";
+import {getFormattedDate} from "../utils";
 
 class AppointmentDetails extends Component {
 
+    constructor(props) {
+        super(props);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
     onSubmit(values) {
         this.props.createAppointment(values, () => {
+            console.log('post submission - values=', values, ' - pushing to home');
             this.props.history.push('/');
         });
     }
@@ -27,6 +33,13 @@ class AppointmentDetails extends Component {
 
     render() {
         const {handleSubmit} = this.props;
+        console.log('Within appointment render: consultant = ', this.props.consultant);
+        const {consultant, appointmentDate, appointmentTime} = this.props;
+        var parts = appointmentDate.split('-');
+        const formattedAppointmentDate = getFormattedDate(new Date(parts[2], parts[1], parts[0]));
+        const primaryAddress = consultant.practices[0].primaryAddress;
+        const consultantId = this.props.consultantId;
+        console.log('primary address:', primaryAddress);
         return (
             <div className="py-5">
                 <div className="container">
@@ -36,37 +49,24 @@ class AppointmentDetails extends Component {
                                 <div className="row">
                                     <div className="col-md-12">
                                         <h1>Review &amp; Book</h1>
-                                        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                                        <form onSubmit={handleSubmit(data => this.onSubmit({...data, consultantId: consultantId}))}>
                                             <div className="bg-white">
                                                 <p>Who will be seeing the doctor?</p>
                                                 <div className="container">
-                                                    <Field name="name" component={this.renderField} type="radio" label="Your name" checked="">Nitin Arora (Me)</Field>
+                                                    <Field name="firstName" component={this.renderField} type="text" label="First name">Enter your first name</Field>
+                                                    <Field name="middleName" component={this.renderField} type="text" label="Middle name">Enter your middle name</Field>
+                                                    <Field name="lastName" component={this.renderField} type="text" label="Last name">Enter your last name</Field>
+                                                    <Field name="email" component={this.renderField} type="text" label="Email">Enter your email address</Field>
+                                                    <Field name="phone" component={this.renderField} type="text" label="Phone number">Enter your phone number</Field>
                                                 </div>
                                             </div>
-                                            <a className="text-warning" href="#">Someone Else</a>
-                                            {/*<div className="form-group">
-                                                <div className="bg-white">
-
-
-                                                    <label htmlFor="InputEmail1">Insurance</label>
-                                                    <div>
-                                                        <select>
-                                                            <option value="volvo">I'm paying for myself</option>
-                                                            <option value="saab">Insurance agency 1</option>
-                                                            <option value="mercedes">Insurance agency 2</option>
-                                                            <option value="audi">Insurance agency 3</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>*/}
                                             <div className="form-group">
                                                 <div className="bg-white">
                                                     <label>Appointment</label>
                                                 </div>
                                                 <div className="bg-white">
                                                     <label className="bg-white">Psychiatry Consultation
-                                                        <br/> I 'm a new Patient
-                                                            <br/> Fri, May 25 -1:00 pm EDT
+                                                        <br/> <div>{formattedAppointmentDate} {appointmentTime}</div>
                                                                 <br/>
                                                                     <a>Edit</a>
                                                     </label>
@@ -78,13 +78,14 @@ class AppointmentDetails extends Component {
                                                     <label>
                                                         <a href="#">Add Phone number</a>
                                                     </label>
-                                                    <Field name="insuranceMemberId" component={this.renderField} label="Insurance Member ID (optional)"/>
+                                                    <Field name="insuranceProviderId" component={this.renderField} label="Insurance Provider ID (optional)"/>
+                                                    <Field name="insurancePlanId" component={this.renderField} label="Insurance Plan ID (optional)"/>
                                                     <Field name="notes" component={this.renderField} label="Notes for doctors office (optional)"/>
                                             </div>
+                                            <button type="submit" className="btn btn-secondary">Book Appointment</button>
                                         </form>
                                     </div>
                                 </div>
-                                <button type="submit" className="btn btn-secondary">Book Appointment</button>
                             </div>
                         </div>
                         <div className="col-md-5 offset-md-1">
@@ -92,9 +93,9 @@ class AppointmentDetails extends Component {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div>
-                                            <img className="img-fluid img-thumbnail" src="img/profile.jpg"/></div>
-                                        <h6 className="product-title">DR. XYZ , M.D.</h6>
-                                        <h6 className="product-title">Child Pychiarist</h6>
+                                            <img className="img-fluid img-thumbnail" src="/img/profile.jpg"/></div>
+                                        <h6 className="product-title">DR. {consultant.consultantName}</h6>
+                                        <h6 className="product-title">{consultant.specialities[0]}</h6>
                                         <div>
                                             <span className="fa fa-star checked"></span>
                                             <span className="fa fa-star checked"></span>
@@ -105,17 +106,18 @@ class AppointmentDetails extends Component {
                                         <hr/>
                                             <h6 className="product-title">Location</h6>
                                             <div>
-                                                <label>26, Court St # 816, brroklyn, NY, 11242</label>
+                                                <label>{primaryAddress.addressLine1}, {primaryAddress.addressLine2}
+                                                , {primaryAddress.city}, {primaryAddress.state}, {primaryAddress.zip}</label>
                                             </div>
                                             <hr/>
                                                 <h6 className="product-title">Appointment</h6>
-                                                <label>Fri, May 25, 1:00 pm EDT</label>
+                                                <label>{formattedAppointmentDate}, {appointmentTime}</label>
                                                 <hr/>
                                                     <h6 className="product-title">Patient</h6>
                                                     <label>Nitin Arora</label>
                                                     <hr/>
                                                         <h6 className="product-title">Visit Reason</h6>
-                                                        <label>Pyschiatry Consultation</label>
+                                                        <label>{consultant.specialities[0]} Consultation</label>
                                     </div>
                                 </div>
                             </div>
@@ -134,9 +136,18 @@ function validate(values) {
     return errors;
 }
 
+function mapStateToProps({consultants}, ownProps) {
+    console.log('consultants in appointment details:', consultants);
+    console.log('ownProps in appointment details:', ownProps);
+    return { consultant: consultants[ownProps.match.params.consultantId],
+        consultantId: ownProps.match.params.consultantId,
+        appointmentDate: ownProps.match.params.appointmentDate,
+        appointmentTime: ownProps.match.params.appointmentTime};
+    return consultants;
+}
 
 export default reduxForm({
     validate,
-    form: 'PostsNewForm'
+    form: 'AppointmentBookForm'
 })(
-    connect(null,{createAppointment})(AppointmentDetails));
+    connect(mapStateToProps,{createAppointment})(AppointmentDetails));
