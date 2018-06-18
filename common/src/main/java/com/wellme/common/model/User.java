@@ -52,7 +52,7 @@ public class User extends BaseVO {
 	/**
 	 * Instantiates a new user.
 	 *
-	 * @param userId            the user id
+	 * @param consultantId            the consultant id
 	 * @param userName            the user name
 	 * @param firstName            the first name
 	 * @param lastName            the last name
