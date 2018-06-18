@@ -9,7 +9,7 @@ medilink:
   appointment:
     db:
       url: jdbc:mysql://localhost:3306/medilink
-      username: root
+      username: medilink
       password: password   
    
     

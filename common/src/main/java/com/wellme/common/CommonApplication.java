@@ -1,4 +1,4 @@
-package com.wellme.common.model;
+package com.wellme.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

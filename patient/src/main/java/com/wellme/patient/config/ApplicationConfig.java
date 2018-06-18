@@ -15,6 +15,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;
 import com.wellme.common.dao.sqeuence.SequenceIdSource;
 import com.wellme.common.dao.sqeuence.SequenceIdSourceMongoImpl;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableMongoRepositories(basePackages="com.wellme.patient.repo" )
@@ -46,5 +49,15 @@ public class ApplicationConfig {
 		restTemplate.getMessageConverters().add(converter);
 		return restTemplate;
 	}
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+            }
+        };
+    }
 
 }
