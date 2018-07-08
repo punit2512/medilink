@@ -66,7 +66,7 @@ public class Consultant extends User{
 	/**
 	 * Instantiates a new consultant.
 	 *
-	 * @param userId the user id
+	 * @param consultantId the consultantId id
 	 * @param userName the user name
 	 * @param firstName the first name
 	 * @param lastName the last name
