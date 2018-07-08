@@ -34,9 +34,12 @@ class AppointmentDetails extends Component {
     render() {
         const {handleSubmit} = this.props;
         console.log('Within appointment render: consultant = ', this.props.consultant);
-        const {consultant, appointmentDate, appointmentTime} = this.props;
+        const {consultant, appointmentDate, appointmentStartTime, appointmentEndTime} = this.props;
         var parts = appointmentDate.split('-');
         const formattedAppointmentDate = getFormattedDate(new Date(parts[2], parts[1], parts[0]));
+        const appointmentStartDate = parts[2] + '-' + parts[1] + '-' + parts[0] + ' ' + appointmentStartTime;
+        const appointmentEndDate = parts[2] + '-' + parts[1] + '-' + parts[0] + ' ' + appointmentEndTime;
+        console.log('appointment start date:' + appointmentStartDate, ', appointment end date:', appointmentEndDate);
         const primaryAddress = consultant.practices[0].primaryAddress;
         const consultantId = this.props.consultantId;
         console.log('primary address:', primaryAddress);
@@ -49,7 +52,7 @@ class AppointmentDetails extends Component {
                                 <div className="row">
                                     <div className="col-md-12">
                                         <h1>Review &amp; Book</h1>
-                                        <form onSubmit={handleSubmit(data => this.onSubmit({...data, consultantId: consultantId}))}>
+                                        <form onSubmit={handleSubmit(data => this.onSubmit({...data, consultantId: consultantId, appointmentStartDate: appointmentStartDate, appointmentEndDate: appointmentEndDate}))}>
                                             <div className="bg-white">
                                                 <p>Who will be seeing the doctor?</p>
                                                 <div className="container">
@@ -66,7 +69,7 @@ class AppointmentDetails extends Component {
                                                 </div>
                                                 <div className="bg-white">
                                                     <label className="bg-white">Psychiatry Consultation
-                                                        <br/> <div>{formattedAppointmentDate} {appointmentTime}</div>
+                                                        <br/> <div>{formattedAppointmentDate} {appointmentStartTime}</div>
                                                                 <br/>
                                                                     <a>Edit</a>
                                                     </label>
@@ -111,7 +114,7 @@ class AppointmentDetails extends Component {
                                             </div>
                                             <hr/>
                                                 <h6 className="product-title">Appointment</h6>
-                                                <label>{formattedAppointmentDate}, {appointmentTime}</label>
+                                                <label>{formattedAppointmentDate}, {appointmentStartTime}</label>
                                                 <hr/>
                                                     <h6 className="product-title">Patient</h6>
                                                     <label>Nitin Arora</label>
@@ -142,7 +145,8 @@ function mapStateToProps({consultants}, ownProps) {
     return { consultant: consultants[ownProps.match.params.consultantId],
         consultantId: ownProps.match.params.consultantId,
         appointmentDate: ownProps.match.params.appointmentDate,
-        appointmentTime: ownProps.match.params.appointmentTime};
+        appointmentStartTime: ownProps.match.params.appointmentStartTime,
+        appointmentEndTime: ownProps.match.params.appointmentEndTime};
     return consultants;
 }
 

@@ -11,7 +11,7 @@ export default class App extends Component {
                 <UpperNav/>
                 <Switch>
                     <Route path="/practices" component={DoctorList}/>
-                    <Route path="/appointment_details/:consultantId/:appointmentDate/:appointmentTime" component={AppointmentDetails}/>
+                    <Route path="/appointment_details/:consultantId/:appointmentDate/:appointmentStartTime/:appointmentEndTime" component={AppointmentDetails}/>
                     <Route path='/' component={HomePage}/>
                 </Switch>
 

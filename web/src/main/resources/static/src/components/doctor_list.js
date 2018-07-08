@@ -37,12 +37,12 @@ class DoctorList extends Component {
     }
 
 
-    renderAvailableTime(date, availableTime,consultantId) {
+    renderAvailableTime(date, availableTime, availableTimeSlots, consultantId) {
         console.log('button for avialabletime:', availableTime, ' and cid:', consultantId);
         const dateHyphenated = date.replace(/\//g, "-");
         return (
 
-            <Link className="btn btn-primary" to={`/appointment_details/${consultantId}/${dateHyphenated}/${availableTime}`}>
+            <Link className="btn btn-primary" to={`/appointment_details/${consultantId}/${dateHyphenated}/${availableTime}/${availableTimeSlots[availableTime]}`}>
                 {availableTime}
             </Link>
         );
@@ -72,7 +72,7 @@ class DoctorList extends Component {
                         {this.getFormattedDate(d)}
                         {availableTimeslotStartTimes.map(
                             function(availableTime) {
-                                return renderAvailableTime(date, availableTime, consultantId);
+                                return renderAvailableTime(date, availableTime, availableTimeslots, consultantId);
                             })}
                 </span>
                 </form>
