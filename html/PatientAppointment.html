@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css">
+  <script>
+    $(document).ready(function(){
+        $("#hide").click(function(){
+            $("div.id.Appointment").hide();
+        });
+        $("#show").click(function(){
+            $("div.id.Appointment").show();
+        });
+    });
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fa d-inline fa-lg fa-cloud"></i>
+        <b> Brand</b>
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fa d-inline fa-lg fa-bookmark-o"></i> Notifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fa d-inline fa-lg fa-envelope-o"></i> Welcome User</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div style="padding:10px;">
+    <div class="col-md-12 breadcrumb">
+      <input name="lname" placeholder="Practice/Provider Name" class="btn-group" type="&quot;text&quot;&quot;" size="20px;">&nbsp;
+      <input type="text" name="lname" placeholder="Procedure/Condition" class="btn-group" size="20px;">&nbsp;
+      <input name="lname" placeholder="Zip Code" class="btn-group" type="&quot;text&quot;&quot;" size="20px;">&nbsp;
+      <input type="text" name="lname" placeholder="Insurance" class="btn-group" size="20px;"> &nbsp;
+      <button type="button" class="btn btn-primary">Search</button>
+    </div>
+    <div class="col-md-12 breadcrumb"> Your Account &gt; Your Appointments </div>
+    <div class="col-md-12">
+      <div>
+        <h1>Your Appointments</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-group">
+          <a href="#" class="btn btn-outline-primary border-bottom-1">Appointments</a>
+          <a href="#" class="btn btn-outline-primary border-0">Upcoming</a>
+          <a href="#" class="btn btn-outline-primary border-0">Cancelled</a>
+        </div>
+        <div class="btn-group pull-right">
+          <select>
+            <option>Last 30 Days</option>
+            <option>XXXXX</option>
+            <option> </option>
+            <option>XXXXX</option>
+            <option>XXXXX</option>
+          </select> &nbsp;
+          <select>
+            <option>All members</option>
+            <option>XXXXX</option>
+            <option> </option>
+            <option>XXXXX</option>
+            <option>XXXXX</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>
+                <img src="img/12243zoom.jpg" class="img-thumbnail" alt="Cinque Terre"> </td>
+              <td>
+                <p>DATE </p>
+                <p>July 31, 2018</p>
+              </td>
+              <td>
+                <p>WITH</p>
+                <p>Dr Vikas Malik</p>
+                <a href="#">Profile</a>
+              </td>
+              <td>
+                <p> For Nitin Arora </p>
+              </td>
+              <td>
+                <p> </p>
+              </td>
+              <td>
+                <div>
+                  <p>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                  </p>
+                  <p>
+                    <button type="button" class="btn btn-primary">Modify</button>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="img/12243zoom.jpg" class="img-thumbnail" alt="Cinque Terre"> </td>
+              <td>
+                <p>DATE </p>
+                <p>July 31, 2018</p>
+              </td>
+              <td>
+                <p>WITH</p>
+                <p>Dr Vikas Malik</p>
+                <a href="#">Profile</a>
+              </td>
+              <td>
+                <p> For Nitin Arora </p>
+              </td>
+              <td>
+                <p> </p>
+              </td>
+              <td>
+                <div>
+                  <p>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                  </p>
+                  <p>
+                    <button type="button" class="btn btn-primary">Modify</button>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="img/12243zoom.jpg" class="img-thumbnail" alt="Cinque Terre"> </td>
+              <td>
+                <p>DATE </p>
+                <p>July 31, 2018</p>
+              </td>
+              <td>
+                <p>WITH</p>
+                <p>Dr Vikas Malik</p>
+                <a href="#">Profile</a>
+              </td>
+              <td>
+                <p> For Nitin Arora </p>
+              </td>
+              <td>
+                <p> INVOICED AMOUNT $110.00 </p>
+                <p>
+                  <a href="#">Invoice</a>
+                </p>
+              </td>
+              <td>
+                <div>
+                  <p>
+                    <button type="button" class="btn btn-warning">Set FollowUp</button>
+                  </p>
+                  <p>
+                    <button type="button" class="btn btn-success">Feedback</button>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="img/12243zoom.jpg" class="img-thumbnail" alt="Cinque Terre"> </td>
+              <td>
+                <p>DATE </p>
+                <p>July 31, 2018</p>
+              </td>
+              <td>
+                <p>WITH</p>
+                <p>Dr Vikas Malik</p>
+                <a href="#">Profile</a>
+              </td>
+              <td>
+                <p> For Nitin Arora </p>
+              </td>
+              <td>
+                <p> </p>
+              </td>
+              <td>
+                <div>
+                  <p>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                  </p>
+                  <p>
+                    <button type="button" class="btn btn-primary">Modify</button>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="img/12243zoom.jpg" class="img-thumbnail" alt="Cinque Terre"> </td>
+              <td>
+                <p>DATE </p>
+                <p>July 31, 2018</p>
+              </td>
+              <td>
+                <p>WITH</p>
+                <p>Dr Vikas Malik</p>
+                <a href="#">Profile</a>
+              </td>
+              <td>
+                <p> For Nitin Arora </p>
+              </td>
+              <td>
+                <p> </p>
+              </td>
+              <td>
+                <div>
+                  <p>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                  </p>
+                  <p>
+                    <button type="button" class="btn btn-primary">Modify</button>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="img/12243zoom.jpg" class="img-thumbnail" alt="Cinque Terre"> </td>
+              <td>
+                <p>DATE </p>
+                <p>July 31, 2018</p>
+              </td>
+              <td>
+                <p>WITH</p>
+                <p>Dr Vikas Malik</p>
+                <a href="#">Profile</a>
+              </td>
+              <td>
+                <p> For Nitin Arora </p>
+              </td>
+              <td>
+                <p> </p>
+              </td>
+              <td>
+                <div>
+                  <p>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                  </p>
+                  <p>
+                    <button type="button" class="btn btn-primary">Modify</button>
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr> </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+
+</html>
