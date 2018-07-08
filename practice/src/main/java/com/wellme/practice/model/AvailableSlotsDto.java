@@ -3,7 +3,7 @@
  */
 package com.wellme.practice.model;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,7 +19,7 @@ public class AvailableSlotsDto extends BaseVO{
 	private String appointmentDate;
 	
 	/** The available times. */
-	private Map<String, String> availableTimes = new HashMap<>();
+	private Map<String, String> availableTimes = new LinkedHashMap<>();
 	
 
 	/**

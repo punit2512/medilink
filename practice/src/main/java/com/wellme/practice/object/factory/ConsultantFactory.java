@@ -1,6 +1,7 @@
 package com.wellme.practice.object.factory;
 
 import java.math.BigInteger;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,11 +23,11 @@ public class ConsultantFactory {
 	public Consultant createConsultant(String userName, String firstName, String lastName, String middleName,
 			String profilePicUrl, List<String> emails, List<String> pictureUrls, List<Address> addresses,
 			List<Phone> phones, List<SocialProfile> socialProfiles, String userFullName, List<BigInteger> specialityIds,
-			List<Qualification> qualifications, List<BoardCertificate> boardCertificates, List<BigInteger> practiceIds, String profile, int appointmentDurationInMins, List<BigInteger> insurancePlanIds, String NPI,
+			List<Qualification> qualifications, List<BoardCertificate> boardCertificates, List<BigInteger> practiceIds, String profile, int appointmentDurationInMins, List<BigInteger> insurancePlanIds, LocalTime appointmentsStartTime, LocalTime appointmentsEndTime, String NPI,
 			String gender, Date insTs, Date updTs, String insLogin, String updLogin) {
 		return new Consultant(idProvider.getNextId(), userName, firstName, lastName, middleName, profilePicUrl, emails,
 				pictureUrls, addresses, phones, socialProfiles, userFullName, gender, NPI, specialityIds, qualifications, boardCertificates, practiceIds, profile,
-				appointmentDurationInMins, insurancePlanIds, insTs, updTs, insLogin, updLogin, 0L, Long.MIN_VALUE);
+				appointmentDurationInMins, insurancePlanIds, appointmentsStartTime, appointmentsEndTime,insTs, updTs, insLogin, updLogin, 0L, Long.MIN_VALUE);
 	}
 
 	public Consultant updateConsultant() {

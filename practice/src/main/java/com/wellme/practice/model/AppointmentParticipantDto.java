@@ -1,10 +1,15 @@
 /*
  * Copyright. Do not copy any portion of this file.
  */
-package com.wellme.appointment.model;
+package com.wellme.practice.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.wellme.common.util.CustomJsonDateDeserializer;
 
 /**
  * The Class AppointmentParticipantDto.
