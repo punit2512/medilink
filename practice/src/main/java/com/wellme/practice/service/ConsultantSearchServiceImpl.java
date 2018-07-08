@@ -283,10 +283,16 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 					LocalTime apptEndTime = apptTime.plusMinutes(appointmentDurationInMins);
 					Date apptStartDate = Date.from(date.atTime(apptTime).atZone(defaultZoneId).toInstant());
 					//Date apptEndDate = Date.from(date.atTime(apptEndTime).atZone(defaultZoneId).toInstant());
+					boolean slotBusy = false;
 					for(AppointmentDto appointment: appointmentsForConsultant) {
 						if((appointment.getAppointmentStartDate().before(apptStartDate) ||  appointment.getAppointmentStartDate().equals(apptStartDate) )&& appointment.getAppointmentEndDate().after(apptStartDate)) {
+							slotBusy = true;
 							break;
 						}
+						
+						
+					}
+					if(!slotBusy) {
 						slot.getAvailableTimes().put(apptTime.toString(), apptEndTime.toString());
 					}
 					apptTime = apptEndTime;
