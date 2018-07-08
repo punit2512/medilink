@@ -57,8 +57,8 @@ public class AppointmentDao {
 			Long eventId = rs.getLong("event_id");
 			String eventName = rs.getString("event_name");
 			String eventDescription = rs.getString("event_description");
-			Date startDate = rs.getDate("start_date");
-			Date endDate = rs.getDate("end_date");
+			Date startDate = rs.getTimestamp("start_date");
+			Date endDate = rs.getTimestamp("end_date");
 			String eventLocation = rs.getString("event_location");
 			Boolean isFullDay = BooleanUtils.toBoolean(rs.getString("is_full_day"), "Y", "N");
 			Boolean isRecurring = BooleanUtils.toBoolean(rs.getString("is_recurring"), "Y", "N");

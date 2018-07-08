@@ -6,8 +6,11 @@ package com.wellme.practice.service;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +20,19 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import com.wellme.common.util.GeoLocationUtils;
 import com.wellme.practice.SearchConsultantsRequest;
+import com.wellme.practice.model.AppointmentDto;
+import com.wellme.practice.model.AppointmentParticipantDto;
 import com.wellme.practice.model.AvailableSlotsDto;
 import com.wellme.practice.model.Consultant;
 import com.wellme.practice.model.InsurancePlan;
@@ -48,6 +60,8 @@ import com.wellme.practice.repo.SpecialityRepository;
  */
 @Component
 public class ConsultantSearchServiceImpl implements ConsultantSearchService {
+	
+	private static final String PARTICIPANT_TYPE_DOCTOR = "CONSULTANT";
 
 	/** The practice repo. */
 	@Autowired
@@ -95,12 +109,32 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 	/** The availability days. */
 	@Value("${availability.days.to.show : 7}")
 	int availabilityDays;
+	
+	/** The availability days. */
+	@Value("${default.appointment.start.time.hour : 8}")
+	int defaultAppointmentStartTimeHour;
+	@Value("${default.appointment.start.time.min : 0}")
+	int defaultAppointmentStartTimeMin;
+	@Value("${default.appointment.end.time.hour : 21}")
+	int defaultAppointmentEndTimeHour;
+	@Value("${default.appointment.End.time.hour : 0}")
+	int defaultAppointmentEndTimeMin;
+	
+	
+	@Autowired
+	RestTemplate restTemplate;
 
 	/** The lower. */
 	public static int LOWER = 10;
 
 	/** The upper. */
 	public static int UPPER = 21;
+	
+	/** The appointment search SQL. */
+	@Value("${appointment.service.url}")
+	String appointmentServiceURL;
+	
+	
 
 	/**
 	 * Save practice.
@@ -197,24 +231,67 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 	 *            the consultant ids
 	 * @return the available slots
 	 */
-	private Map<BigInteger, List<AvailableSlotsDto>> getAvailableSlots(Set<BigInteger> consultantIds) {
+	private Map<BigInteger, List<AvailableSlotsDto>> getAvailableSlots(Map<BigInteger, Consultant> consultantsMap) {
+		Set<BigInteger> consultantIds = consultantsMap.keySet();
 		Map<BigInteger, List<AvailableSlotsDto>> availableSlotsMap = new HashMap<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-
+		Map<String, String> participantIdAndType = new HashMap<>();
+		consultantIds.stream().map(cid -> participantIdAndType.put(cid.toString(), PARTICIPANT_TYPE_DOCTOR)).count();
+		
+		HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(participantIdAndType); 
+		
+		ResponseEntity<List<AppointmentDto>> appointmentsResponse = restTemplate.exchange(appointmentServiceURL, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<List<AppointmentDto>>(){
+		});
+		
+		List<AppointmentDto> appointments = appointmentsResponse.getBody();
+		
+		Multimap<BigInteger, AppointmentDto> appointmentsByConsultant = ArrayListMultimap.create();
+		
+		for (AppointmentDto appointment : appointments) {
+			List<AppointmentParticipantDto> participants = appointment.getParticipants();
+			for (AppointmentParticipantDto participantDto : participants) {
+				for (BigInteger consultantId : consultantIds) {
+					if (participantDto.getParticipantId().equals(consultantId.toString())
+							&& participantDto.getParticipantType().equals(PARTICIPANT_TYPE_DOCTOR)) {
+						appointmentsByConsultant.put(consultantId, appointment);
+						// Assumption here before breaking is an appointment will not have two
+						// consultants.
+						break;
+					}
+				}
+			}
+		}
+		
 		LocalDate today = LocalDate.now();
 		LocalDate endDate = today.plusDays(availabilityDays);
+		ZoneId defaultZoneId = ZoneId.systemDefault();
 		for (BigInteger consultantId : consultantIds) {
+			Consultant consultant = consultantsMap.get(consultantId);
+			LocalTime appointmentStartTime = consultant.getAppointmentsStartTime() == null ? LocalTime.of(defaultAppointmentStartTimeHour, defaultAppointmentStartTimeMin) : consultant.getAppointmentsStartTime();
+			
+			LocalTime appointmentEndTime = consultant.getAppointmentsEndTime() == null ? LocalTime.of(defaultAppointmentEndTimeHour, defaultAppointmentEndTimeMin) : consultant.getAppointmentsEndTime();
+			int appointmentDurationInMins = consultant.getAppointmentDurationInMins();
+			
 			List<AvailableSlotsDto> availableSlots = new ArrayList<>();
-			AvailableSlotsDto slot = new AvailableSlotsDto();
+			
+			Collection<AppointmentDto> appointmentsForConsultant = appointmentsByConsultant.get(consultantId);
 			for (LocalDate date = today; date.isBefore(endDate); date = date.plusDays(1)) {
+				AvailableSlotsDto slot = new AvailableSlotsDto();
 				slot.setAppointmentDate(date.format(formatter));
-				for (int i = 0; i < 8; i++) {
-					int r = (int) (Math.random() * (UPPER - LOWER)) + LOWER;
-					LocalTime startTime = LocalTime.of(r, 0);
-					String startTimeString = startTime.toString();
-					String endTimeString = startTime.plusHours(1).toString();
-					slot.getAvailableTimes().put(startTimeString, endTimeString);
+				LocalTime apptTime = LocalTime.of(appointmentStartTime.getHour(), appointmentEndTime.getMinute());
+				while(apptTime.isBefore(appointmentEndTime)){
+					LocalTime apptEndTime = apptTime.plusMinutes(appointmentDurationInMins);
+					Date apptStartDate = Date.from(date.atTime(apptTime).atZone(defaultZoneId).toInstant());
+					//Date apptEndDate = Date.from(date.atTime(apptEndTime).atZone(defaultZoneId).toInstant());
+					for(AppointmentDto appointment: appointmentsForConsultant) {
+						if((appointment.getAppointmentStartDate().before(apptStartDate) ||  appointment.getAppointmentStartDate().equals(apptStartDate) )&& appointment.getAppointmentEndDate().after(apptStartDate)) {
+							break;
+						}
+						slot.getAvailableTimes().put(apptTime.toString(), apptEndTime.toString());
+					}
+					apptTime = apptEndTime;
 				}
+				
 				availableSlots.add(slot);
 			}
 			availableSlotsMap.put(consultantId, availableSlots);
@@ -233,7 +310,7 @@ public class ConsultantSearchServiceImpl implements ConsultantSearchService {
 			SearchConsultantDataContext context) {
 
 		Map<BigInteger, List<AvailableSlotsDto>> availableSlotsMap = MapUtils.isNotEmpty(context.getConsultants())
-				? getAvailableSlots(context.getConsultants().keySet()) : null;
+				? getAvailableSlots(context.getConsultants()) : null;
 		Map<BigInteger, Practice> practices = context.getPractices();
 		Map<BigInteger, Consultant> consultants = context.getConsultants();
 		Map<BigInteger, InsuranceProvider> insuranceProviders = context.getInsuranceProvdiers();

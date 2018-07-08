@@ -4,3 +4,7 @@ spring:
     
 server:
   port: 8081   
+  
+appointment:
+  service:
+    url: http://localhost:8083/searchAppointmentsByParticipantIdsAndTypes
