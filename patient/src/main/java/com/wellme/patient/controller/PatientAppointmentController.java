@@ -22,7 +22,7 @@ public class PatientAppointmentController {
 	 *            the request
 	 * @return the list
 	 */
-	@RequestMapping(value = "/bookAppointment", method = RequestMethod.POST)
+	@RequestMapping(value = "/secured/bookAppointment", method = RequestMethod.POST)
 	public void bookAppointment(@RequestBody PatientAppointmentDto patientAppointment) {
 		
 		patientAppointmentService.bookAppointment(patientAppointment, "PUNIT");

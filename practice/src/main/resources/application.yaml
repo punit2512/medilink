@@ -8,3 +8,16 @@ server:
 appointment:
   service:
     url: http://localhost:8083/searchAppointmentsByParticipantIdsAndTypes
+    
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      clientId: practice
+      clientSecret: password
+      accessTokenUri: http://localhost:8089/oauth/token
+      userAuthorizationUri: http://localhost:8089/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:8089/user/me
+      tokenInfoUri: http://localhost:8089/oauth/check_token

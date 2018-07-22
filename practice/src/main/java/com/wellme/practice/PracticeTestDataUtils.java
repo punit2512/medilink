@@ -2,7 +2,6 @@ package com.wellme.practice;
 
 import java.math.BigInteger;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.wellme.common.model.Address;
@@ -53,6 +53,8 @@ public class PracticeTestDataUtils {
 	
 	@Autowired
 	BoardCertificateFactory boardCertificateFactory;
+	
+	private static final String DEFAULT_PASSWORD = "password";
 	
 	public void createData(SearchConsultantDataContext dataContext){
 		Date date = new Date();
@@ -1131,7 +1133,7 @@ public class PracticeTestDataUtils {
 		List<BoardCertificate> certificatesDoc1 = new ArrayList<>();
 		certificatesDoc1.add(boardCertificate28);
 		certificatesDoc1.add(boardCertificate33);
-		
+	
 		
 		String picUrlDoc1 = "https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi8oonvn9_aAhUMQ48KHZqNBCIQjRx6BAgBEAU&url=http%3A%2F%2Fbbhospitals.com%2F&psig=AOvVaw2jb1i-LeCRcNedc8yf6IF3&ust=1525082977376126";
 		SocialProfile socialProfileDoc1 = new SocialProfile("Facebook", "vikas.malik", null);
@@ -1142,15 +1144,13 @@ public class PracticeTestDataUtils {
 		LocalTime startTime = LocalTime.of(8, 0);
 		LocalTime endTime = LocalTime.of(21, 0);
 		
-		Consultant consultant1 = consultantFactory.createConsultant("vikas.malik", "Vikas", "Malik", null, null, Collections.singletonList("dr.vikas.malik@gmail.com"), Collections.singletonList(picUrlDoc1), Collections.singletonList(practice1Address), Collections.singletonList(phoneDoc1), Collections.singletonList(socialProfileDoc1), "Vikas Malik" , specialitiesDoc1, qualListDoc1, certificatesDoc1, Collections.singletonList(practice1.getPracticeId()), " Dr. Malik is double board certified Psychiatrist helping Adults, Adolescents and Children. He is thoughtful, compassionate and very responsive. "
+		Consultant consultant1 = consultantFactory.createConsultant(BigInteger.valueOf(1), "vikasmalik", "Vikas", "Malik", null, null, Collections.singletonList("dr.vikas.malik@gmail.com"), Collections.singletonList(picUrlDoc1), Collections.singletonList(practice1Address), Collections.singletonList(phoneDoc1), Collections.singletonList(socialProfileDoc1), "Vikas Malik" , specialitiesDoc1, qualListDoc1, certificatesDoc1, Collections.singletonList(practice1.getPracticeId()), " Dr. Malik is double board certified Psychiatrist helping Adults, Adolescents and Children. He is thoughtful, compassionate and very responsive. "
 				+ " Dr. Malik strives to be transparent and upfront about healthcare costs to his patients. He is a 'out-of-network' provider for all insurances. "
 				+ " Initial Consultation is comprehensive and lasts about an hour. "
 				+ " Initial Consultation is $149 for Adults and $189 for Children & Adolescents. " 
 				+ " Follow up medication management lasts either 20 or 30 minutes. "
 				+ " Follow up medication management is $99 per visit.", 60, insurancePlanDoc1, startTime, endTime, "1234567890", "Male", date, date, insLogin, updLogin);
-		
-	
-		
+
 		Address consultantInstAddress3 = new Address("", "", null, "", "", "", "", "USA", "US", new Coordinates(7878, 78787), true);
 		Institute institute3 = new Institute("Medical School", "Universtiy of Pitsburgh", consultantInstAddress3, null);
 		Qualification qualification4 = new Qualification("Doctor", "Medicine", institute3, 2002);
@@ -1402,9 +1402,10 @@ public class PracticeTestDataUtils {
 		SocialProfile socialProfileDoc2 = new SocialProfile("Facebook", "margaret.mcnamara", null);
 		Phone phoneDoc2 = new Phone("Office", "001", "617", "8745679");
 		
-		Consultant consultant2 = consultantFactory.createConsultant("margaret.mcnamara", "Margaret", "McNamara", null, null, Collections.singletonList("dr.margaret.mcnamara@gmail.com"), Collections.singletonList(picUrlDoc2), Collections.singletonList(practice2Address2), Collections.singletonList(phoneDoc2), Collections.singletonList(socialProfileDoc2), "Margaret Mcnamara" , specialitiesDoc2, qualListDoc2, certificatesDoc2, Collections.singletonList(practice21.getPracticeId()), "Dr. Margaret McNamara is a trained primary care doctor looking after the community of Boston, MA. Dr. McNamara earned her medical degree from the University of Pittsburgh, where she received the prestigious Arthur Mirsky Award. She completed an internship and a residency in internal medicine at Brown University, Rhode Island Hospital. "
+		Consultant consultant2 = consultantFactory.createConsultant(BigInteger.valueOf(2), "margaretmcnamara", "Margaret", "McNamara", null, null, Collections.singletonList("dr.margaret.mcnamara@gmail.com"), Collections.singletonList(picUrlDoc2), Collections.singletonList(practice2Address2), Collections.singletonList(phoneDoc2), Collections.singletonList(socialProfileDoc2), "Margaret Mcnamara" , specialitiesDoc2, qualListDoc2, certificatesDoc2, Collections.singletonList(practice21.getPracticeId()), "Dr. Margaret McNamara is a trained primary care doctor looking after the community of Boston, MA. Dr. McNamara earned her medical degree from the University of Pittsburgh, where she received the prestigious Arthur Mirsky Award. She completed an internship and a residency in internal medicine at Brown University, Rhode Island Hospital. "
 				+ " Dr. McNamara is certified by the American Board of Internal Medicine. She is an active member of the American College of Physicians, the American Medical Association, and the Society of General Internal Medicine. Patients visit her at Tufts MC Primary Care Boston, where she attends to a spectrum of medical needs, including the management of treatment of asthma, hypertension, migraine, incontinence, irritable bowel syndrome, and vaginal infections."
 				+ " Dr. McNamara’s philosophy of patient care is based on compassion, efficacy, and teamwork. She focuses on giving patients the highest quality of care while guaranteeing their participation in managing their own medical condition.", 60, insurancePlanDoc2, startTime, endTime, "9876543210", "Female", date, date, insLogin, updLogin);
+
 		
 		Address consultantInstAddress5 = new Address("", "", null, "", "", "", "", "China", "CH", new Coordinates(7878, 78787), true);
 		Institute institute5 = new Institute("Xiangya School of Medicine", "Central South University", consultantInstAddress5, null);
@@ -1652,10 +1653,11 @@ public class PracticeTestDataUtils {
 		SocialProfile socialProfileDoc3 = new SocialProfile("Twitter", "hong.gao", null);
 		Phone phoneDoc3 = new Phone("Office", "001", "617", "9345679");
 		
-		Consultant consultant3 = consultantFactory.createConsultant("hong.gao", "Hong (Jenny)", "Gao", null, null, Collections.singletonList("dr.hong.gao@gmail.com"), Collections.singletonList(picUrlDoc3), Collections.singletonList(practice2Address1), Collections.singletonList(phoneDoc3), Collections.singletonList(socialProfileDoc3), "Hong (Jenny) Gao" , specialitiesDoc2, qualListDoc2, certificatesDoc2, Collections.singletonList(practice21.getPracticeId()), "When scheduling an annual exam, please be sure you are complying with your insurance company’s policy. "
+		Consultant consultant3 = consultantFactory.createConsultant(BigInteger.valueOf(3), "honggao", "Hong (Jenny)", "Gao", null, null, Collections.singletonList("dr.hong.gao@gmail.com"), Collections.singletonList(picUrlDoc3), Collections.singletonList(practice2Address1), Collections.singletonList(phoneDoc3), Collections.singletonList(socialProfileDoc3), "Hong (Jenny) Gao" , specialitiesDoc2, qualListDoc2, certificatesDoc2, Collections.singletonList(practice21.getPracticeId()), "When scheduling an annual exam, please be sure you are complying with your insurance company’s policy. "
 + " Dr. Jenny Gao is a warm and trusted primary care doctor based in Boston, MA. Dr. Gao earned her medical degree from the Xiangya School of Medicine, Central South University in China. She completed her residency in internal medicine at North Shore Medical Center."
 + " Dr. Gao is a physician at General Medical Associates and is affiliated with Tufts Medical Center in Boston, MA. Dr. Gao is certified by the American Board of Internal Medicine. In addition to diagnosing and treating illness, Dr. Gao offers a range of acute, chronic,  and preventative medical care services. She currently holds the position of an assistant professor at Tufts University. "
 + " Dr. Gao is sensitive to the uniqueness of each patient’s complaint and adapts her consultations and treatment options appropriately to accommodate individual needs and concerns.", 60, insurancePlanDoc3, startTime, endTime, "1122334455", "Female", date, date, insLogin, updLogin);
+
 
 		
 		Address consultantInstAddress7 = new Address("", "", null, "Boston", "MA", "MA", "02110", "USA", "US", new Coordinates(7878, 78787), true);
@@ -1908,11 +1910,11 @@ public class PracticeTestDataUtils {
 			SocialProfile socialProfileDoc4 = new SocialProfile("Facebook", "daniel.chandler", null);
 			Phone phoneDoc4 = new Phone("Office", "001", "617", "2345679");
 		
-		Consultant consultant4 = consultantFactory.createConsultant("daniel.chandler", "Daniel", "Chandler", null, null, Collections.singletonList("dr.daniel.chandler@gmail.com"), Collections.singletonList(picUrlDoc4), Collections.singletonList(practice2Address1), Collections.singletonList(phoneDoc4), Collections.singletonList(socialProfileDoc4), "Daniel Chandler" , specialitiesDoc4, qualListDoc4, certificatesDoc4, Collections.singletonList(practice21.getPracticeId()), "When scheduling an annual exam, please be sure you are complying with your insurance company’s policy. "
+		Consultant consultant4 = consultantFactory.createConsultant(BigInteger.valueOf(4), "daniel.chandler", "Daniel", "Chandler", null, null, Collections.singletonList("dr.daniel.chandler@gmail.com"), Collections.singletonList(picUrlDoc4), Collections.singletonList(practice2Address1), Collections.singletonList(phoneDoc4), Collections.singletonList(socialProfileDoc4), "Daniel Chandler" , specialitiesDoc4, qualListDoc4, certificatesDoc4, Collections.singletonList(practice21.getPracticeId()), "When scheduling an annual exam, please be sure you are complying with your insurance company’s policy. "
 				+ "Dr. Daniel Chandler is a trusted and dedicated primary care doctor serving the community of Boston, MA. Dr. Chandler attended Tufts University, where he earned his medical degree. He completed both his internship and residency in internal medicine at Tufts Medical Center. "
 				+ "Dr. Chandler is certified by the American Board of Internal Medicine and is affiliated with Tufts Medical Center. He is presently an assistant professor and the director of resident education at Tufts University. His areas of special interest include internal medicine, adult primary care, hospital medicine, and resident education."
 				+ "Because Dr. Chandler is bilingual in English and French, patients from a variety of backgrounds enjoy having him as their physician. He treats a range of conditions, and he is eager to help the wider community receive the care they deserve.", 60, insurancePlanDoc4, startTime, endTime,  "2233445566", "Male", date , date, insLogin, updLogin);
-		
+
 		
 		Address consultantInstAddress9 = new Address("", "", null, "Boston", "MA", "MA", "02118", "USA", "US", new Coordinates(7878, 78787), true);
 		Institute institute9 = new Institute("Medical School", "Harvard University", consultantInstAddress9, null);
@@ -2166,7 +2168,7 @@ public class PracticeTestDataUtils {
 		SocialProfile socialProfileDoc5 = new SocialProfile("Facebook", "ralph.vetters", null);
 		Phone phoneDoc5 = new Phone("Office", "001", "617", "2345678");
 		
-		Consultant consultant5 = consultantFactory.createConsultant("ralph.vetters", "Ralph", "Vetters", null, null, Collections.singletonList("dr.ralph.vetters@gmail.com"), Collections.singletonList(picUrlDoc5), Collections.singletonList(practice3Address2), Collections.singletonList(phoneDoc5), Collections.singletonList(socialProfileDoc5), "Ralph Vetters" , specialitiesDoc5, qualListDoc5, certificatesDoc5, Collections.singletonList(practice31.getPracticeId()), "Dr. Vetters Focuses on seeing patients from 12-29 years old. "
+		Consultant consultant5 = consultantFactory.createConsultant(BigInteger.valueOf(6), "ralphvetters", "Ralph", "Vetters", null, null, Collections.singletonList("dr.ralph.vetters@gmail.com"), Collections.singletonList(picUrlDoc5), Collections.singletonList(practice3Address2), Collections.singletonList(phoneDoc5), Collections.singletonList(socialProfileDoc5), "Ralph Vetters" , specialitiesDoc5, qualListDoc5, certificatesDoc5, Collections.singletonList(practice31.getPracticeId()), "Dr. Vetters Focuses on seeing patients from 12-29 years old. "
 				+ " Dr. Vetters is the Medical Director of the Sidney Borum Jr. Health Center, a program of Fenway Health. He is from Texas and Missouri and graduated from Harvard College in 1985. His first career was as a union organizer in New England for workers in higher education and the public sector. In 1998 he went back to school and graduated from the Harvard Medical School in 2003 after also getting his masters in public health at the Harvard School of Public Health in maternal and child health. He graduated from the Boston Combined Residency Program in Pediatrics at Boston Children’s Hospital and Boston Medical Center in 2006 and has been working as a pediatrician at the Sidney Borum Health Center since that time. Dr. Vetters focuses on providing care to high risk adolescents and young adults, specifically developing programs that support the needs of homeless youth and inner city LGBT youth."
 				, 60, insurancePlanDoc5, startTime, endTime, "3344556677", "Male", date, date, insLogin, updLogin);
 		
@@ -2275,7 +2277,7 @@ public class PracticeTestDataUtils {
 		String picUrlDoc6 = "https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjOovL9nt_aAhUSSY8KHaF0CDYQjRx6BAgBEAU&url=https%3A%2F%2Fwww.myhprs.com%2Fblog%2Fnews%2Fgoogle-glass-doctors%2F&psig=AOvVaw2jb1i-LeCRcNedc8yf6IF3&ust=1525082977376126";
 		SocialProfile socialProfileDoc6 = new SocialProfile("Twitter", "christine.odell", null);
 		Phone phoneDoc6 = new Phone("Office", "001", "617", "1234567");
-		Consultant consultant6 = consultantFactory.createConsultant("christine.odell", "Christine", "Odell", null, null, Collections.singletonList("dr.christine.odell@gmail.com"), Collections.singletonList(picUrlDoc6), Collections.singletonList(practice3Address2), Collections.singletonList(phoneDoc6), Collections.singletonList(socialProfileDoc6), "Christine Odel" , specialitiesDoc6, qualListDoc6, certificatesDoc6, Collections.singletonList(practice32.getPracticeId()), 
+		Consultant consultant6 = consultantFactory.createConsultant(BigInteger.valueOf(5), "christineodell", "Christine", "Odell", null, null, Collections.singletonList("dr.christine.odell@gmail.com"), Collections.singletonList(picUrlDoc6), Collections.singletonList(practice3Address2), Collections.singletonList(phoneDoc6), Collections.singletonList(socialProfileDoc6), "Christine Odel" , specialitiesDoc6, qualListDoc6, certificatesDoc6, Collections.singletonList(practice32.getPracticeId()), 
 				"Christine Odell has been a Primary Care Physician at Fenway since 2016. She holds a BS in Biology from the University of Michigan, an MD from the Boston University School of Medicine, and an MSc Epidemiology from the Boston University School of Public Health. She completed her residency in 2000 at Maine Medical Center Family Medicine Residency and is certified by the American Board of Family Medicine.", 60, insurancePlanDoc6, startTime, endTime, "4455667788", "Female", date, date, insLogin, updLogin);
 		
 		List<Consultant> consultants = new ArrayList<>();
@@ -2298,5 +2300,6 @@ public class PracticeTestDataUtils {
 		
 		consultants.stream().map(c -> consultantMap.put(c.getConsultantId(), c)).count();
 		dataContext.setConsultants(consultantMap);
+
 	}
 }

@@ -12,8 +12,11 @@ import java.util.List;
  * The Class User.
  */
 public class User extends BaseVO {
-
-	/** The user name. */
+	
+	/** The user id. */
+	private BigInteger userId; 
+	
+	/** The user name */
 	private String userName;
 
 	/** The first name. */
@@ -48,12 +51,14 @@ public class User extends BaseVO {
 
 	/** The gender. */
 	private String gender;
+	
 
 	/**
 	 * Instantiates a new user.
 	 *
-	 * @param consultantId            the consultant id
+	 * @param userId the user id
 	 * @param userName            the user name
+	 * @param password the password
 	 * @param firstName            the first name
 	 * @param lastName            the last name
 	 * @param middleName            the middle name
@@ -72,11 +77,12 @@ public class User extends BaseVO {
 	 * @param versionId            the version id
 	 * @param previosVersionId            the previos version id
 	 */
-	public User(String userName, String firstName, String lastName, String middleName,
+	public User(BigInteger userId, String userName, String firstName, String lastName, String middleName,
 			String profilePicUrl, List<String> emails, List<String> pictureUrls, List<Address> addresses,
 			List<Phone> phones, List<SocialProfile> socialProfiles, String userFullName, String gender, Date insTs,
 			Date updTs, String insLogin, String updLogin, long versionId, long previosVersionId) {
 		super(insTs, updTs, insLogin, updLogin, versionId, previosVersionId);
+		this.userId = userId;
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -89,6 +95,26 @@ public class User extends BaseVO {
 		this.socialProfiles = socialProfiles;
 		this.userFullName = userFullName;
 		this.gender = gender;
+	}
+
+
+	/**
+	 * Gets the user id.
+	 *
+	 * @return the user id
+	 */
+	public BigInteger getUserId() {
+		return userId;
+	}
+
+
+	/**
+	 * Sets the user id.
+	 *
+	 * @param userId the new user id
+	 */
+	public void setUserId(BigInteger userId) {
+		this.userId = userId;
 	}
 
 
@@ -110,6 +136,7 @@ public class User extends BaseVO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 
 	/**
 	 * Gets the first name.

@@ -10,6 +10,7 @@ import java.util.Map;
  * The Class SearchPracticeRequestContext.
  */
 public class SearchConsultantDataContext {
+
 	
 	/** The specialities. */
 	Map<BigInteger, Speciality> specialities;
@@ -29,8 +30,7 @@ public class SearchConsultantDataContext {
 	/** The board certificates. */
 	Map<BigInteger, BoardCertificate> boardCertificates;
 	
-	//Map<BigInteger, Appointment> appointmentsByConsultant;
-	
+
 	/**
 	 * Gets the specialities.
 	 *

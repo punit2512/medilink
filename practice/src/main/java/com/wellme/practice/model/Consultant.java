@@ -102,7 +102,7 @@ public class Consultant extends User{
 			List<SocialProfile> socialProfiles, String userFullName, String gender, String NPI,
 			List<BigInteger> specialityIds, List<Qualification> qualifications, List<BoardCertificate> boardCertificates, List<BigInteger> practiceIds, String profile,
 			int appointmentDurationInMins, List<BigInteger> insurancePlanIds, LocalTime appointmentsStartTime, LocalTime appointmentsEndTime, Date insTs, Date updTs, String insLogin, String updLogin, long versionId, long previosVersionId) {
-		super(userName, firstName, lastName,
+		super(consultantId, userName, firstName, lastName,
 				middleName, profilePicUrl, emails, pictureUrls, addresses, phones, socialProfiles, userFullName,
 				gender, insTs, updTs, insLogin, updLogin, versionId, previosVersionId);
 		this.consultantId = consultantId;

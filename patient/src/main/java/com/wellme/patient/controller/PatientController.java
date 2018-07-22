@@ -24,7 +24,6 @@ public class PatientController {
 
 	@RequestMapping("/addPatient")
 	public void addPatient(){
-		Patient patient = patientFactory.createPatient("John", "Martin", null, "jmartin@gmail.com", "+001-617-287-2718", "MALE", new Date(), "PUNIT");
-		patientRepo.save(patient);
+//		patientRepo.save(patient);
 	}
 }

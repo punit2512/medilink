@@ -1,9 +1,27 @@
 spring:
   application:
-    name:patient
+    name: patient
 server:
-  port: 8082    
+  port: 8082
     
 appointment:
   service:
     url: http://localhost:8083/createAppointment
+
+user:
+  service:
+    url: http://localhost:8089/signUpUser
+    
+security:
+  basic:
+    enabled: true
+  oauth2:
+    client:
+      clientId: patient
+      clientSecret: Password
+      accessTokenUri: http://localhost:8089/oauth/token
+      userAuthorizationUri: http://localhost:8089/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:8089/user/me
+      tokenInfoUri: http://localhost:8089/oauth/check_token
+              

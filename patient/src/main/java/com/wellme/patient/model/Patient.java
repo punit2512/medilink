@@ -33,11 +33,14 @@ public class Patient extends User{
 			List<Phone> phones, List<SocialProfile> socialProfiles, String userFullName, String gender, Date insTs,
 			Date updTs, String insLogin, String updLogin, long versionId, long previosVersionId,
 			List<PreferredTime> preferredTimes) {
-		super(userName, firstName, lastName, middleName, profilePicUrl, emails, pictureUrls, addresses, phones,
+		super(patientId, userName, firstName, lastName, middleName, profilePicUrl, emails, pictureUrls, addresses, phones,
 				socialProfiles, userFullName, gender, insTs, updTs, insLogin, updLogin, versionId, previosVersionId);
 		this.patientId = patientId;
 		this.preferredTimes = preferredTimes;
 	}
+	
+	
+	
 
 	/**
 	 * Gets the patient id.

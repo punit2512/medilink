@@ -1,25 +1,34 @@
 package com.wellme.common.model;
 
-public class Role extends BaseVO{
-	private int roleId;
+public enum Role {
+	
+	CONSULTANT("CONSULTANT", "Consultant"),
+	PATIENT("PATIENT", "Patient"),
+	PRACTICE_ADMIN("PRACTICE_ADMIN", "Admin for the practice");
+	
 	private String roleName;
 	private String roleDescription;
-	public int getRoleId() {
-		return roleId;
+	
+	Role(String roleName, String roleDescription){
+		this.roleName = roleName;
+		this.roleDescription = roleDescription;
 	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
+
 	public String getRoleName() {
 		return roleName;
 	}
+
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
+
 	public String getRoleDescription() {
 		return roleDescription;
 	}
+
 	public void setRoleDescription(String roleDescription) {
 		this.roleDescription = roleDescription;
 	}
+	
+	
 }

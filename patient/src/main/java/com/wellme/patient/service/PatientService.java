@@ -1,3 +1,6 @@
+/*
+ * Copyright. Do not copy any portion of this file.
+ */
 package com.wellme.patient.service;
 
 import java.util.Collection;
@@ -10,6 +13,17 @@ import com.wellme.patient.model.Patient;
  */
 public interface PatientService {
 	
+	/**
+	 * Creates the patient.
+	 *
+	 * @param firstName the first name
+	 * @param lastName the last name
+	 * @param middleName the middle name
+	 * @param email the email
+	 * @param phoneNumber the phone number
+	 * @param gender the gender
+	 */
+	Patient createPatient(String firstName, String lastName, String middleName, String email, String phoneNumber, String gender); 
 	/**
 	 * Creates the patient.
 	 *

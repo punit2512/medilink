@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.wellme.patient.factory.PatientAppointmentFactory;
-import com.wellme.patient.factory.PatientFactory;
 import com.wellme.patient.model.AppointmentDto;
 import com.wellme.patient.model.AppointmentParticipantDto;
 import com.wellme.patient.model.Patient;
@@ -35,8 +34,10 @@ public class PatientAppointmentServiceImpl implements PatientAppointmentService{
 	
 	@Autowired
 	RestTemplate restTemplate;
+
 	@Autowired
-	PatientFactory patientFactory;
+	PatientService patientService;
+	
 	@Autowired
 	PatientAppointmentFactory patientAppointmentFactory;
 	
@@ -44,18 +45,18 @@ public class PatientAppointmentServiceImpl implements PatientAppointmentService{
 	@Value("${appointment.service.url}")
 	String appointmentServiceURL;
 	
+	
 	@Override
 	public void bookAppointment(PatientAppointmentDto patientAppointmentDto, String insLogin) {
 		
 		Date date = new Date();
 		List<Patient> patients = patientDao.findByPatientDetails(patientAppointmentDto.getFirstName(), patientAppointmentDto.getLastName(), patientAppointmentDto.getMiddleName(), patientAppointmentDto.getPhoneNumber(), patientAppointmentDto.getEmail(), patientAppointmentDto.getPatientId());
-		
+
 		Patient patient ;
 		if(CollectionUtils.isNotEmpty(patients)) {
 			patient = patients.get(0);
 		} else {
-			patient = patientFactory.createPatient(patientAppointmentDto.getFirstName(), patientAppointmentDto.getLastName(), patientAppointmentDto.getMiddleName(), patientAppointmentDto.getEmail(), patientAppointmentDto.getPhoneNumber(), patientAppointmentDto.getGender(), date, insLogin);
-			patientRepo.save(patient);
+			patient = patientService.createPatient(patientAppointmentDto.getFirstName(), patientAppointmentDto.getLastName(), patientAppointmentDto.getMiddleName(), patientAppointmentDto.getEmail(), patientAppointmentDto.getPhoneNumber(), patientAppointmentDto.getGender());
 		}
 		BigInteger patientId = patient.getPatientId();
 		AppointmentParticipantDto participantDtoPatient = new AppointmentParticipantDto(patientId.toString(), "PATIENT", "CONFIRMED", new Date(), null, 0L);

@@ -1,0 +1,25 @@
+spring: 
+  application:
+    name: authentication-service  
+    
+server:
+  port: 8089
+#  servlet:
+#    context-path: /auth
+
+medilink:
+  auth:
+    db:
+      url: jdbc:mysql://localhost:3306/medilink_auth
+      username: medilink_auth
+      password: password
+      
+ #Hibernate Configuration
+hibernate:
+  dialect: org.hibernate.dialect.H2Dialect
+  hbm2ddl: 
+    auto: 
+  ejb: 
+    naming_strategy :  org.hibernate.cfg.ImprovedNamingStrategy
+  show_sql: false
+  format_sql: true      
