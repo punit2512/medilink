@@ -11,10 +11,10 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @EnableResourceServer
 public class PatientServiceResourceServerConfig extends ResourceServerConfigurerAdapter  {
 
-    private static final String RESOURCE_ID = "patient";
+    private static final String RESOURCE_ID = "medilink";
     private static final String SECURED_READ_SCOPE = "#oauth2.hasScope('read')";
     private static final String SECURED_WRITE_SCOPE = "#oauth2.hasScope('write')";
-    private static final String SECURED_PATTERN = "/secured/**";
+    private static final String SECURED_PATTERN = "**/secured/**";
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         resources.resourceId(RESOURCE_ID);

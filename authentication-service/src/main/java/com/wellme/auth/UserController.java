@@ -26,7 +26,7 @@ public class UserController {
 	@Autowired
 	PasswordEncoder userPasswordEncoder;
 	
-    @GetMapping("/user/me")
+    @GetMapping("/user")
     public Principal user(Principal principal) {
         return principal;
     }

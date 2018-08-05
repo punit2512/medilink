@@ -1,13 +1,11 @@
 package com.wellme.patient.controller;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellme.patient.factory.PatientFactory;
-import com.wellme.patient.model.Patient;
 import com.wellme.patient.repo.PatientDao;
 import com.wellme.patient.repo.PatientRepository;
 
@@ -22,8 +20,10 @@ public class PatientController {
 	
 	PatientFactory patientFactory;
 
-	@RequestMapping("/addPatient")
+	@RequestMapping("/patient/addPatient")
+	//@PreAuthorize("hasAuthority('APP_ADMIN')")
 	public void addPatient(){
+		System.out.println("I am here");
 //		patientRepo.save(patient);
 	}
 }

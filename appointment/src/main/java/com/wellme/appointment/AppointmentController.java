@@ -18,12 +18,12 @@ public class AppointmentController {
 	@Autowired
 	AppointmentService appointmentService;
 	
-	@RequestMapping(value="/searchAppointmentsByParticipantIdsAndTypes", method = RequestMethod.POST)
+	@RequestMapping(value="/appointment/searchAppointmentsByParticipantIdsAndTypes", method = RequestMethod.POST)
 	public Collection<AppointmentDto> getAppointmentsByPracticeConsultantKeys(@RequestBody Map<String, String> participantIdsAndTypes){
 		return appointmentService.searchByParticipantIdsAndType(participantIdsAndTypes);
 	}
 	
-	@RequestMapping(value="/createAppointment", method=RequestMethod.POST)
+	@RequestMapping(value="/appointment/createAppointment", method=RequestMethod.POST)
 	public Long createAppointment(@RequestBody AppointmentDto appointmentDto) {
 		return appointmentService.createAppointment(appointmentDto);
 	}
