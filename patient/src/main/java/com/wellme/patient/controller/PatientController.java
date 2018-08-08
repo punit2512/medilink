@@ -1,7 +1,7 @@
 package com.wellme.patient.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +22,7 @@ public class PatientController {
 
 	@RequestMapping("/patient/addPatient")
 	//@PreAuthorize("hasAuthority('APP_ADMIN')")
-	public void addPatient(){
+	public void addPatient(Authentication auth){
 		System.out.println("I am here");
 //		patientRepo.save(patient);
 	}

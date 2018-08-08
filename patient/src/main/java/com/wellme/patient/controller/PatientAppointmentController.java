@@ -1,6 +1,7 @@
 package com.wellme.patient.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +24,7 @@ public class PatientAppointmentController {
 	 * @return the list
 	 */
 	@RequestMapping(value = "/secured/bookAppointment", method = RequestMethod.POST)
-	public void bookAppointment(@RequestBody PatientAppointmentDto patientAppointment) {
+	public void bookAppointment(@RequestBody PatientAppointmentDto patientAppointment, Authentication auth) {
 		
 		patientAppointmentService.bookAppointment(patientAppointment, "PUNIT");
 	}
