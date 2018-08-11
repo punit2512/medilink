@@ -32,7 +32,9 @@ public class PatientServiceResourceServerConfig extends ResourceServerConfigurer
     
 	@Override
 	public void configure(final HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.POST, SECURED_PATTERN).access(SECURED_WRITE_SCOPE).anyRequest().authenticated();
+		http.authorizeRequests().antMatchers("/login/**", "/auth/**", "/oauth/**","/signup").permitAll()
+		.antMatchers(HttpMethod.POST, SECURED_PATTERN).access(SECURED_WRITE_SCOPE)
+		.anyRequest().authenticated().antMatchers("/login/**", "/auth/**", "/oauth/**","/signup").permitAll();
 	}
 	
     @Bean
