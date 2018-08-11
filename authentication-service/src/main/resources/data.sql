@@ -50,9 +50,9 @@ INSERT INTO USER_AUTHORITY VALUE (10,4);
 
 
 delete from oauth_client_details;
-INSERT INTO oauth_client_details VALUES('practice','practice', '$2a$10$eNxZ4GEdBL6KJMPT09DWeOI4FY51vvQZqKmyzd6CzYcJQCaUMeXM.', 'read,write', 'password,authorization_code,implicit,client_credentials', null, 'APP_ADMIN', 7200, 0, NULL, 'true');
-INSERT INTO oauth_client_details VALUES('medilink','medilink', '$2a$10$eNxZ4GEdBL6KJMPT09DWeOI4FY51vvQZqKmyzd6CzYcJQCaUMeXM.', 'read,write', 'password,authorization_code,refresh_token,implicit,client_credentials', 'http://127.0.0.1', 'APP_ADMIN', 7200, 0, NULL, 'true');
+INSERT INTO oauth_client_details VALUES('practice','practice', '$2a$10$eNxZ4GEdBL6KJMPT09DWeOI4FY51vvQZqKmyzd6CzYcJQCaUMeXM.', 'read,write', 'password,authorization_code,implicit,client_credentials,refresh_token', null, 'APP_ADMIN', 7200, 0, NULL, 'true');
+INSERT INTO oauth_client_details VALUES('medilink','medilink', '$2a$10$eNxZ4GEdBL6KJMPT09DWeOI4FY51vvQZqKmyzd6CzYcJQCaUMeXM.', 'read,write', 'password,authorization_code,refresh_token,implicit,client_credentials,refresh_token', null,  'APP_ADMIN', 7200, 0, NULL, 'true');
 
-INSERT INTO oauth_client_details VALUES('appointment','appointment', '$2a$10$eNxZ4GEdBL6KJMPT09DWeOI4FY51vvQZqKmyzd6CzYcJQCaUMeXM.', 'read,write', 'password,authorization_code,implicit,client_credentials', 'http://127.0.0.1', 'APP_ADMIN', 7200, 0, NULL, 'true');
+INSERT INTO oauth_client_details VALUES('appointment','appointment', '$2a$10$eNxZ4GEdBL6KJMPT09DWeOI4FY51vvQZqKmyzd6CzYcJQCaUMeXM.', 'read,write', 'password,authorization_code,implicit,client_credentials,refresh_token', null, 'APP_ADMIN', 7200, 0, NULL, 'true');
 
 commit;
