@@ -1,29 +1,24 @@
 package com.wellme.patient.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wellme.patient.factory.PatientFactory;
-import com.wellme.patient.repo.PatientDao;
-import com.wellme.patient.repo.PatientRepository;
+import com.wellme.patient.model.Patient;
+import com.wellme.patient.model.PatientSignupDto;
+import com.wellme.patient.service.PatientService;
 
 @RestController
 public class PatientController {
 	
 	@Autowired
-	PatientRepository patientRepo;
-	
-	@Autowired
-	PatientDao patientDao;
-	
-	PatientFactory patientFactory;
+	PatientService patientService;
 
-	@RequestMapping("/patient/addPatient")
-	//@PreAuthorize("hasAuthority('APP_ADMIN')")
-	public void addPatient(Authentication auth){
-		System.out.println("I am here");
-//		patientRepo.save(patient);
+	
+	@RequestMapping("/signup")
+	public Patient patientSignup(@RequestBody PatientSignupDto signupDto) {
+		Patient patient = patientService.createPatient(signupDto.getUserName(), signupDto.getFirstName(), signupDto.getLastName(), signupDto.getMiddleName(), signupDto.getEmail(), signupDto.getPhoneNumber(), signupDto.getGender(), signupDto.getPassword());
+		return patient;
 	}
 }

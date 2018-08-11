@@ -19,12 +19,11 @@ zuul:
     practice: /practice/**
     patient: /patient/**
     appointment: /appointment/**
+    authentication-service: /auth/**
 
 security:
   basic:
-    enabled: true
-  ignored:
-  - "*.bundle.*"  
+    enabled: false
   oauth2:
     client:
       clientId: medilink
@@ -34,4 +33,5 @@ security:
     resource:
       userInfoUri: http://localhost:8089/user
       tokenInfoUri: http://localhost:8089/oauth/check_token
+      filter-order: 3
   

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +35,10 @@ public class PatientServiceImpl implements PatientService {
 	PatientFactory patientFactory;
 
 	@Override
-	public Patient createPatient(String firstName, String lastName, String middleName, String email, String phoneNumber, String gender) {
-
-		ApplicationUser appUserIn = new ApplicationUser(email, true, CommonConstants.DEFAULT_PASSWORD, Collections.singletonList(new Authority("PATIENT")));
+	public Patient createPatient(String userName, String firstName, String lastName, String middleName, String email, String phoneNumber, String gender, String password) {
+		userName = StringUtils.isBlank(userName) ? email : userName;
+		password = StringUtils.isBlank(password) ? CommonConstants.DEFAULT_PASSWORD : password;
+		ApplicationUser appUserIn = new ApplicationUser(userName, true, CommonConstants.DEFAULT_PASSWORD, Collections.singletonList(new Authority("PATIENT")));
 		
 		ResponseEntity<ApplicationUser> userResponse = restTemplate.postForEntity(userServiceURL, appUserIn, ApplicationUser.class);
 		ApplicationUser appUser = userResponse.getBody();

@@ -56,7 +56,7 @@ public class PatientAppointmentServiceImpl implements PatientAppointmentService{
 		if(CollectionUtils.isNotEmpty(patients)) {
 			patient = patients.get(0);
 		} else {
-			patient = patientService.createPatient(patientAppointmentDto.getFirstName(), patientAppointmentDto.getLastName(), patientAppointmentDto.getMiddleName(), patientAppointmentDto.getEmail(), patientAppointmentDto.getPhoneNumber(), patientAppointmentDto.getGender());
+			patient = patientService.createPatient(null, patientAppointmentDto.getFirstName(), patientAppointmentDto.getLastName(), patientAppointmentDto.getMiddleName(), patientAppointmentDto.getEmail(), patientAppointmentDto.getPhoneNumber(), patientAppointmentDto.getGender(), null);
 		}
 		BigInteger patientId = patient.getPatientId();
 		AppointmentParticipantDto participantDtoPatient = new AppointmentParticipantDto(patientId.toString(), "PATIENT", "CONFIRMED", new Date(), null, 0L);

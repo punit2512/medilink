@@ -63,6 +63,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     	endpoints.tokenStore(tokenStore())
         .accessTokenConverter(accessTokenConverter()).authenticationManager(authenticationManager).userDetailsService(userDetailsService);
     }
+    
     protected void configure(HttpSecurity http) throws Exception {
         http.requestMatchers()
           .and()

@@ -23,7 +23,7 @@ public interface PatientService {
 	 * @param phoneNumber the phone number
 	 * @param gender the gender
 	 */
-	Patient createPatient(String firstName, String lastName, String middleName, String email, String phoneNumber, String gender); 
+	Patient createPatient(String userName, String firstName, String lastName, String middleName, String email, String phoneNumber, String gender, String password); 
 	/**
 	 * Creates the patient.
 	 *
