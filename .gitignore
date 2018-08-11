@@ -12,3 +12,4 @@
 # IntelliJ
 **/*.iml
 **/.idea
+**/icon*
