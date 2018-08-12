@@ -2,14 +2,14 @@
 *.zip
 .classpath
 .project
-.settings/
+.settings
 **/target/
 **/node_modules
 **/bundle.js
 **/npm-debug.log
-**/.DS_Store
+.DS_Store
 
 # IntelliJ
 **/*.iml
 **/.idea
-**/icon*
+Icon?
