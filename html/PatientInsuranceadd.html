@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css">
+  <script>
+    $(document).ready(function(){
+        $("#hide").click(function(){
+            $("div.id.Appointment").hide();
+        });
+        $("#show").click(function(){
+            $("div.id.Appointment").show();
+        });
+    });
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <a class="navbar-brand" href="#">
+      <i class="fa d-inline fa-lg fa-cloud"></i>
+      <b> Brand</b>
+    </a>
+    <div class="container">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fa d-inline fa-lg fa-bookmark-o"></i> Notifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fa d-inline fa-lg fa-envelope-o"></i> Welcome User</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div style="padding:10px;">
+    <div class="col-md-12 breadcrumb">
+      <input name="lname" placeholder="Practice/Provider Name" class="btn-group" type="&quot;text&quot;&quot;" size="20px;">&nbsp;
+      <input type="text" name="lname" placeholder="Procedure/Condition" class="btn-group" size="20px;">&nbsp;
+      <input name="lname" placeholder="Zip Code" class="btn-group" type="&quot;text&quot;&quot;" size="20px;">&nbsp;
+      <input type="text" name="lname" placeholder="Insurance" class="btn-group" size="20px;"> &nbsp;
+      <button type="button" class="btn btn-primary">Search</button>
+    </div>
+    <div class="col-md-12 breadcrumb"> Your Account &gt; Insurance &gt; Edit Insurance </div>
+    <div class="col-md-12">
+      <div>
+        <h1>Edit Insurance</h1>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <form class="">
+            <div class="form-group">
+              <label>Insurance Issuer</label>
+              <input type="name" class="form-control" placeholder="Blue Cross Blue Shield of Illinois"> </div>
+            <div class="form-group">
+              <label>Plan Name</label>
+              <input type="name" class="form-control" placeholder="Blue Choice Preferred Gold PPO"> </div>
+            <div class="form-group">
+              <label>Plan Type</label>
+              <select class="form-control">
+                <option>PPO</option>
+                <option></option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Subscriber</label>
+              <select class="form-control">
+                <option>Nitin Arora</option>
+                <option></option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Identification Number</label>
+              <input type="name" class="form-control" placeholder="ABC123456789"> </div>
+            <div class="form-group">
+              <label>Group Number</label>
+              <input type="name" class="form-control" placeholder="123456"> </div>
+            <div class="form-group">
+              <label>Customer Service Number</label>
+              <input type="name" class="form-control" placeholder="800-123-4567"> </div>
+            <div class="form-group">
+              <label>Valid from</label>
+              <input type="name" class="form-control" placeholder="MM/DD/YYYY"> </div>
+            <div class="form-group">
+              <label>Valid till</label>
+              <input type="name" class="form-control" placeholder="MM/DD/YYYY"> </div>
+            <div class="form-group">
+              <label>Personalized Name</label>
+              <input type="name" class="form-control" placeholder="Nitin and kids Medical Insurance"> </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ </body>
+
+</html>
