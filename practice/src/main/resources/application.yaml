@@ -3,12 +3,12 @@ spring:
     name: practice
     
 server:
-  port: 8081   
+  port: 8084
   
 appointment:
   service:
     url: http://localhost:8083/searchAppointmentsByParticipantIdsAndTypes
-    
+    allowedOrigins
 security:
   basic:
     enabled: false
