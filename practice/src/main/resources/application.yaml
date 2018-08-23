@@ -8,7 +8,6 @@ server:
 appointment:
   service:
     url: http://localhost:8083/searchAppointmentsByParticipantIdsAndTypes
-    allowedOrigins
 security:
   basic:
     enabled: false
