@@ -10,7 +10,7 @@ appointment:
 
 user:
   service:
-    url: http://localhost:8089/signUpUser
+    url: http://localhost:8093/signUpUser
 
 logging:
   level:
