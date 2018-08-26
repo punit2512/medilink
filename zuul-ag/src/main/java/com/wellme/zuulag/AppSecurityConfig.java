@@ -27,15 +27,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 //  }
 
 //
-//	    @Override
-//	    public void configure(HttpSecurity http) throws Exception {
-//	        http.csrf().disable().antMatcher("/**")
-//	          .authorizeRequests()
-//	          .antMatchers("/oauth**", "/", "/login**", "/search**")
-//	          .permitAll()
-//	          .anyRequest()
-//	          .authenticated();
-//	    }
+	    @Override
+	    public void configure(HttpSecurity http) throws Exception {
+	        http.csrf().disable().antMatcher("/**");
+	    }
 	    @Bean
 	    public FilterRegistrationBean corsFilterRegistrationBean() {
 	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -29,3 +29,23 @@ hibernate:
     naming_strategy :  org.hibernate.cfg.ImprovedNamingStrategy
   show_sql: false
   format_sql: true
+  
+  
+logging:
+  level:
+    org.springframework.security: DEBUG
+    
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      clientId: medilink
+      clientSecret: Password
+      accessTokenUri: http://localhost:8093/oauth/token
+      userAuthorizationUri: http://localhost:8093/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:8093/user
+      tokenInfoUri: http://localhost:8093/oauth/check_token
+      filter-order: 3  
+  

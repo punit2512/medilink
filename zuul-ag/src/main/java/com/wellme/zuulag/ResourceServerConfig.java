@@ -32,9 +32,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter  {
     
 	@Override
 	public void configure(final HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**/addData","/**/search*","/login/**", "/auth/**", "/oauth/**","/patient/signup").permitAll()
+		http.authorizeRequests().antMatchers("/**/search*","/login/**", "/auth/**", "/oauth/**","/patient/signup").permitAll()
 		.antMatchers(HttpMethod.POST, SECURED_PATTERN).access(SECURED_WRITE_SCOPE)
-		.anyRequest().authenticated().antMatchers("/**/addData","/**/search*","/login/**", "/auth/**", "/oauth/**","/patient/signup").permitAll();
+		.anyRequest().authenticated().antMatchers("/**/search*","/login/**", "/auth/**", "/oauth/**","/patient/signup").permitAll();
 		
 //		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and().authorizeRequests()
 //				.antMatchers("/secured*", "/**").access("#oauth2.hasScope('write')").anyRequest().permitAll();
