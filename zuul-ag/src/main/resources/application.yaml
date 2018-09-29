@@ -5,6 +5,7 @@ spring:
 server:
   port: 8093
 
+
 eureka:
   client:
     serviceUrl:
@@ -21,6 +22,18 @@ zuul:
     appointment: /appointment/**
     authentication-service: /auth/**
 
+    
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000  
 security:
   basic:
     enabled: false
@@ -28,10 +41,10 @@ security:
     client:
       clientId: medilink
       clientSecret: Password
-      accessTokenUri: http://localhost:8089/oauth/token
-      userAuthorizationUri: http://localhost:8089/oauth/authorize
+      accessTokenUri: http://localhost:8093/oauth/token
+      userAuthorizationUri: http://localhost:8093/oauth/authorize
     resource:
-      userInfoUri: http://localhost:8089/user
-      tokenInfoUri: http://localhost:8089/oauth/check_token
+      userInfoUri: http://localhost:8093/user
+      tokenInfoUri: http://localhost:8093/oauth/check_token
       filter-order: 3
   

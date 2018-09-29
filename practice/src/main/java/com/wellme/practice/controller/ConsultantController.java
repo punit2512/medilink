@@ -37,7 +37,7 @@ public class ConsultantController {
 	 *            the request
 	 * @return the list
 	 */
-	@RequestMapping(value = "/practice/searchConsultants", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchConsultants", method = RequestMethod.POST)
 	public List<SearchConsultantResultDto> searchPractices(@RequestBody SearchConsultantsRequest request) {
 		return consultantSearchService.findConsultants(request);
 	}
@@ -45,7 +45,7 @@ public class ConsultantController {
 	/**
 	 * Adds the practice.
 	 */
-	@RequestMapping(value = "/practice/addData")
+	@RequestMapping(value = "/addData")
 	public void addPractice() {
 		SearchConsultantDataContext dataContext = new SearchConsultantDataContext();
 		testDataUtils.createData(dataContext);
