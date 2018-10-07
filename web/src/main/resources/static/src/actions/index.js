@@ -84,7 +84,7 @@ export function authError(error) {
 }
 
 export function signoutUser() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('access_token');
     return {type: UNAUTH_USER};
 }
 
@@ -94,7 +94,7 @@ export function signupUser({email, password}) {
             .then(response => {
                 console.log('response is:', response);
                 dispatch({type: AUTH_USER});
-                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('access_token', response.data.access_token);
                 //history.push('/feature');
                 this.context.router.history.push('/feature');
             }).catch(error => {
