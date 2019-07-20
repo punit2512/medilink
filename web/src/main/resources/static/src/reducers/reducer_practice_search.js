@@ -1,4 +1,4 @@
-import {ACTION_SEARCH_PRACTICES} from "../actions";
+import {ACTION_SEARCH_PRACTICES} from "../actions/types";
 import _ from 'lodash';
 
 export default function(state={}, action) {

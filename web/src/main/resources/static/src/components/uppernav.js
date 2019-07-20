@@ -1,6 +1,28 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-export default class UpperNav extends Component {
+class UpperNav extends Component {
+
+    renderLinks() {
+        console.log('uppernav: props are:', this.props);
+        if (this.props.authenticated) {
+            return <li className="nav-item" key="signout">
+                <Link className="nav-link" to="/signout">Sign Out</Link>
+            </li>
+        } else {
+            return [
+                <li className="nav-item" key="signin">
+                    <Link className="nav-link" to="/signin">Sign In</Link>
+                </li>,
+                <li className="nav-item" key="signup">
+                    <Link className="nav-link" to="/signup">Sign Up</Link>
+                </li>
+            ]
+        }
+
+    }
+
     render() {
         return (
              <nav className="navbar navbar-expand-md bg-primary navbar-dark">
@@ -12,18 +34,24 @@ export default class UpperNav extends Component {
                                  aria-label="Toggle navigation"><span className="navbar-toggler-icon"></span></button>
                      <div className="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
                          <ul className="nav navbar-nav">
-                             <li className="nav-item">
-                                 <a className="nav-link" href="#"><i className="fa d-inline fa-lg fa-bookmark-o"></i> Register as Practitioner</a>
-                             </li>
-                             <li className="nav-item">
-                                 <a className="nav-link" href="signup.html"><i className="fa d-inline fa-lg fa-envelope-o"></i> Sign up</a>
-                             </li>
+                             {this.renderLinks()}
                          </ul>
-                         <a className="btn navbar-btn ml-2 text-white btn-secondary" href="signin.html"><i
-                             className="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>
+                         {/*<a className="btn navbar-btn ml-2 text-white btn-secondary" href="signin.html"><i
+                             className="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>*/}
                      </div>
                  </div>
              </nav>
         );
     }
 }
+
+function mapStateToProps(state) {
+    console.log('mapStateToProps from signin: state=', state);
+    var authenticated = false;
+    if (state.auth && state.auth.auth) {
+        authenticated = state.auth.auth.authenticated;
+    }
+    return {authenticated};
+}
+
+export default connect(mapStateToProps, null)(UpperNav);

@@ -34,7 +34,7 @@ class AppointmentDetails extends Component {
     render() {
         const {handleSubmit} = this.props;
         console.log('Within appointment render: consultant = ', this.props.consultant);
-        const {consultant, appointmentDate, appointmentStartTime, appointmentEndTime} = this.props;
+        const {consultant, appointmentDate, appointmentStartTime, appointmentEndTime, patientId} = this.props;
         var parts = appointmentDate.split('-');
         const formattedAppointmentDate = getFormattedDate(new Date(parts[2], parts[1], parts[0]));
         const appointmentStartDate = parts[2] + '-' + parts[1] + '-' + parts[0] + ' ' + appointmentStartTime;
@@ -52,16 +52,16 @@ class AppointmentDetails extends Component {
                                 <div className="row">
                                     <div className="col-md-12">
                                         <h1>Review &amp; Book</h1>
-                                        <form onSubmit={handleSubmit(data => this.onSubmit({...data, consultantId: consultantId, appointmentStartDate: appointmentStartDate, appointmentEndDate: appointmentEndDate}))}>
+                                        <form onSubmit={handleSubmit(data => this.onSubmit({...data, consultantId: consultantId, appointmentStartDate: appointmentStartDate, appointmentEndDate: appointmentEndDate, patientId: patientId}))}>
                                             <div className="bg-white">
                                                 <p>Who will be seeing the doctor?</p>
-                                                <div className="container">
+                                                {/*<div className="container">
                                                     <Field name="firstName" component={this.renderField} type="text" label="First name">Enter your first name</Field>
                                                     <Field name="middleName" component={this.renderField} type="text" label="Middle name">Enter your middle name</Field>
                                                     <Field name="lastName" component={this.renderField} type="text" label="Last name">Enter your last name</Field>
                                                     <Field name="email" component={this.renderField} type="text" label="Email">Enter your email address</Field>
                                                     <Field name="phone" component={this.renderField} type="text" label="Phone number">Enter your phone number</Field>
-                                                </div>
+                                                </div>*/}
                                             </div>
                                             <div className="form-group">
                                                 <div className="bg-white">
@@ -146,7 +146,8 @@ function mapStateToProps({consultants}, ownProps) {
         consultantId: ownProps.match.params.consultantId,
         appointmentDate: ownProps.match.params.appointmentDate,
         appointmentStartTime: ownProps.match.params.appointmentStartTime,
-        appointmentEndTime: ownProps.match.params.appointmentEndTime};
+        appointmentEndTime: ownProps.match.params.appointmentEndTime,
+        patientId: ownProps.match.params.patientId};
     return consultants;
 }
 
