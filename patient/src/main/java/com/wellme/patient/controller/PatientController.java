@@ -21,4 +21,6 @@ public class PatientController {
 		Patient patient = patientService.createPatient(signupDto.getUserName(), signupDto.getFirstName(), signupDto.getLastName(), signupDto.getMiddleName(), signupDto.getEmail(), signupDto.getPhoneNumber(), signupDto.getGender(), signupDto.getPassword());
 		return patient;
 	}
+	
+
 }

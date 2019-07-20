@@ -19,6 +19,7 @@ import com.wellme.appointment.factory.EventParticipantFactory;
 import com.wellme.appointment.model.AppointmentDto;
 import com.wellme.appointment.model.Event;
 import com.wellme.appointment.model.EventParticipant;
+import com.wellme.appointment.model.EventStatusEnum;
 import com.wellme.appointment.repo.AppointmentDao;
 import com.wellme.appointment.repo.EventRepo;
 
@@ -26,48 +27,85 @@ import com.wellme.appointment.repo.EventRepo;
  * The Class AppointmentServiceImpl.
  */
 @Component
-public class AppointmentServiceImpl implements AppointmentService{
+public class AppointmentServiceImpl implements AppointmentService {
 
 	/** The appointment dao. */
 	@Autowired
 	AppointmentDao appointmentDao;
-	
+
 	/** The event repo. */
 	@Autowired
 	EventRepo eventRepo;
-	
+
 	/** The event factory. */
 	@Autowired
 	EventFactory eventFactory;
-	
+
 	/** The event participant factory. */
 	@Autowired
 	EventParticipantFactory eventParticipantFactory;
-	
-	/* (non-Javadoc)
-	 * @see com.wellme.appointment.service.AppointmentService#searchByPracticeAndConsultants(java.util.Set)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.wellme.appointment.service.AppointmentService#
+	 * searchByPracticeAndConsultants(java.util.Set)
 	 */
 	@Override
-	public Collection<AppointmentDto> searchByParticipantIdsAndType(Map<String, String> participantIdTypeMap){
+	public Collection<AppointmentDto> searchByParticipantIdsAndType(Map<String, String> participantIdTypeMap) {
 		return appointmentDao.getAppointmentsByParticipantIdsAndType(participantIdTypeMap);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.wellme.appointment.service.AppointmentService#createAppointment(com.wellme.appointment.model.Appointment)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.wellme.appointment.service.AppointmentService#createAppointment(com.
+	 * wellme.appointment.model.Appointment)
 	 */
 	@Override
 	@Transactional
-	public Long createAppointment(AppointmentDto appointment){
+	public Long createAppointment(AppointmentDto appointment) {
 		Date insTs = new Date();
 		String insLogin = "PUNIT";
-		Event event = eventFactory.createEvent(appointment.getEventName(), appointment.getEventDescription(), appointment.getAppointmentStartDate(), appointment.getAppointmentEndDate(), appointment.isFullDay(), appointment.isRecurring(), appointment.getAppointmentLocation(), insTs, insLogin);
+		Event event = eventFactory.createEvent(appointment.getEventName(), appointment.getEventDescription(),
+				appointment.getAppointmentStartDate(), appointment.getAppointmentEndDate(), appointment.isFullDay(),
+				appointment.isRecurring(), appointment.getAppointmentLocation(), EventStatusEnum.NEW.getValue(), insTs,
+				insLogin);
 		List<EventParticipant> participants = new ArrayList<>();
 		appointment.getParticipants().stream().forEach(pa -> {
-			participants.add(eventParticipantFactory.createEventParticipant(event.getEventId(), pa.getParticipantId(), pa.getParticipantType(), pa.getParticipationStatus(), pa.getParticipationStatusDate(), pa.getParticipationStatusComments(), insTs, insLogin));
+			participants.add(eventParticipantFactory.createEventParticipant(event.getEventId(), pa.getParticipantId(),
+					pa.getParticipantType(), pa.getParticipationStatus(), pa.getParticipationStatusDate(),
+					pa.getParticipationStatusComments(), insTs, insLogin));
 		});
 		event.setEventParticipants(participants);
 		eventRepo.save(event);
 		return event.getEventId();
-		//return null;
+		// return null;
+	}
+
+	/**
+	 * Cancel event.
+	 *
+	 * @param eventId the event id
+	 */
+	public void cancelEvent(Long eventId) {
+		Event event = eventRepo.getOne(eventId);
+		event.setEventStatus(EventStatusEnum.CANCELED.getValue());
+		eventRepo.save(event);
+	}
+
+	/**
+	 * Update event.
+	 *
+	 * @param appointment the appointment
+	 */
+	public void updateEvent(AppointmentDto appointment) {
+		Date insTs = new Date();
+		String insLogin = "PUNIT";
+		Event event = eventRepo.getOne(appointment.getEventId());
+		eventFactory.updateEvent(event, appointment.getEventName(), appointment.getEventDescription(),
+				appointment.getAppointmentStartDate(), appointment.getAppointmentEndDate(), appointment.isFullDay(),
+				appointment.isRecurring(), appointment.getAppointmentLocation(), insTs, insLogin);
+
 	}
 }

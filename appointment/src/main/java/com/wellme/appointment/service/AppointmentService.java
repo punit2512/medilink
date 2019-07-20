@@ -28,4 +28,20 @@ public interface AppointmentService {
 	 * @param appointment the appointment
 	 */
 	Long createAppointment(AppointmentDto appointment);
+	
+
+	/**
+	 * Update event.
+	 *
+	 * @param appointment the appointment
+	 */
+	public void updateEvent(AppointmentDto appointment) ;
+	
+	/**
+	 * Cancel event.
+	 *
+	 * @param eventId the event id
+	 */
+	public void cancelEvent(Long eventId); 
+	
 }

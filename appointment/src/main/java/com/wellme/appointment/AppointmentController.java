@@ -27,6 +27,10 @@ public class AppointmentController {
 	public Long createAppointment(@RequestBody AppointmentDto appointmentDto) {
 		return appointmentService.createAppointment(appointmentDto);
 	}
-	
+
+	@RequestMapping(value="/cancelAppointment", method=RequestMethod.POST)
+	public Long cancelAppointment(@RequestBody AppointmentDto appointmentDto) {
+		return appointmentService.createAppointment(appointmentDto);
+	}
 	
 }

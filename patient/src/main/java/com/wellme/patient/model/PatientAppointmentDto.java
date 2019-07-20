@@ -4,6 +4,7 @@
 package com.wellme.patient.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -17,6 +18,8 @@ public class PatientAppointmentDto implements Serializable{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	BigDecimal patientAppointmentId;
 	
 	/** The patient id. */
 	private String patientId;
@@ -72,6 +75,14 @@ public class PatientAppointmentDto implements Serializable{
 		
 	}
 	
+	public BigDecimal getPatientAppointmentId() {
+		return patientAppointmentId;
+	}
+
+	public void setPatientAppointmentId(BigDecimal patientAppointmentId) {
+		this.patientAppointmentId = patientAppointmentId;
+	}
+
 	/**
 	 * Gets the patient id.
 	 *

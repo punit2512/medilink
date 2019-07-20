@@ -67,6 +67,10 @@ public class Event implements Serializable{
 	@Column(name="EVENT_LOCATION")
 	private String eventLocation;
 	
+	/** The event status. */
+	@Column(name="EVENT_STATUS")
+	private String eventStatus;
+	
 	/** The ins ts. */
 	@Column(name = "INS_TS")
 	protected Date insTs;
@@ -117,6 +121,7 @@ public class Event implements Serializable{
 	 * @param isFullDateEvent the is full date event
 	 * @param isRecurringEvent the is recurring event
 	 * @param eventLocation the event location
+	 * @param eventStatus the event status
 	 * @param insTs the ins ts
 	 * @param updTs the upd ts
 	 * @param insLogin the ins login
@@ -125,7 +130,7 @@ public class Event implements Serializable{
 	 * @param previousVersionId the previous version id
 	 */
 	public Event(String eventName, String eventDescription, Date startDateTime, Date endDateTime,
-			String isFullDateEvent, String isRecurringEvent, String eventLocation, Date insTs, Date updTs, String insLogin, String updLogin,
+			String isFullDateEvent, String isRecurringEvent, String eventLocation, String eventStatus, Date insTs, Date updTs, String insLogin, String updLogin,
 			long versionId, long previousVersionId) {
 		super();
 		this.eventName = eventName;
@@ -135,6 +140,7 @@ public class Event implements Serializable{
 		this.isFullDateEvent = isFullDateEvent;
 		this.isRecurringEvent = isRecurringEvent;
 		this.eventLocation = eventLocation;
+		this.eventStatus = eventStatus;
 		this.insTs = insTs;
 		this.updTs = updTs;
 		this.insLogin = insLogin;
@@ -143,6 +149,46 @@ public class Event implements Serializable{
 		this.previousVersionId = previousVersionId;
 	}
 
+	/**
+	 * Instantiates a new event.
+	 *
+	 * @param eventId the event id
+	 * @param eventName the event name
+	 * @param eventDescription the event description
+	 * @param startDateTime the start date time
+	 * @param endDateTime the end date time
+	 * @param isFullDateEvent the is full date event
+	 * @param isRecurringEvent the is recurring event
+	 * @param eventLocation the event location
+	 * @param eventStatus the event status
+	 * @param insTs the ins ts
+	 * @param updTs the upd ts
+	 * @param insLogin the ins login
+	 * @param updLogin the upd login
+	 * @param versionId the version id
+	 * @param previousVersionId the previous version id
+	 */
+	public Event(Long eventId, String eventName, String eventDescription, Date startDateTime, Date endDateTime,
+			String isFullDateEvent, String isRecurringEvent, String eventLocation, String eventStatus, Date insTs, Date updTs, String insLogin, String updLogin,
+			long versionId, long previousVersionId) {
+		super();
+		this.eventId = eventId;
+		this.eventName = eventName;
+		this.eventDescription = eventDescription;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
+		this.isFullDateEvent = isFullDateEvent;
+		this.isRecurringEvent = isRecurringEvent;
+		this.eventLocation = eventLocation;
+		this.eventStatus = eventStatus;
+		this.insTs = insTs;
+		this.updTs = updTs;
+		this.insLogin = insLogin;
+		this.updLogin = updLogin;
+		this.versionId = versionId;
+		this.previousVersionId = previousVersionId;
+	}
+	
 	/**
 	 * Gets the event id.
 	 *
@@ -447,6 +493,24 @@ public class Event implements Serializable{
 	 */
 	public void setEventParticipants(List<EventParticipant> eventParticipants) {
 		this.eventParticipants = eventParticipants;
+	}
+
+	/**
+	 * Gets the event status.
+	 *
+	 * @return the event status
+	 */
+	public String getEventStatus() {
+		return eventStatus;
+	}
+
+	/**
+	 * Sets the event status.
+	 *
+	 * @param eventStatus the new event status
+	 */
+	public void setEventStatus(String eventStatus) {
+		this.eventStatus = eventStatus;
 	}
 
 }

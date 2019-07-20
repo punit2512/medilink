@@ -6,13 +6,13 @@ package com.wellme.appointment.model;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.wellme.common.util.CustomJsonDateDeserializer;
-
 /**
  * The Class AppointmentDto.
  */
 public class AppointmentDto {
+	
+	/** The event id. */
+	private Long eventId;
 	
 	/** The event name. */
 	private String eventName;
@@ -43,6 +43,9 @@ public class AppointmentDto {
 	/** The participants. */
 	private List<AppointmentParticipantDto> participants;
 	
+	/**
+	 * Instantiates a new appointment dto.
+	 */
 	public AppointmentDto() {
 		super();
 	}
@@ -65,6 +68,7 @@ public class AppointmentDto {
 			Date appointmentEndDate, String appointmentLocation, boolean isFullDay, boolean isRecurring,
 			Long versionId, List<AppointmentParticipantDto> participants) {
 		super();
+		this.eventId = eventId;
 		this.eventName = eventName;
 		this.eventDescription = eventDescription;
 		this.appointmentStartDate = appointmentStartDate;
@@ -77,6 +81,24 @@ public class AppointmentDto {
 	}
 
 	
+	/**
+	 * Gets the event id.
+	 *
+	 * @return the event id
+	 */
+	public Long getEventId() {
+		return eventId;
+	}
+
+	/**
+	 * Sets the event id.
+	 *
+	 * @param eventId the new event id
+	 */
+	public void setEventId(Long eventId) {
+		this.eventId = eventId;
+	}
+
 	/**
 	 * Gets the event name.
 	 *

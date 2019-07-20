@@ -44,6 +44,10 @@ public class PatientAppointment extends BaseVO{
 	/** The insurance provider id. */
 	BigInteger insuranceProviderId;
 	
+	/** The appoointment status. */
+	String appoointmentStatus;
+	
+	
 	/**
 	 * Instantiates a new patient appointment.
 	 *
@@ -56,6 +60,7 @@ public class PatientAppointment extends BaseVO{
 	 * @param consultantId the consultant id
 	 * @param insurancePlanId the insurance plan id
 	 * @param insuranceProviderId the insurance provider id
+	 * @param appointmentStatus the appointment status
 	 * @param insTs the ins ts
 	 * @param updTs the upd ts
 	 * @param insLogin the ins login
@@ -65,7 +70,7 @@ public class PatientAppointment extends BaseVO{
 	 */
 	public PatientAppointment(BigInteger patientAppointmentId, BigInteger patientId, BigInteger appointmentId,
 			Date appointmentStartDate, Date appointmentEndDate, BigInteger practiceId, BigInteger consultantId,
-			BigInteger insurancePlanId, BigInteger insuranceProviderId, Date insTs, Date updTs, String insLogin, String updLogin, long versionId,
+			BigInteger insurancePlanId, BigInteger insuranceProviderId, String appointmentStatus, Date insTs, Date updTs, String insLogin, String updLogin, long versionId,
 			long previosVersionId) {
 		super(insTs, updTs, insLogin, updLogin, versionId, previosVersionId);
 		this.patientAppointmentId = patientAppointmentId;
@@ -77,6 +82,7 @@ public class PatientAppointment extends BaseVO{
 		this.consultantId = consultantId;
 		this.insurancePlanId = insurancePlanId;
 		this.insuranceProviderId = insuranceProviderId;
+		this.appoointmentStatus = appointmentStatus;
 	}
 	
 	/**
@@ -239,5 +245,23 @@ public class PatientAppointment extends BaseVO{
 	 */
 	public void setInsuranceProviderId(BigInteger insuranceProviderId) {
 		this.insuranceProviderId = insuranceProviderId;
+	}
+
+	/**
+	 * Gets the appoointment status.
+	 *
+	 * @return the appoointment status
+	 */
+	public String getAppoointmentStatus() {
+		return appoointmentStatus;
+	}
+
+	/**
+	 * Sets the appoointment status.
+	 *
+	 * @param appoointmentStatus the new appoointment status
+	 */
+	public void setAppoointmentStatus(String appoointmentStatus) {
+		this.appoointmentStatus = appoointmentStatus;
 	}
 }

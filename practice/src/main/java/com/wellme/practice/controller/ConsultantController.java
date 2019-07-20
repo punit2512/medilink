@@ -15,7 +15,9 @@ import com.wellme.practice.PracticeTestDataUtils;
 import com.wellme.practice.SearchConsultantsRequest;
 import com.wellme.practice.model.SearchConsultantDataContext;
 import com.wellme.practice.model.SearchConsultantResultDto;
+import com.wellme.practice.request.SubmitConsultantReviewRequest;
 import com.wellme.practice.service.ConsultantSearchService;
+import com.wellme.practice.service.ConsultantService;
 
 /**
  * The Class roller.
@@ -26,7 +28,12 @@ public class ConsultantController {
 	/** The practice service. */
 	@Autowired
 	private ConsultantSearchService consultantSearchService;
+	
+	/** The consultant service. */
+	@Autowired
+	private ConsultantService consultantService;
 
+	/** The test data utils. */
 	@Autowired
 	private PracticeTestDataUtils testDataUtils;
 
@@ -40,6 +47,16 @@ public class ConsultantController {
 	@RequestMapping(value = "/searchConsultants", method = RequestMethod.POST)
 	public List<SearchConsultantResultDto> searchPractices(@RequestBody SearchConsultantsRequest request) {
 		return consultantSearchService.findConsultants(request);
+	}
+	
+	/**
+	 * Submit review.
+	 *
+	 * @param request the request
+	 */
+	@RequestMapping(value="/submitReview", method = RequestMethod.POST)
+	public void submitReview(@RequestBody SubmitConsultantReviewRequest request) {
+		consultantService.addConsultantReview(request);
 	}
 
 	/**

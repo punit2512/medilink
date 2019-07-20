@@ -6,7 +6,12 @@ server:
     
 appointment:
   service:
-    url: http://localhost:8083/createAppointment
+    createAppointment:
+      url: http://localhost:8083/createAppointment
+    updateAppointment:
+      url: http://localhost:8083/updateAppointment
+    cancelAppointment:
+      url: http://localhost:8083/cancelAppointment
 
 user:
   service:

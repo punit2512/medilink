@@ -5,6 +5,7 @@ package com.wellme.practice.model;
 
 import java.math.BigInteger;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class Consultant extends User{
 	/** The consultant id. */
 	@Id
 	private BigInteger consultantId;
-	
 	
 	/** The npi. */
 	private String NPI;
@@ -63,6 +63,12 @@ public class Consultant extends User{
 	/** The appointment duration in mins. */
 	private int appointmentDurationInMins;
 	
+	/** The languages spoken. */
+	private List<String> languagesSpoken;
+	
+	/** The consultant review. */
+	public List<ConsultantReview> consultantReviews = new ArrayList<>();
+	
 	/**
 	 * Instantiates a new consultant.
 	 *
@@ -89,6 +95,7 @@ public class Consultant extends User{
 	 * @param insurancePlanIds the insurance plan ids
 	 * @param appointmentsStartTime the appointments start time
 	 * @param appointmentsEndTime the appointments end time
+	 * @param languagesSpoken the languages spoken
 	 * @param insTs the ins ts
 	 * @param updTs the upd ts
 	 * @param insLogin the ins login
@@ -101,7 +108,7 @@ public class Consultant extends User{
 			List<String> emails, List<String> pictureUrls, List<Address> addresses, List<Phone> phones,
 			List<SocialProfile> socialProfiles, String userFullName, String gender, String NPI,
 			List<BigInteger> specialityIds, List<Qualification> qualifications, List<BoardCertificate> boardCertificates, List<BigInteger> practiceIds, String profile,
-			int appointmentDurationInMins, List<BigInteger> insurancePlanIds, LocalTime appointmentsStartTime, LocalTime appointmentsEndTime, Date insTs, Date updTs, String insLogin, String updLogin, long versionId, long previosVersionId) {
+			int appointmentDurationInMins, List<BigInteger> insurancePlanIds, LocalTime appointmentsStartTime, LocalTime appointmentsEndTime, List<String> languagesSpoken, Date insTs, Date updTs, String insLogin, String updLogin, long versionId, long previosVersionId) {
 		super(consultantId, userName, firstName, lastName,
 				middleName, profilePicUrl, emails, pictureUrls, addresses, phones, socialProfiles, userFullName,
 				gender, insTs, updTs, insLogin, updLogin, versionId, previosVersionId);
@@ -116,6 +123,7 @@ public class Consultant extends User{
 		this.appointmentsStartTime = appointmentsStartTime;
 		this.appointmentsEndTime = appointmentsEndTime;
 		this.insurancePlanIds = insurancePlanIds;
+		this.languagesSpoken = languagesSpoken;
 	}
 
 
@@ -299,11 +307,6 @@ public class Consultant extends User{
 		return appointmentsStartTime;
 	}
 
-
-
-
-
-
 	/**
 	 * Sets the appointments start time.
 	 *
@@ -312,11 +315,6 @@ public class Consultant extends User{
 	public void setAppointmentsStartTime(LocalTime appointmentsStartTime) {
 		this.appointmentsStartTime = appointmentsStartTime;
 	}
-
-
-
-
-
 
 	/**
 	 * Gets the appointments end time.
@@ -327,11 +325,6 @@ public class Consultant extends User{
 		return appointmentsEndTime;
 	}
 
-
-
-
-
-
 	/**
 	 * Sets the appointments end time.
 	 *
@@ -340,5 +333,63 @@ public class Consultant extends User{
 	public void setAppointmentsEndTime(LocalTime appointmentsEndTime) {
 		this.appointmentsEndTime = appointmentsEndTime;
 	}
+
+
+
+
+
+
+	/**
+	 * Gets the languages spoken.
+	 *
+	 * @return the languages spoken
+	 */
+	public List<String> getLanguagesSpoken() {
+		return languagesSpoken;
+	}
+
+
+
+
+
+
+	/**
+	 * Sets the languages spoken.
+	 *
+	 * @param languagesSpoken the new languages spoken
+	 */
+	public void setLanguagesSpoken(List<String> languagesSpoken) {
+		this.languagesSpoken = languagesSpoken;
+	}
+
+
+
+
+
+
+	/**
+	 * Gets the consultant review.
+	 *
+	 * @return the consultant review
+	 */
+	public List<ConsultantReview> getConsultantReviews() {
+		return consultantReviews;
+	}
+
+
+
+
+
+
+	/**
+	 * Sets the consultant review.
+	 *
+	 * @param consultantReview the new consultant review
+	 */
+	public void addConsultantReview(ConsultantReview consultantReview) {
+		this.consultantReviews.add(consultantReview);
+	}
+	
+	
 	
 }
