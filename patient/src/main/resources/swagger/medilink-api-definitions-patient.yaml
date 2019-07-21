@@ -1,0 +1,249 @@
+swagger: "2.0"
+info:
+  description: "API DEFINITIONS for medical appointment application"
+  version: 1.0.0
+  title: Medilink api YAML
+  contact:
+    email: "punit2512@gmail.com"
+basePath: /search
+schemes:
+  - http
+  - https
+paths:
+  /secured/signup:
+    post:
+      produces:
+        - application/json
+      description: this API is to be used to for patient sign up
+      parameters:
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/PatientSignupDto"
+      responses:
+        '200':
+          description: void return of 200 means appointment created
+          schema:
+            $ref: "#/definitions/Patient"          
+        default:
+          $ref: "#/definitions/Error"    
+  /secured/bookAppointment:
+    post:
+      produces:
+        - application/json
+      description: this API is to be used to Book appointments by patients. Patients can be logged in , in which case patient id would be needed to book appointment or else patients full details.
+      parameters:
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/PatientAppointmentDto"
+      responses:
+        '200':
+          description: void return of 200 means appointment created
+        default:
+          $ref: "#/definitions/Error"        
+  /secured/cancelAppointment:
+    post:
+      produces:
+        - application/json
+      description: this API is to be used to ppreviously booked appointments
+      parameters:
+      - name: request
+        in: body
+        required: true
+        schema:
+          patientAppointmentId: 
+            type: integer
+            format: int64 
+      responses:
+        '200':
+          description: void return of 200 means appointment canceled
+        default:
+          $ref: "#/definitions/Error"                 
+definitions:
+  Error:
+    type: object
+    properties:
+      errorMessage:
+        type: string
+        description: The error placeholder
+  Patient:
+    properties:
+      patientId: 
+        type: integer
+        format: int64    
+      firstName:
+        type: string
+      lastName:
+        type: string    
+      middleName:
+        type: string
+      gender:
+        type: string
+      userFullName:
+        type: string    
+      profilePicUrl:
+        type: string
+      emails:
+        type: array
+        items: 
+          type: string
+      pictureUrls:
+        type: array
+        items: 
+          type: string              
+      addresses:
+        type: array
+        items: 
+          $ref: "#/definitions/Address"
+      phones:
+        type: array
+        items: 
+          $ref: "#/definitions/Phone"   
+      socialProfiles:
+        type: array
+        items:
+          $ref: "#/definitions/SocialProfile"      
+  Address:
+    properties:
+      addressLine1:
+        type: string   
+      addressLine2:
+        type: string
+      area:
+        type: string     
+      city:
+        type: string
+      state:
+        type: string
+      stateCode:
+        type: string
+      zip:
+        type: string
+      country:
+        type: string
+      coordinates:
+        $ref: "#/definitions/Coordinates" 
+      isPrimary:
+        type: boolean   
+  Coordinates:
+    properties:
+      lattitude: 
+        type: number
+        format: double
+      longitude: 
+        type: number
+        format: double
+  Phone:
+    required:
+      - phoneNumber
+    properties:
+      phoneNumber:
+        type: string
+      phoneType:
+        type: string
+        description: Phone type e.g. office, mobile, home etc
+        enum:
+          - Office
+          - Home
+          - mobile
+          - Other
+      areaCode:
+        type: string
+      countryCode:
+        type: string
+      completePhoneNumber:
+        type: string
+  SocialProfile:
+    description: social profile for the user, e.g. twitter, linked in, facebook, google user id etc details
+    required:
+      - socialType
+      - socialId
+    properties:
+      socialType:
+        type: string
+      socialId:
+        type: string
+      socialDescription: 
+        type: string
+  InsuranceProviderDto:
+    description: details of insurance providers
+    required:
+      - insuranceProviderId
+    properties:
+      insuranceProviderId:
+        type: integer
+      insuranceProviderName:
+        type: string
+      insuranceTypes:
+        type: array
+        items:
+          type: string
+  PatientSignupDto: 
+    description: sign up dto for patient sign up
+    properties: 
+        userName:
+          type: string
+        password:
+          type: string  
+        firstName: 
+          type: string
+        lastName: 
+          type: string    
+        middleName:
+          type: string
+        gender:
+          type: string
+        phoneNumber:
+          type: string
+        email: 
+          type: string 
+        dateOfBirth: 
+          type: string
+          format: date-time         
+  PatientAppointmentDto: 
+    description: the provider details when searched for along with its other attributes e.g. slots, insurance plans, practices etc
+    properties:
+        patientId: 
+          type: integer
+          format: int64    
+        consultantId: 
+          type: integer
+          format: int64 
+        firstName:
+          type: string
+        lastName:
+          type: string    
+        middleName:
+          type: string
+        gender:
+          type: string
+        phoneNumber:
+          type: string
+        email: 
+          type: string
+        appointmentLocation:
+          type: string
+        practiceId: 
+          type: integer
+          format: int64 
+        appointmentSummary:
+          type: string
+        appointmentNotes:
+          type: string
+        insuranceProviderId: 
+          type: integer
+          format: int64 
+        insurancePlanId: 
+          type: integer
+          format: int64 
+        appointmentStartDate: 
+          description: start date time of the appointment
+          type: string
+          format: date-time
+        appointmentEndDate: 
+          description: end date time of the appointment
+          type: string
+          format: date-time                                                  

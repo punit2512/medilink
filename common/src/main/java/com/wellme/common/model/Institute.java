@@ -3,10 +3,14 @@
  */
 package com.wellme.common.model;
 
+import java.math.BigInteger;
+
 /**
  * The Class Institute.
  */
 public class Institute {
+	
+	BigInteger instituteId;
 	
 	/** The institute name. */
 	String instituteName;
@@ -28,8 +32,9 @@ public class Institute {
 	 * @param address the address
 	 * @param phone the phone
 	 */
-	public Institute(String instituteName, String university, Address address, Phone phone) {
+	public Institute(BigInteger instituteId, String instituteName, String university, Address address, Phone phone) {
 		super();
+		this.instituteId = instituteId;
 		this.instituteName = instituteName;
 		this.university = university;
 		this.address = address;
@@ -106,5 +111,13 @@ public class Institute {
 	 */
 	public void setUniversity(String university) {
 		this.university = university;
+	}
+
+	public BigInteger getInstituteId() {
+		return instituteId;
+	}
+
+	public void setInstituteId(BigInteger instituteId) {
+		this.instituteId = instituteId;
 	}
 }

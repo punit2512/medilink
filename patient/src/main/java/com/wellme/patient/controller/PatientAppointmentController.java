@@ -48,7 +48,7 @@ public class PatientAppointmentController {
 	 */
 	@RequestMapping(value = "/secured/cancelAppointment", method = RequestMethod.POST)
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public void bookAppointment(@RequestBody BigDecimal patientAppointmentId, Authentication auth) {
+	public void cancelAppointment(@RequestBody BigDecimal patientAppointmentId, Authentication auth) {
 		
 		patientAppointmentService.cancelAppointment(patientAppointmentId);
 	}
