@@ -10,6 +10,80 @@ schemes:
   - http
   - https
 paths:
+  /provider/signup
+    post:
+      produces:
+        - application/json
+      description: this API is to be used for consultants to sign up  
+      parameters:
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/ConsultantSignupDto"
+      responses:
+        '200':
+          description: 200 status means review request is successful and returns the consultant id.
+          schema:
+            type: integer
+        default:
+          $ref: "#/definitions/Error"   
+  /practice/addEdit
+    post:
+      produces:
+        - application/json
+      description: this API is to be used to add or edit the practice details  
+      parameters:
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/AdddEditPracticeRequest"
+      responses:
+        '200':
+          description: 200 status means review request is successful and returns the practice id
+          schema:
+            type: integer
+        default:
+          $ref: "#/definitions/Error"
+
+  /provider/appointmentStatusUpdate
+    post:
+      produces:
+        - application/json
+      description: this API is to be confirm or decline the appointment   
+      parameters:
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/UpdateAppointmentStatusRequest"
+      responses:
+        '200':
+          description: 200 status means review request is successful
+          schema:
+            type: boolean
+        default:
+          $ref: "#/definitions/Error"
+          
+  /provider/getAppointmentDetails
+    post:
+      produces:
+        - application/json
+      description: this API is to be confirm or decline the appointment   
+      parameters:
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/GetAppointmentDetailsRequest"
+      responses:
+        '200':
+          description: 200 status means review request is successful
+          schema:
+            $ref: "#/definitions/SearchProvidersResponse"
+        default:
+          $ref: "#/definitions/Error"               
   /submitReview:
     post:
       produces:
@@ -520,7 +594,9 @@ definitions:
     properties:
       practice:
         $ref: "#/definitions/PracticeDto"  
-  
+  AppointmentDto:
+    Description: object representing the appointment details
+      
 
                              
  

@@ -61,7 +61,8 @@ paths:
         '200':
           description: void return of 200 means appointment canceled
         default:
-          $ref: "#/definitions/Error"                 
+          $ref: "#/definitions/Error"
+                           
 definitions:
   Error:
     type: object
